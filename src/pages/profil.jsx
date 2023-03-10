@@ -1,7 +1,13 @@
+import Routine from "./Routine"
+
+
+
 function profil() {
   return (
     <div>
-    page profil
+      <h2>Profile Page</h2>
+      <Routine />
+      
     </div>
   )
 }
