@@ -7,6 +7,9 @@ import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
 import Profile from './pages/Profile';
 
+import Exercise from "./pages/exercisse/Exercise"
+import ExerciseDetails from "./pages/exercisse/Exercisedetails.jsx"
+
 function App() {
   return (
     <div className="App">
@@ -20,6 +23,9 @@ function App() {
 <Route path="/signup" element={ <Signup/> }  />
 <Route path="/login" element={ <Login/> }  />
 
+<Route path="/exercise" element={ <Exercise/> }/>
+<Route path="/exercise/:id/details" element={ <ExerciseDetails/> }/>
+<Route path="/exercise/:id/edit" element={ <Exercise/> }/>
 
 
 </Routes>
