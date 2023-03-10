@@ -15,6 +15,10 @@ function Home() {
       <NavLink to="/login" className={"ButtonHome"}>
        Log In
       </NavLink>
+
+      <NavLink to="/profile" className={"ButtonHome"}>
+       Profile
+      </NavLink>
     </div>
 
     </div>

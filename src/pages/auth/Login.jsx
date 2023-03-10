@@ -5,7 +5,8 @@ function Login() {
   return (
     <div>
       <Link to="/">Home</Link>
-      login page
+      <p>Login</p>
+      
     </div>
   )
 }
