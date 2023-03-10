@@ -9,6 +9,8 @@ import Profile from './pages/Profile';
 
 import Exercise from "./pages/exercisse/Exercise"
 import ExerciseDetails from "./pages/exercisse/Exercisedetails.jsx"
+import ExerciseCreate from './pages/exercisse/ExerciseCreate';
+import ExerciseEdit from './pages/exercisse/ExerciseEdit';
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
 
 <Route path="/exercise" element={ <Exercise/> }/>
 <Route path="/exercise/:id/details" element={ <ExerciseDetails/> }/>
-<Route path="/exercise/:id/edit" element={ <Exercise/> }/>
+<Route path="/exercise/:id/edit" element={ <ExerciseEdit/> }/>
+<Route path="/exercise/create" element={ <ExerciseCreate/> }/>
 
 
 </Routes>

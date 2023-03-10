@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function ExerciseEdit() {
-  const params = useParams();
-  const navigate = useNavigate()
-  const { id } = params;
+function ExerciseCreate() {
+
+const navigate = useNavigate()
+
 
   const [name, setName] = useState("");
   const [creador, setCreador] = useState("");
   const [category, setCategory] = useState("");
-  const [colories, setColories] = useState(0);
+  const [calories, setCalories] = useState(0);
   const [description, setDescription] = useState("");
   const [videoUrl, setvideoUrl] = useState("");
   const [tagline, settagline] = useState("");
@@ -38,71 +38,39 @@ function ExerciseEdit() {
     setimage(e.target.value);
   };
   const handleCaloriesChange = (e) => {
-    setColories(e.target.value);
-  };
-
-  useEffect(() => {
-    getDataExercise();
-  }, []);
-
-  const getDataExercise = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:5005/api/exercise/${id}`
-      );
-
-      const {
-        name,
-        calories,
-        category,
-        creador,
-        description,
-        image,
-        tagline,
-        videoUrl,
-      } = response.data;
-
-
-      setName(name)
-      setCreador(creador)
-      setCategory(category)
-      setColories(calories)
-      setDescription(description)
-      setvideoUrl(videoUrl)
-      settagline(tagline)
-      setimage(image)
-      
-
-
-
-    } catch (error) {
-      console.log(error);
-    }
+    setCalories(e.target.value);
   };
 
   const handleSubmitExercisse = async (e) => {
     e.preventDefault();
-    const updateExercise = {
+    const newExercise = {
       name,
       creador,
       category,
-      colories,
+      calories,
       description,
       videoUrl,
       tagline,
       image,
     };
 
+
+
     try {
-      await axios.patch(`http://localhost:5005/api/exercise/${id}`, updateExercise);
-      navigate(`/exercise/${id}/details`)
+        await axios.post("http://localhost:5005/api/exercise",newExercise )
+        navigate("/exercise")
     } catch (error) {
-      console.log(error);
+        console.log(error)
     }
+
+
+
   };
 
   return (
     <div>
+      <h2>Add exercise</h2>
+
       <form>
         <label htmlFor="name">Name</label>
         <input
@@ -138,7 +106,7 @@ function ExerciseEdit() {
         <input
           type="number"
           name="calories"
-          value={colories}
+          value={calories}
           onChange={handleCaloriesChange}
         />
         <br />
@@ -184,10 +152,10 @@ function ExerciseEdit() {
         <br />
         <br />
 
-        <button onClick={handleSubmitExercisse}>Edit exercise</button>
+        <button onClick={handleSubmitExercisse}>Create</button>
       </form>
     </div>
   );
 }
 
-export default ExerciseEdit;
+export default ExerciseCreate;

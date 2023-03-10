@@ -28,6 +28,7 @@ function Exercise() {
 
 
     <h2>Exercisse List</h2>
+    <br /><br />
 
       {
         
@@ -47,6 +48,9 @@ function Exercise() {
               <p>{eachExercisse.calories}</p>
 
             </div>
+
+            <br />
+            <br />
           </Link>
         );
       })
@@ -55,7 +59,7 @@ function Exercise() {
         
         
 }
-      Exercisse page list
+
     </div>
   );
 }
