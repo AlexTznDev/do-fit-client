@@ -45,10 +45,10 @@ function ProfileEdit() {
         try {
             const response = await profileSerivce()
             console.log(response.data)
-            const {name, profileImage, age, weight, height} = response.data
-
+            const {name, imageProfile, age, weight, height} = response.data
+            console.log(imageProfile)
             setUsername(name)
-            setProfileImage(profileImage)
+            setProfileImage(imageProfile)
             setUserAge(age)
             setUserWeight(weight)
             setUserHeight(height)

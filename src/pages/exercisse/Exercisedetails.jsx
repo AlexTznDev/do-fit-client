@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { exerciseDetailService } from "../../services/exercise.services";
 import { exerciseDeleteService } from "../../services/exercise.services";
+import axios from "axios";
 
 import AllButtons from "../../components/AllButtons";
 
@@ -86,16 +87,13 @@ const addExercisseToRoutine = {
 }
 
 try {
-  
-await axios.delete(`http://localhost:5005/api/exercise/${id}`)
-navigate("/exercise")
-
+  await axios.patch(`http://localhost:5005/api/routine/${idRoutine}`, addExercisseToRoutine)
+  navigate(`/routine/${idRoutine}`)
 } catch (error) {
-  console.log(error)
+  
 }
-
-    
-  }
+   
+}
 
   return (
     <div>

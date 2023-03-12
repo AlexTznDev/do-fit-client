@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
 import axios from "axios";
 import AllButtons from "../components/AllButtons";
 import ProfilDescription from "../components/ProfilDescription"
-import Routine from "./Routine"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { profileSerivce } from "../services/profile.services"
@@ -11,10 +9,20 @@ import { useContext } from "react"
 import { AuthContext } from "../context/auth.context"
 
 function Profile() {
+
+  const navigate = useNavigate()
+  const { isLoggedIn, authenticateUser} = useContext(AuthContext)
+
+
+  const [ userData, setUserData ] = useState(null)
+
   const [allRoutines, setallRoutines] = useState(null);
   const [isFetching, setisFetching] = useState(true);
 
+  const [ isFetchingRoutine, setisFetchingRoutine ] = useState(true)
+
   useEffect(() => {
+    getData();
     getDataAllRoutines();
   }, []);
 
@@ -22,23 +30,11 @@ function Profile() {
     try {
       const response = await axios.get("http://localhost:5005/api/routine");
       setallRoutines(response.data);
-      setisFetching(false);
+      setisFetchingRoutine(false);
     } catch (error) {
       console.log(error);
     }
   };
-
-
-  const navigate = useNavigate()
-
-  const { isLoggedIn, authenticateUser} = useContext(AuthContext)
-
-  const [ userData, setUserData ] = useState(null)
-  const [ isFetching, setisFetching ] = useState(true)
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const getData = async() => {
     setisFetching(true)
@@ -75,21 +71,7 @@ function Profile() {
       <br />
       <br />
 
-      {isFetching ? (
-        <h2>...is fetching</h2>
-        ) : (
-        allRoutines.map((eachRoutine) => {
-          return (
-              <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}`}>
-              <div>
-                {/* <img src="first image from exercisse" alt="" /> */}
-                <h2>{eachRoutine.name}</h2>
-              </div>
-            </Link>
-          );
-        })
-      )}
-        <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout}>Logout</button>
       </div>
       <div style={{borderStyle: "solid", width: "30vw"}}>
         <img src={userData.imageProfile} alt="img" width="200px" />
@@ -105,6 +87,26 @@ function Profile() {
         </div>
         <Link to={`/profile/${userData._id}/edit`}>Edit Profile</Link>
       </div>
+
+      <br />
+      <br />
+
+      {isFetchingRoutine ? (
+        <h2>...is fetching</h2>
+        ) : (
+        allRoutines.map((eachRoutine) => {
+          return (
+              <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}`}>
+              <div>
+                {/* <img src="first image from exercisse" alt="" /> */}
+                <h2>{eachRoutine.name}</h2>
+              </div>
+            </Link>
+          );
+        })
+      )}
+
+        
       
 
       <Link to={"/routine/create"}>
