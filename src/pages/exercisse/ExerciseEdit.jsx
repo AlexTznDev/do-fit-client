@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { exerciseDetailService } from "../../services/exercise.services";
+import { exerciseEditService } from "../../services/exercise.services";
 
 function ExerciseEdit() {
   const params = useParams();
@@ -10,7 +12,7 @@ function ExerciseEdit() {
   const [name, setName] = useState("");
   const [creador, setCreador] = useState("");
   const [category, setCategory] = useState("");
-  const [colories, setColories] = useState(0);
+  const [calories, setCalories] = useState(0);
   const [description, setDescription] = useState("");
   const [videoUrl, setvideoUrl] = useState("");
   const [tagline, settagline] = useState("");
@@ -38,7 +40,7 @@ function ExerciseEdit() {
     setimage(e.target.value);
   };
   const handleCaloriesChange = (e) => {
-    setColories(e.target.value);
+    setCalories(e.target.value);
   };
 
   useEffect(() => {
@@ -47,9 +49,7 @@ function ExerciseEdit() {
 
   const getDataExercise = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5005/api/exercise/${id}`
-      );
+      const response = await exerciseDetailService(id)
 
       const {
         name,
@@ -66,7 +66,7 @@ function ExerciseEdit() {
       setName(name)
       setCreador(creador)
       setCategory(category)
-      setColories(calories)
+      setCalories(calories)
       setDescription(description)
       setvideoUrl(videoUrl)
       settagline(tagline)
@@ -86,7 +86,7 @@ function ExerciseEdit() {
       name,
       creador,
       category,
-      colories,
+      calories,
       description,
       videoUrl,
       tagline,
@@ -94,7 +94,7 @@ function ExerciseEdit() {
     };
 
     try {
-      await axios.patch(`http://localhost:5005/api/exercise/${id}`, updateExercise);
+      await exerciseEditService(id, updateExercise)
       navigate(`/exercise/${id}/details`)
     } catch (error) {
       console.log(error);
@@ -138,7 +138,7 @@ function ExerciseEdit() {
         <input
           type="number"
           name="calories"
-          value={colories}
+          value={calories}
           onChange={handleCaloriesChange}
         />
         <br />

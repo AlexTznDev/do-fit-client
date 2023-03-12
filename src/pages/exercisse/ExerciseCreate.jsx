@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { exerciseCreateService } from "../../services/exercise.services";
 
 function ExerciseCreate() {
 
@@ -54,17 +54,12 @@ const navigate = useNavigate()
       image,
     };
 
-
-
     try {
-        await axios.post("http://localhost:5005/api/exercise",newExercise )
+        await exerciseCreateService(newExercise)
         navigate("/exercise")
     } catch (error) {
         console.log(error)
     }
-
-
-
   };
 
   return (

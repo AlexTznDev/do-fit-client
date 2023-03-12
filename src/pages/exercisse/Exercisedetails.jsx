@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { exerciseDetailService } from "../../services/exercise.services";
+import { exerciseDeleteService } from "../../services/exercise.services";
 
 function Exercisedetails() {
   const params = useParams();
@@ -18,9 +19,7 @@ function Exercisedetails() {
 
   const getDetailDataExercise = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5005/api/exercise/${id}`
-      );
+      const response = await exerciseDetailService(id)
 
       setDetailsExercise(response.data);
       setisFetching(false);
@@ -35,7 +34,7 @@ function Exercisedetails() {
 
 try {
   
-await axios.delete(`http://localhost:5005/api/exercise/${id}`)
+await exerciseDeleteService(id)
 navigate("/exercise")
 
 } catch (error) {

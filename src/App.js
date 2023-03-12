@@ -12,6 +12,8 @@ import ExerciseDetails from "./pages/exercisse/Exercisedetails.jsx"
 import ExerciseCreate from './pages/exercisse/ExerciseCreate';
 import ExerciseEdit from './pages/exercisse/ExerciseEdit';
 
+import IsPrivate from './components/isPrivate';
+
 function App() {
   return (
     <div className="App">
@@ -21,14 +23,14 @@ function App() {
   
 <Route path="/" element={ <Home/> }/>
 
-<Route path="/profile" element={<Profile/>}/>
+<Route path="/profile" element={<IsPrivate><Profile/></IsPrivate>}/>
 <Route path="/signup" element={ <Signup/> }  />
 <Route path="/login" element={ <Login/> }  />
 
-<Route path="/exercise" element={ <Exercise/> }/>
-<Route path="/exercise/:id/details" element={ <ExerciseDetails/> }/>
-<Route path="/exercise/:id/edit" element={ <ExerciseEdit/> }/>
-<Route path="/exercise/create" element={ <ExerciseCreate/> }/>
+<Route path="/exercise" element={<IsPrivate><Exercise/></IsPrivate> }/>
+<Route path="/exercise/:id/details" element={<IsPrivate><ExerciseDetails/></IsPrivate> }/>
+<Route path="/exercise/:id/edit" element={<IsPrivate><ExerciseEdit/></IsPrivate>}/>
+<Route path="/exercise/create" element={<IsPrivate><ExerciseCreate/></IsPrivate>}/>
 
 
 </Routes>

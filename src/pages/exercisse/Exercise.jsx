@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { exerciseSerivce } from "../../services/exercise.services";
 
 function Exercise() {
   const [allExercise, setAllExercise] = useState(null);
@@ -12,7 +13,7 @@ function Exercise() {
 
   const getDataAllExercisse = async () => {
     try {
-      const response = await axios.get("http://localhost:5005/api/exercise");
+      const response = await exerciseSerivce();
 
       setAllExercise(response.data);
       setisFetching(false);

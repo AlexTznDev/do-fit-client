@@ -1,16 +1,21 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { AuthContext } from "../../context/auth.context";
+import { loginService } from "../../services/auth.services";
 
 function Login() {
+// añadiendo el authcontext
+
+  const {authenticateUser} = useContext(AuthContext)
+
 
   const navigate = useNavigate()
 
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [ errorMessage, setErrorMessage ] = useState("")
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -29,11 +34,18 @@ function Login() {
     };
 
     try {
-      await axios.post("http://localhost:5005/api/auth/login",userAccount);
+     const response =  await loginService(userAccount)
+     console.log(response)
+    
+      authenticateUser()
+      console.log("usuario autentificado")
+     //6. Haciendo uso del LocalStorage para almacenar el token que viene del BE
+     localStorage.setItem("authToken", response.data.authToken) 
       navigate("/profile")
 
     } catch (error) {
       console.log(error);
+      setErrorMessage(error.response.data.errorMessage)
     }
   };
 
@@ -62,6 +74,7 @@ function Login() {
         <br />
 
         <button type="submit">Login</button>
+        {errorMessage !== "" ? <p>{errorMessage}</p> : null}
       </form>
     </div>
   );

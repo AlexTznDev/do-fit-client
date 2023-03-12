@@ -1,8 +1,6 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
-
+import { signupSerivce } from "../../services/auth.services";
 function Signup() {
   //Navigate para ir a login despues de crear el usuario
   const navigate = useNavigate();
@@ -32,10 +30,7 @@ function Signup() {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5005/api/auth/signup",
-        newUser
-      );
+      const response = await signupSerivce(newUser)
       console.log(response);
       navigate("/login");
     } catch (error) {
