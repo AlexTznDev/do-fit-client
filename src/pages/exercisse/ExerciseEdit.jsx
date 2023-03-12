@@ -125,12 +125,26 @@ function ExerciseEdit() {
         <br />
 
         <label htmlFor="category">Category</label>
-        <input
+
+
+        <select
           type="text"
           name="category"
           value={category}
           onChange={handleCategoryChange}
-        />
+        >
+          <option value="Abbs">Abbs</option>
+          <option value="Upper body">Upper body</option>
+          <option value="Lower body">Lower body</option>
+          <option value="Stretching">Stretching</option>
+          <option value="Breathing">Breathing</option>
+          <option value="Cardio">Cardio</option>
+          <option value="body weight">body weight</option>
+
+        </select>
+
+
+
         <br />
         <br />
 

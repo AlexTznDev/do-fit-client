@@ -12,6 +12,10 @@ import ExerciseDetails from "./pages/exercisse/Exercisedetails.jsx"
 import ExerciseCreate from './pages/exercisse/ExerciseCreate';
 import ExerciseEdit from './pages/exercisse/ExerciseEdit';
 
+import RoutineCreate from './pages/routine/RoutineCreate';
+import RoutineDetail from './pages/routine/RoutineDetail';
+import RoutineExercise from './pages/routine/RoutineExercise';
+
 function App() {
   return (
     <div className="App">
@@ -25,10 +29,19 @@ function App() {
 <Route path="/signup" element={ <Signup/> }  />
 <Route path="/login" element={ <Login/> }  />
 
+
+
 <Route path="/exercise" element={ <Exercise/> }/>
 <Route path="/exercise/:id/details" element={ <ExerciseDetails/> }/>
 <Route path="/exercise/:id/edit" element={ <ExerciseEdit/> }/>
 <Route path="/exercise/create" element={ <ExerciseCreate/> }/>
+
+<Route path="/routine/:id" element={<RoutineDetail/>}></Route>
+<Route path="/routine/create" element={<RoutineCreate/>}></Route>
+<Route path="/routine/:idRoutine/exercise" element={<RoutineExercise/>}></Route>
+<Route path="/routine/:idRoutine/exercise/:idExercise" element={<ExerciseDetails/>}></Route>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray" element={<ExerciseDetails/>}></Route>
+<Route path="/routine/create" element={<RoutineCreate/>}></Route>
 
 
 </Routes>
