@@ -13,6 +13,7 @@ import ExerciseCreate from './pages/exercisse/ExerciseCreate';
 import ExerciseEdit from './pages/exercisse/ExerciseEdit';
 
 import IsPrivate from './components/isPrivate';
+import ProfileEdit from './pages/ProfileEdit';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
 <Route path="/" element={ <Home/> }/>
 
 <Route path="/profile" element={<IsPrivate><Profile/></IsPrivate>}/>
+<Route path="/profile/:id/edit" element={<IsPrivate><ProfileEdit/></IsPrivate>}/>
+
 <Route path="/signup" element={ <Signup/> }  />
 <Route path="/login" element={ <Login/> }  />
 

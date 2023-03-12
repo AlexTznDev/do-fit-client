@@ -16,9 +16,6 @@ function Home() {
        Log In
       </NavLink>
 
-      <NavLink to="/profile" className={"ButtonHome"}>
-       Profile
-      </NavLink>
     </div>
 
     </div>
