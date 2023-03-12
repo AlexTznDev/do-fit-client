@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { exerciseCreateService } from "../../services/exercise.services";
 
 function ExerciseCreate() {
-
-const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [creador, setCreador] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Abbs");
   const [calories, setCalories] = useState(0);
   const [description, setDescription] = useState("");
   const [videoUrl, setvideoUrl] = useState("");
@@ -58,13 +56,19 @@ const navigate = useNavigate()
         await exerciseCreateService(newExercise)
         navigate("/exercise")
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
   };
 
   return (
     <div>
       <h2>Add exercise</h2>
+
+      <br />
+
+      <AllButtons/>
+      <br />
+      <br /> 
 
       <form>
         <label htmlFor="name">Name</label>
@@ -88,12 +92,22 @@ const navigate = useNavigate()
         <br />
 
         <label htmlFor="category">Category</label>
-        <input
+        <select
           type="text"
           name="category"
           value={category}
           onChange={handleCategoryChange}
-        />
+        >
+          <option value="Abbs">Abbs</option>
+          <option value="Upper body">Upper body</option>
+          <option value="Lower body">Lower body</option>
+          <option value="Stretching">Stretching</option>
+          <option value="Breathing">Breathing</option>
+          <option value="Cardio">Cardio</option>
+          <option value="body weight">body weight</option>
+
+        </select>
+
         <br />
         <br />
 
