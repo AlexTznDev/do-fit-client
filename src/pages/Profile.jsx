@@ -51,7 +51,7 @@ function Profile() {
   
   if(isFetching === true) {
     return
-      (<h1>...Searching</h1>)
+      <h1>...Searching</h1>
   } 
   
   const handleLogout = () => {
