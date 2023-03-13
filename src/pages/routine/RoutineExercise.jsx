@@ -161,8 +161,7 @@ function RoutineExercise() {
     });
 
     setIsRoutineFinished(false);
-    console.log(exercisseData);
-    console.log(isEndRoutine)
+
   };
 
 const handleEndRoutine =()=>{
@@ -220,6 +219,8 @@ const handleEndRoutine =()=>{
               </h2>
             </div>
           ) : (
+
+            //isroad?
             <div>
               <form>
                 <label htmlFor="repeticion">repeticion</label>

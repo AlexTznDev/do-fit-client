@@ -27,7 +27,7 @@ function RoutineDetail() {
       );
 
       setRoutineData(response.data.exercises);
-      console.log(response.data.exercises.length)
+  
       setIsFetching(false);
     } catch (error) {
       console.log(error);
