@@ -57,7 +57,7 @@ function RoutineDetail() {
       </Link>
       <br />
       <br />
-      {isFetching ? null : (
+      {isFetching || routineData.length === 0 ? null : (
         <Link to={`/routine/${id}/exercise/${routineData[0]._id}/start`}>
           <div className="ButtonStart">Start the routine!!</div>
         </Link>
