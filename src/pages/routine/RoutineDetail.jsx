@@ -57,18 +57,18 @@ function RoutineDetail() {
       ) : (
         routineData.map((eachExercisse) => {
           return (
-            <div>
+            <div key={eachExercisse.exercisesId._id}>
               {!isUserRoad ? (
                 <Link
                   to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
-                  key={eachExercisse.exercisesId._id}
+                  
                 >
                   <h4>{eachExercisse.exercisesId.name}</h4>
                 </Link>
               ) : (
                 <Link
                   to={`/routine/${id}/exercise/${eachExercisse._id}/user`}
-                  key={eachExercisse.exercisesId._id}
+              
                 >
                   <h4>{eachExercisse.exercisesId.name}</h4>
                 </Link>
