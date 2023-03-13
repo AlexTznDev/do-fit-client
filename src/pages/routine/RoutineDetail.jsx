@@ -24,8 +24,8 @@ function RoutineDetail() {
       );
 
 
-      console.log(response.data.exercises)
       setRoutineData(response.data.exercises);
+
       setIsFetching(false);
     } catch (error) {
       console.log(error);
@@ -42,16 +42,27 @@ function RoutineDetail() {
       ) : (
         routineData.map((eachExercisse) => {
           return (
-            <Link to={`/routine/${id}/exercise/${eachExercisse._id}/edit`} key={eachExercisse.exercisesId._id}>
+            <Link
+              to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
+              key={eachExercisse.exercisesId._id}
+            >
               <h4>{eachExercisse.exercisesId.name}</h4>
             </Link>
           );
         })
       )}
 
-      <Link to={`/routine/${id}/exercise`} >
-        <div className="ButtonCreate"></div>
+      <Link to={`/routine/${id}/exercise`}>
+        <div className="ButtonCreate">Add exercisse to routine</div>
       </Link>
+      <br />
+      <br />
+      {isFetching ? null : (
+        <Link to={`/routine/${id}/exercise/${routineData[0]._id}/start`}>
+          <div className="ButtonStart">Start the routine!!</div>
+        </Link>
+      )}
+
     </div>
   );
 }

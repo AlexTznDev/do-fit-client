@@ -63,7 +63,7 @@ function ExerciseCreate() {
   };
 
   return (
-    <div>
+    <div className="mainContainer">
       <h2>Add exercise</h2>
 
       <br />

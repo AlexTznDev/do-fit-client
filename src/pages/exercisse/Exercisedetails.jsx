@@ -11,7 +11,7 @@ function Exercisedetails() {
   const params = useParams();
   const { id } = params;
   const { idRoutine, idExercise } = params;
-  console.log(params);
+
 
   const navigate = useNavigate();
 
@@ -28,16 +28,15 @@ function Exercisedetails() {
 
   const getDetailDataExercise = async () => {
     try {
-
       if (isRoutineRoad) {
-        console.log("if routuine road ");
+
         const response = await exerciseDetailService(idExercise);
 
-        console.log(response.data)
+
         setDetailsExercise(response.data);
         setisFetching(false);
       } else {
-        console.log("if routuine not road ");
+
         const response = await exerciseDetailService(id);
         setDetailsExercise(response.data);
         setisFetching(false);
@@ -115,19 +114,22 @@ function Exercisedetails() {
 
                 <label htmlFor="series">series</label>
                 <input
-                  type="series"
+                  type="number"
                   name="series"
                   onChange={handleSeriesChange}
                 />
 
                 <label htmlFor="chronometro">chronometro</label>
                 <input
-                  type="chronometro"
+                  type="number"
                   name="chronometro"
                   onChange={handleChronometerChange}
                 />
-
-                <button onClick={handleSubmit}>Add to my routine</button>
+                <br />
+                <br />
+                <button className="ButtonCreate" onClick={handleSubmit}>
+                  Add to my routine
+                </button>
               </form>
             </div>
           )}

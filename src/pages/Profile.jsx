@@ -101,7 +101,7 @@ function Profile() {
       )}
 
       <Link to={"/routine/create"}>
-        <div className={"ButtonCreate"}></div>
+        <div className={"ButtonCreate"}>create a new routine</div>
       </Link>
     </div>
   );
