@@ -8,12 +8,16 @@ function Home() {
 
 
     <div className={"containerBtnHome"}>
-    <NavLink to="/signup" className={"ButtonHome"}>
-        Sign Up
+      <NavLink to="/signup" className={"ButtonHome"}>
+      Sign Up
       </NavLink>
 
       <NavLink to="/login" className={"ButtonHome"}>
        Log In
+      </NavLink>
+
+      <NavLink to="/search" className={"ButtonHome"}>
+       Search friends
       </NavLink>
 
     </div>

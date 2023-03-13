@@ -19,6 +19,8 @@ import RoutineExercise from './pages/routine/RoutineExercise';
 
 import IsPrivate from './components/isPrivate';
 import ProfileEdit from './pages/ProfileEdit';
+import SearchFriends from './components/SearchFriends';
+import ProfileFoundUser from './pages/ProfileFoundUser';
 
 function App() {
   return (
@@ -26,7 +28,10 @@ function App() {
 
 
 <Routes>
-  
+<Route path="/search" element={<SearchFriends/>}></Route>
+<Route path="/profile/:idFoundUser" element={<ProfileFoundUser/>}/>
+
+
 <Route path="/" element={ <Home/> }/>
 
 <Route path="/profile" element={<IsPrivate><Profile/></IsPrivate>}/>
@@ -47,7 +52,7 @@ function App() {
 <Route path="/routine/:idRoutine/exercise" element={<RoutineExercise/>}></Route>
 <Route path="/routine/:idRoutine/exercise/:idExercise" element={<ExerciseDetails/>}></Route>
 <Route path="/routine/:idRoutine/exercise/:idExerciseInArray/edit" element={<RoutineExercise/>}></Route>
-<Route path="/routine/create" element={<RoutineCreate/>}></Route>
+
 
 
 </Routes>
