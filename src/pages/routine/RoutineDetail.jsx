@@ -5,11 +5,13 @@ import ProfilDescription from "../../components/ProfilDescription";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
+import RoutineExercise from "./RoutineExercise";
 
 function RoutineDetail() {
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
+
 
   const [routineData, setRoutineData] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -29,7 +31,7 @@ function RoutineDetail() {
       );
 
       setRoutineData(response.data.exercises);
-
+      console.log(response.data.exercises.length)
       setIsFetching(false);
     } catch (error) {
       console.log(error);
@@ -85,7 +87,7 @@ function RoutineDetail() {
       <br />
       <br />
       {isFetching || routineData.length === 0 ? null : (
-        <Link to={`/routine/${id}/exercise/${routineData[0]._id}/start`}>
+        <Link  to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}`}>
           <div className="ButtonStart">Start the routine!!</div>
         </Link>
       )}

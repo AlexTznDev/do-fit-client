@@ -4,6 +4,10 @@ const routineService = () => {
     return service.get("/routine")
 
 }
+const routineDetailService = (id) => {
+    return service.get(`/routine/${id}`)
+
+}
 
 const crearRoutineService =(newRoutine)=>{
     return service.post("/routine", newRoutine)
@@ -30,6 +34,6 @@ const routineUserService = (id) => {
 
 export {
 
-    routineService, crearRoutineService, routineUserService
+    routineService, crearRoutineService, routineDetailService, routineUserService
    
 }

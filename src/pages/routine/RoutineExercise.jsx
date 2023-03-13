@@ -8,7 +8,7 @@ import AllButtons from "../../components/AllButtons";
 
 function RoutineExercise() {
   const params = useParams();
-  const { idRoutine, idExerciseInArray } = params;
+  const { idRoutine, idExerciseInArray, lengthData } = params;
 
   const bipAudio = new Audio(Bipsound);
 
@@ -34,10 +34,13 @@ function RoutineExercise() {
   const [countExerciseInroutine, setcountExerciseInroutine] = useState(0);
   const [countSeriesDone, setcountSeriesDone] = useState(0);
   const [IsRoutineFinished, setIsRoutineFinished] = useState(false);
+  const [isEndRoutine, setisEndRoutine] = useState(false)
 
   const [isAddExerciseRoad, setisAddExerciseRoad] = useState(
     window.location.href.includes("add") ? true : false
   );
+
+
 
   useEffect(() => {
     getDataExerciseInArrayRoutine();
@@ -150,17 +153,28 @@ function RoutineExercise() {
       setIsRoutineFinished(true);
       setcountSeriesDone(0);
     }
+    if(parseInt(lengthData) === countExerciseInroutine +1 && countSeriesDone + 1 === series ){
+      setisEndRoutine(true)
+      setIsRoutineFinished(false)
+    }
   };
 
   const handleNextExercise = () => {
     setcountExerciseInroutine((currentState) => {
       return currentState + 1;
     });
+
     setIsRoutineFinished(false);
-    console.log(exercisseData)
+    console.log(exercisseData);
+    console.log(isEndRoutine)
   };
 
+const handleEndRoutine =()=>{
+  navigate(`/routine/${idRoutine}`)
+}
+
   return (
+    
     <div className="mainContainer">
       {!isEditRoad ? (
         <Exercise />
@@ -193,6 +207,14 @@ function RoutineExercise() {
               {IsRoutineFinished ? (
                 <button className="nextExercise" onClick={handleNextExercise}>
                   Next exercise
+                </button>
+              ) : null}
+              {
+                
+
+                isEndRoutine ? (
+                <button className="endExercise" onClick={handleEndRoutine}>
+                  End routine
                 </button>
               ) : null}
 

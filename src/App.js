@@ -58,7 +58,7 @@ function App() {
 <Route path="/routine/:idRoutine/exercise/:idExerciseInArray/user" element={<RoutineExercise/>}></Route>
 
 
-<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start" element={<RoutineExercise/>}></Route>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData" element={<RoutineExercise/>}></Route>
 <Route path="/routine/create" element={<RoutineCreate/>}></Route>
 
 
