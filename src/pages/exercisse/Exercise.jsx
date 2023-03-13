@@ -40,7 +40,7 @@ function Exercise() {
       <AllButtons />
       <br />
 
-      {isFetching ? (
+      {isFetching  ? (
         <h1>...buscando</h1>
       ) : isRoutineRoad ? (
         allExercise.map((eachExercisse, index) => {
@@ -69,7 +69,7 @@ function Exercise() {
       ) : (
         allExercise.map((eachExercisse, index) => {
           return (
-            <div>
+            <div key={eachExercisse._id + index}>
               <Link
                 style={{
                   textDecoration: "none",
@@ -77,7 +77,7 @@ function Exercise() {
                   cursor: "pointer",
                 }}
                 to={`/exercise/${eachExercisse._id}/details`}
-                key={eachExercisse._id + index}
+                
               >
                 <div className="containerInfoExercisse">
                   <h3>{eachExercisse.name}</h3>
