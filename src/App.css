@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+
+button{
+border: none;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+
 .containerBtnHome{
   display: flex;
   gap: 1rem;
@@ -13,15 +24,18 @@
   background-color: rgba(4, 0, 255, 0.351);
   color: #fff;
   text-decoration: none;
+  border-radius: 10px;
 
 }
 .ButtonCreate{
-  width: 2rem;
-  height: 2rem;
+  padding:1rem 2rem;
   background-color: rgb(91, 91, 91);
+  color: #fff;
   margin-left: auto;
   margin-right: auto;
-  /* border-radius: 50%; */
+  text-decoration: none;
+  border-radius: 10px;
+
 
 }
 
@@ -30,4 +44,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding:2rem 0;
+}
+
+.ButtonStart{
+  background-color: rgb(65, 203, 65);
+  font-size: 25px;
+  font-weight: bold;
+  padding:1rem 2rem;
+  color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.chronometro{
+  padding: 2rem 4rem;
+  background-color: rgb(65, 179, 65);
+}
+.SeriesCounter{
+  padding: 2rem 4rem;
+  background-color: rgb(65, 107, 179);
 }

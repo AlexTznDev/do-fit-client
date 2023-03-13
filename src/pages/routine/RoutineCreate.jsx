@@ -49,7 +49,7 @@ function RoutineCreate() {
   };
 
   return (
-    <div>
+    <div className="mainContainer">
       <ProfilDescription />
 
       <AllButtons />
