@@ -36,8 +36,7 @@ function RoutineExercise() {
     window.location.href.includes("add") ? true : false
   );
 
-  console.log(parseInt(lengthData))
-  console.log(countExerciseInroutine)
+
 
   useEffect(() => {
     getDataExerciseInArrayRoutine();
