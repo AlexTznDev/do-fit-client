@@ -10,6 +10,7 @@ const exerciseCreateService = (newExercise) => {
 }
 
 const exerciseDetailService = (exerciseId) => {
+    console.log("service" , exerciseId)
     return service.get(`/exercise/${exerciseId}`)
 }
 
