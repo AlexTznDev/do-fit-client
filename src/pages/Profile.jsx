@@ -7,6 +7,8 @@ import { profileSerivce } from "../services/profile.services";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
+import { routineService } from "../services/routine.services";
+
 function Profile() {
   const navigate = useNavigate();
 
@@ -26,7 +28,7 @@ function Profile() {
 
   const getDataAllRoutines = async () => {
     try {
-      const response = await axios.get("http://localhost:5005/api/routine");
+      const response = await routineService()
       setallRoutines(response.data);
       setisFetchingRoutine(false);
     } catch (error) {
