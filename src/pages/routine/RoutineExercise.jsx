@@ -28,6 +28,7 @@ function RoutineExercise() {
   const [isChronometerRunning, setisChronometerRunning] = useState(false);
   const [countExerciseInroutine, setcountExerciseInroutine] = useState(0);
   const [countSeriesDone, setcountSeriesDone] = useState(0);
+  const [isAddExerciseRoad, setisAddExerciseRoad] = useState(window.location.href.includes("add") ? true : false);
 
   useEffect(() => {
     getDataExerciseInArrayRoutine();
@@ -35,7 +36,7 @@ function RoutineExercise() {
 
   const getDataExerciseInArrayRoutine = async () => {
     try {
-      if (isStartExerciseRoad) {
+      if (isStartExerciseRoad && !isAddExerciseRoad) {
         const response = await axios.get(
           `http://localhost:5005/api/routine/${idRoutine}`
         );
@@ -49,7 +50,7 @@ function RoutineExercise() {
         setexercisseData(response.data.exercises[countExerciseInroutine]);
         console.log(response.data);
         setisFetching(false);
-      } else {
+      } else if(!isStartExerciseRoad && !isAddExerciseRoad){
         const response = await axios.get(
           `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
         );
@@ -65,7 +66,8 @@ function RoutineExercise() {
     }
   };
 
-  const handleRemove = async () => {
+  const handleRemove = async (e) => {
+    e.preventDefault()
     try {
       await axios.patch(
         `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
@@ -86,7 +88,8 @@ function RoutineExercise() {
     setChronometro(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     const updateExercise = {
       newRepeticion: repeticion,
       newSeries: series,
@@ -139,13 +142,14 @@ function RoutineExercise() {
 
   return (
     <div className="mainContainer">
-      <AllButtons />
+      
       {!isEditRoad ? (
         <Exercise />
       ) : isFetching ? (
         <h2>...Buscando</h2>
       ) : (
-        <div>
+        <div className="mainContainer">
+        <AllButtons />
           <h2>name: {exercisseData.exercisesId.name}</h2>
           <p>category: {exercisseData.exercisesId.category}</p>
           <p>description: {exercisseData.exercisesId.description}</p>

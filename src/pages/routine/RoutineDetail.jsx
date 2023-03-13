@@ -52,7 +52,7 @@ function RoutineDetail() {
         })
       )}
 
-      <Link to={`/routine/${id}/exercise`}>
+      <Link to={`/routine/${id}/exercise/add`}>
         <div className="ButtonCreate">Add exercisse to routine</div>
       </Link>
       <br />
