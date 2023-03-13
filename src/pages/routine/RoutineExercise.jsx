@@ -14,6 +14,12 @@ function RoutineExercise() {
 
   const navigate = useNavigate();
 
+  const [isUserRoad, setIsUserRoad] = useState(
+    window.location.href.includes("user") ? true : false
+  );
+
+  ////////////////////ALEX//////////////////
+
   const [isEditRoad, setisEditRoad] = useState(
     idExerciseInArray ? true : false
   );
@@ -30,13 +36,11 @@ function RoutineExercise() {
   const [countExerciseInroutine, setcountExerciseInroutine] = useState(0);
   const [countSeriesDone, setcountSeriesDone] = useState(0);
   const [IsRoutineFinished, setIsRoutineFinished] = useState(false);
-  const [isEndRoutine, setisEndRoutine] = useState(false)
+  const [isEndRoutine, setisEndRoutine] = useState(false);
 
   const [isAddExerciseRoad, setisAddExerciseRoad] = useState(
     window.location.href.includes("add") ? true : false
   );
-
-
 
   useEffect(() => {
     getDataExerciseInArrayRoutine();
@@ -149,9 +153,12 @@ function RoutineExercise() {
       setIsRoutineFinished(true);
       setcountSeriesDone(0);
     }
-    if(parseInt(lengthData) === countExerciseInroutine +1 && countSeriesDone + 1 === series ){
-      setisEndRoutine(true)
-      setIsRoutineFinished(false)
+    if (
+      parseInt(lengthData) === countExerciseInroutine + 1 &&
+      countSeriesDone + 1 === series
+    ) {
+      setisEndRoutine(true);
+      setIsRoutineFinished(false);
     }
   };
 
@@ -161,15 +168,14 @@ function RoutineExercise() {
     });
 
     setIsRoutineFinished(false);
-
+;
   };
 
-const handleEndRoutine =()=>{
-  navigate(`/routine/${idRoutine}`)
-}
+  const handleEndRoutine = () => {
+    navigate(`/routine/${idRoutine}`);
+  };
 
   return (
-    
     <div className="mainContainer">
       {!isEditRoad ? (
         <Exercise />
@@ -204,10 +210,7 @@ const handleEndRoutine =()=>{
                   Next exercise
                 </button>
               ) : null}
-              {
-                
-
-                isEndRoutine ? (
+              {isEndRoutine ? (
                 <button className="endExercise" onClick={handleEndRoutine}>
                   End routine
                 </button>
@@ -218,9 +221,7 @@ const handleEndRoutine =()=>{
                 {exercisseData.repeticion} repeticion
               </h2>
             </div>
-          ) : (
-
-            //isroad?
+          ) : !isUserRoad ? (
             <div>
               <form>
                 <label htmlFor="repeticion">repeticion</label>
@@ -258,6 +259,12 @@ const handleEndRoutine =()=>{
               <button className="ButtonCreate" onClick={handleRemove}>
                 Remove from the routine
               </button>
+            </div>
+          ) : (
+            <div>
+              <p>Series: {exercisseData.series}</p>
+              <p>Repetitions: {exercisseData.repeticion}</p>
+              <p>TimeOut: {exercisseData.chronometro}</p>
             </div>
           )}
         </div>

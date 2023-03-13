@@ -16,6 +16,10 @@ function RoutineDetail() {
   const [routineData, setRoutineData] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
 
+  const [isUserRoad, setUserRoad] = useState(
+    window.location.href.includes("user") ? true : false
+  );
+
   useEffect(() => {
     getData();
   }, []);
@@ -53,19 +57,33 @@ function RoutineDetail() {
       ) : (
         routineData.map((eachExercisse) => {
           return (
-            <Link
-              to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
-              key={eachExercisse.exercisesId._id}
-            >
-              <h4>{eachExercisse.exercisesId.name}</h4>
-            </Link>
+            <div key={eachExercisse.exercisesId._id}>
+              {!isUserRoad ? (
+                <Link
+                  to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
+                  
+                >
+                  <h4>{eachExercisse.exercisesId.name}</h4>
+                </Link>
+              ) : (
+                <Link
+                  to={`/routine/${id}/exercise/${eachExercisse._id}/user`}
+              
+                >
+                  <h4>{eachExercisse.exercisesId.name}</h4>
+                </Link>
+              )}
+            </div>
           );
         })
       )}
 
-      <Link to={`/routine/${id}/exercise/add`}>
-        <div className="ButtonCreate">Add exercisse to routine</div>
-      </Link>
+      {!isUserRoad ? (
+        <Link to={`/routine/${id}/exercise/add`}>
+          <div className="ButtonCreate">Add exercisse to routine</div>
+        </Link>
+      ) : null}
+
       <br />
       <br />
       {isFetching || routineData.length === 0 ? null : (
@@ -74,11 +92,11 @@ function RoutineDetail() {
         </Link>
       )}
 
-      <br />
-      <br />
-      <button onClick={handleDeleteRoutine} className="ButtonCreate">
-        Delete the routine
-      </button>
+      {!isUserRoad ? (
+        <button onClick={handleDeleteRoutine} className="ButtonCreate">
+          Delete the routine
+        </button>
+      ) : null}
     </div>
   );
 }

@@ -13,6 +13,9 @@ const crearRoutineService =(newRoutine)=>{
     return service.post("/routine", newRoutine)
 }
 
+const routineUserService = (id) => {
+    return service.get(`/routine/${id}`)
+}
 // const exerciseCreateService = (newExercise) => {
 //     return service.post("/exercise", newExercise)
 // }
@@ -31,6 +34,6 @@ const crearRoutineService =(newRoutine)=>{
 
 export {
 
-    routineService, crearRoutineService, routineDetailService
+    routineService, crearRoutineService, routineDetailService, routineUserService
    
 }

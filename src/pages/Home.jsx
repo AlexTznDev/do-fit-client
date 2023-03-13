@@ -16,9 +16,7 @@ function Home() {
        Log In
       </NavLink>
 
-      <NavLink to="/search" className={"ButtonHome"}>
-       Search friends
-      </NavLink>
+     
 
     </div>
 

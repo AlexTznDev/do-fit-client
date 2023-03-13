@@ -9,7 +9,11 @@ function AllButtons() {
         Exercise
       </Link>
       <Link className={"ButtonHome"} to={"/profile"}>
-        My routines
+        My Profile
+      </Link>
+
+      <Link to="/search" className={"ButtonHome"}>
+       Search friends
       </Link>
 
     </div>

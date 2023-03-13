@@ -7,6 +7,7 @@ import { profileSerivce } from "../services/profile.services";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useParams } from "react-router-dom";
+import { routineUserService } from "../services/routine.services";
 
 
 function ProfileFoundUser() {
@@ -32,8 +33,9 @@ function ProfileFoundUser() {
   
     const getDataAllRoutines = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/api/routine");
+        const response = await axios.get(`http://localhost:5005/api/userInformation/${idFoundUser}`)
         setallRoutines(response.data);
+        console.log(response)
         setisFetchingRoutine(false);
       } catch (error) {
         console.log(error);
@@ -86,24 +88,24 @@ function ProfileFoundUser() {
 
       <br />
       <br />
-      <AllButtons />
+      <AllButtons/>
 
       <br />
       <br />
 
-      {isFetchingRoutine ? (
+      {isFetchingRoutine ? 
         <h2>...is fetching</h2>
-      ) : (
+       : 
         allRoutines.map((eachRoutine) => {
           return (
-            <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}`}>
+            <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}/user`}>
               <div>
                 <h2>{eachRoutine.name}</h2>
               </div>
             </Link>
           );
         })
-      )}
+      }
 
       {/* <Link to={"/routine/create"}>
         <div className={"ButtonCreate"}></div>

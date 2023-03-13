@@ -48,11 +48,16 @@ function App() {
 <Route path="/exercise/create" element={<IsPrivate><ExerciseCreate/></IsPrivate>}/>
 
 <Route path="/routine/:id" element={<RoutineDetail/>}></Route>
+<Route path="/routine/:id/user" element={<RoutineDetail/>}></Route>
+
 <Route path="/routine/create" element={<RoutineCreate/>}></Route>
 <Route path="/routine/:idRoutine/exercise" element={<RoutineExercise/>}></Route>
 <Route path="/routine/:idRoutine/exercise/add" element={<RoutineExercise/>}></Route>
 <Route path="/routine/:idRoutine/exercise/:idExercise" element={<ExerciseDetails/>}></Route>
 <Route path="/routine/:idRoutine/exercise/:idExerciseInArray/edit" element={<RoutineExercise/>}></Route>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/user" element={<RoutineExercise/>}></Route>
+
+
 <Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData" element={<RoutineExercise/>}></Route>
 <Route path="/routine/create" element={<RoutineCreate/>}></Route>
 
