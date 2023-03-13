@@ -65,7 +65,8 @@ function RoutineExercise() {
     }
   };
 
-  const handleRemove = async () => {
+  const handleRemove = async (e) => {
+
     try {
       await axios.patch(
         `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
@@ -86,7 +87,9 @@ function RoutineExercise() {
     setChronometro(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
     const updateExercise = {
       newRepeticion: repeticion,
       newSeries: series,
@@ -98,10 +101,12 @@ function RoutineExercise() {
         `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}/edit`,
         updateExercise
       );
-      navigate(`/routine/${idRoutine}`); //! el navigate no funciona
+      navigate(`/routine/${idRoutine}`);
+
     } catch (error) {
       console.log(error);
     }
+ 
   };
 
   const handleStartChronometer = () => {

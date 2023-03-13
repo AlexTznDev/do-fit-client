@@ -43,7 +43,7 @@ function App() {
 
 
 <Route path="/exercise" element={<IsPrivate><Exercise/></IsPrivate> }/>
-<Route path="/exercise/:id/details" element={<IsPrivate><ExerciseDetails/></IsPrivate> }/>
+<Route path="/exercise/:id/details" element={<IsPrivate><ExerciseDetails/></IsPrivate>}/>
 <Route path="/exercise/:id/edit" element={<IsPrivate><ExerciseEdit/></IsPrivate>}/>
 <Route path="/exercise/create" element={<IsPrivate><ExerciseCreate/></IsPrivate>}/>
 
