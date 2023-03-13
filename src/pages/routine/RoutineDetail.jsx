@@ -7,14 +7,16 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function RoutineDetail() {
-
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
 
   const [routineData, setRoutineData] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+
+  const [isUserRoad, setUserRoad] = useState(
+    window.location.href.includes("user") ? true : false
+  );
 
   useEffect(() => {
     getData();
@@ -26,7 +28,6 @@ function RoutineDetail() {
         `http://localhost:5005/api/routine/${id}`
       );
 
-
       setRoutineData(response.data.exercises);
 
       setIsFetching(false);
@@ -35,18 +36,14 @@ function RoutineDetail() {
     }
   };
 
-
-  const handleDeleteRoutine = async () =>{
-
+  const handleDeleteRoutine = async () => {
     try {
-      await axios.delete(`http://localhost:5005/api/routine/${id}`)
-      navigate("/profile")
+      await axios.delete(`http://localhost:5005/api/routine/${id}`);
+      navigate("/profile");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-
-  }
+  };
 
   return (
     <div className="mainContainer">
@@ -58,19 +55,33 @@ function RoutineDetail() {
       ) : (
         routineData.map((eachExercisse) => {
           return (
-            <Link
-              to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
-              key={eachExercisse.exercisesId._id}
-            >
-              <h4>{eachExercisse.exercisesId.name}</h4>
-            </Link>
+            <div>
+              {!isUserRoad ? (
+                <Link
+                  to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
+                  key={eachExercisse.exercisesId._id}
+                >
+                  <h4>{eachExercisse.exercisesId.name}</h4>
+                </Link>
+              ) : (
+                <Link
+                  to={`/routine/${id}/exercise/${eachExercisse._id}/user`}
+                  key={eachExercisse.exercisesId._id}
+                >
+                  <h4>{eachExercisse.exercisesId.name}</h4>
+                </Link>
+              )}
+            </div>
           );
         })
       )}
 
-      <Link to={`/routine/${id}/exercise/add`}>
-        <div className="ButtonCreate">Add exercisse to routine</div>
-      </Link>
+      {!isUserRoad ? (
+        <Link to={`/routine/${id}/exercise/add`}>
+          <div className="ButtonCreate">Add exercisse to routine</div>
+        </Link>
+      ) : null}
+
       <br />
       <br />
       {isFetching || routineData.length === 0 ? null : (
@@ -79,9 +90,11 @@ function RoutineDetail() {
         </Link>
       )}
 
-
-      <button onClick={handleDeleteRoutine} className="ButtonCreate">Delete the routine</button>
-
+      {!isUserRoad ? (
+        <button onClick={handleDeleteRoutine} className="ButtonCreate">
+          Delete the routine
+        </button>
+      ) : null}
     </div>
   );
 }

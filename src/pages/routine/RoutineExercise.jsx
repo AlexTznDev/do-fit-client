@@ -14,6 +14,10 @@ function RoutineExercise() {
 
   const navigate = useNavigate();
 
+  const [ isUserRoad, setIsUserRoad ] = useState(window.location.href.includes("user") ? true : false)
+
+  ////////////////////ALEX//////////////////
+
   const [isEditRoad, setisEditRoad] = useState(
     idExerciseInArray ? true : false
   );
