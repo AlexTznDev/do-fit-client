@@ -16,6 +16,7 @@ import RoutineCreate from './pages/routine/RoutineCreate';
 import RoutineDetail from './pages/routine/RoutineDetail';
 import RoutineExercise from './pages/routine/RoutineExercise';
 
+
 import IsPrivate from './components/isPrivate';
 import ProfileEdit from './pages/ProfileEdit';
 
@@ -45,7 +46,7 @@ function App() {
 <Route path="/routine/create" element={<RoutineCreate/>}></Route>
 <Route path="/routine/:idRoutine/exercise" element={<RoutineExercise/>}></Route>
 <Route path="/routine/:idRoutine/exercise/:idExercise" element={<ExerciseDetails/>}></Route>
-<Route path="/routine/:idRoutine/exercise/:idExerciseInArray" element={<ExerciseDetails/>}></Route>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/edit" element={<RoutineExercise/>}></Route>
 <Route path="/routine/create" element={<RoutineCreate/>}></Route>
 
 

@@ -1,25 +1,23 @@
-
 import axios from "axios";
 import AllButtons from "../components/AllButtons";
-import ProfilDescription from "../components/ProfilDescription"
-import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { profileSerivce } from "../services/profile.services"
-import { useContext } from "react"
-import { AuthContext } from "../context/auth.context"
+import ProfilDescription from "../components/ProfilDescription";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { profileSerivce } from "../services/profile.services";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 function Profile() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-  const { isLoggedIn, authenticateUser} = useContext(AuthContext)
+  const { isLoggedIn, authenticateUser } = useContext(AuthContext);
 
-
-  const [ userData, setUserData ] = useState(null)
+  const [userData, setUserData] = useState(null);
 
   const [allRoutines, setallRoutines] = useState(null);
   const [isFetching, setisFetching] = useState(true);
 
-  const [ isFetchingRoutine, setisFetchingRoutine ] = useState(true)
+  const [isFetchingRoutine, setisFetchingRoutine] = useState(true);
 
   useEffect(() => {
     getData();
@@ -36,44 +34,36 @@ function Profile() {
     }
   };
 
-  const getData = async() => {
-    setisFetching(true)
+  const getData = async () => {
+    setisFetching(true);
 
     try {
-      const response = await profileSerivce()
-      console.log(response.data)
-      setUserData(response.data)
-      setisFetching(false)
+      const response = await profileSerivce();
+      console.log(response.data);
+      setUserData(response.data);
+      setisFetching(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
+
+  if (isFetching === true) {
+    return;
+    <h1>...Searching</h1>;
   }
-  
-  if(isFetching === true) {
-    return
-      <h1>...Searching</h1>
-  } 
-  
+
   const handleLogout = () => {
-    localStorage.removeItem("authToken")
-    authenticateUser()
-    navigate("/")
-  }
+    localStorage.removeItem("authToken");
+    authenticateUser();
+    navigate("/");
+  };
 
-  
   return (
-    <div>
+    <div className="mainContainer">
       <div>
-        <ProfilDescription/>
-
-      <AllButtons />
-
-      <br />
-      <br />
-
-      <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout}>Logout</button>
       </div>
-      <div style={{borderStyle: "solid", width: "30vw"}}>
+      <div style={{ borderStyle: "solid", width: "30vw" }}>
         <img src={userData.imageProfile} alt="img" width="200px" />
         <div>
           <h3>{userData.name}</h3>
@@ -90,13 +80,17 @@ function Profile() {
 
       <br />
       <br />
+      <AllButtons />
+
+      <br />
+      <br />
 
       {isFetchingRoutine ? (
         <h2>...is fetching</h2>
-        ) : (
+      ) : (
         allRoutines.map((eachRoutine) => {
           return (
-              <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}`}>
+            <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}`}>
               <div>
                 {/* <img src="first image from exercisse" alt="" /> */}
                 <h2>{eachRoutine.name}</h2>
@@ -105,9 +99,6 @@ function Profile() {
           );
         })
       )}
-
-        
-      
 
       <Link to={"/routine/create"}>
         <div className={"ButtonCreate"}></div>

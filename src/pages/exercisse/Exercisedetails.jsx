@@ -8,12 +8,10 @@ import axios from "axios";
 import AllButtons from "../../components/AllButtons";
 
 function Exercisedetails() {
-
-
   const params = useParams();
   const { id } = params;
   const { idRoutine, idExercise } = params;
-  
+  console.log(params);
 
   const navigate = useNavigate();
 
@@ -24,31 +22,26 @@ function Exercisedetails() {
   const [series, setSeries] = useState(0);
   const [chronometro, setChronometro] = useState(0);
 
-
-
-
-
   useEffect(() => {
     getDetailDataExercise();
   }, []);
 
   const getDetailDataExercise = async () => {
     try {
-      const response = await exerciseDetailService(id)
-
 
       if (isRoutineRoad) {
-        const response = await exerciseDetailService(idExercise)
+        console.log("if routuine road ");
+        const response = await exerciseDetailService(idExercise);
+
+        console.log(response.data)
         setDetailsExercise(response.data);
         setisFetching(false);
-      } 
-      
-      else {
-        const response = await exerciseDetailService(id)
+      } else {
+        console.log("if routuine not road ");
+        const response = await exerciseDetailService(id);
         setDetailsExercise(response.data);
         setisFetching(false);
       }
-      
     } catch (error) {
       console.log(error);
     }
@@ -56,47 +49,44 @@ function Exercisedetails() {
 
   const handleDeleteExercise = async () => {
     try {
-      await exerciseDeleteService(id)
+      await exerciseDeleteService(id);
       navigate("/exercise");
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleRepeticionChange = (e) => {
+    setrepeticion(e.target.value);
+  };
+  const handleSeriesChange = (e) => {
+    setSeries(e.target.value);
+  };
+  const handleChronometerChange = (e) => {
+    setChronometro(e.target.value);
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const handleRepeticionChange =(e)=>{
-  setrepeticion(e.target.value)
-}
-const handleSeriesChange =(e)=>{
-  setSeries(e.target.value)
-}
-const handleChronometerChange =(e)=>{
-  setChronometro(e.target.value)
-}
+    const addExercisseToRoutine = {
+      exercisesId: idExercise,
+      series,
+      repeticion,
+      chronometro,
+    };
 
-const handleSubmit = async(e)=>{
-  e.preventDefault();
-
-
-const addExercisseToRoutine = {
-    exercisesId : idExercise,
-    series,
-    repeticion,
-    chronometro,
-}
-
-try {
-  await axios.patch(`http://localhost:5005/api/routine/${idRoutine}`, addExercisseToRoutine)
-  navigate(`/routine/${idRoutine}`)
-} catch (error) {
-  
-}
-   
-}
+    try {
+      await axios.patch(
+        `http://localhost:5005/api/routine/${idRoutine}`,
+        addExercisseToRoutine
+      );
+      navigate(`/routine/${idRoutine}`);
+    } catch (error) {}
+  };
 
   return (
-    <div>
+    <div className="mainContainer">
       <AllButtons />
 
       {isFetching ? null : (
@@ -108,36 +98,39 @@ try {
           <p>{detailsExercise.videoUrl}</p>
           <p>{detailsExercise.image}</p>
 
+          {!isRoutineRoad ? (
+            <div>
+              <button onClick={handleDeleteExercise}>Delete</button>
+              <Link to={`/exercise/${detailsExercise._id}/edit`}>Edit</Link>
+            </div>
+          ) : (
+            <div>
+              <form>
+                <label htmlFor="repeticion">repeticion</label>
+                <input
+                  type="number"
+                  name="repeticion"
+                  onChange={handleRepeticionChange}
+                />
 
+                <label htmlFor="series">series</label>
+                <input
+                  type="series"
+                  name="series"
+                  onChange={handleSeriesChange}
+                />
 
-          {!isRoutineRoad ? 
-          <div>
-          <button onClick={handleDeleteExercise}>Delete</button>
-          <Link to={`/exercise/${detailsExercise._id}/edit`}>Edit</Link>
-          </div>
+                <label htmlFor="chronometro">chronometro</label>
+                <input
+                  type="chronometro"
+                  name="chronometro"
+                  onChange={handleChronometerChange}
+                />
 
-           :
-          
-           <div>
-            <form >
-
-              <label htmlFor="repeticion">repeticion</label>
-              <input type="number" name="repeticion" onChange={handleRepeticionChange}/>
-
-              <label htmlFor="series">series</label>
-              <input type="series" name="series" onChange={handleSeriesChange}/>
-
-              <label htmlFor="chronometro">chronometro</label>
-              <input type="chronometro" name="chronometro" onChange={handleChronometerChange}/>
-
-
-              <button onClick={handleSubmit}>Add to my routine</button>
-
-            </form>
-           </div>
-           
-           
-           }
+                <button onClick={handleSubmit}>Add to my routine</button>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </div>

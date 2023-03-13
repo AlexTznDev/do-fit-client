@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 
 function AllButtons() {
   return (
-    <div>
+
+  
+    <div className="containerBtnHome">
       <Link className={"ButtonHome"} to={"/exercise"}>
         Exercise
       </Link>

@@ -8,6 +8,7 @@
 }
 
 .ButtonHome{
+  margin-top: 2rem;
   padding: 1rem 2rem;
   background-color: rgba(4, 0, 255, 0.351);
   color: #fff;
@@ -22,4 +23,11 @@
   margin-right: auto;
   /* border-radius: 50%; */
 
+}
+
+.mainContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

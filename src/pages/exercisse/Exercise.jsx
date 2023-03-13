@@ -32,7 +32,7 @@ function Exercise() {
   };
 
   return (
-    <div>
+    <div className="mainContainer">
       <h2>Exercisse List</h2>
       <br />
       <br />

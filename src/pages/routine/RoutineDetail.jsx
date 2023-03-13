@@ -33,7 +33,7 @@ function RoutineDetail() {
   };
 
   return (
-    <div>
+    <div className="mainContainer">
       <ProfilDescription />
       <AllButtons />
 
@@ -42,7 +42,7 @@ function RoutineDetail() {
       ) : (
         routineData.map((eachExercisse) => {
           return (
-            <Link to={`/routine/${id}/exercise/${eachExercisse._id}`} key={eachExercisse.exercisesId._id}>
+            <Link to={`/routine/${id}/exercise/${eachExercisse._id}/edit`} key={eachExercisse.exercisesId._id}>
               <h4>{eachExercisse.exercisesId.name}</h4>
             </Link>
           );
