@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Exercise from "../exercisse/Exercise";
+import Bipsound from "../../sounfFile/bip.wav";
 
 import axios from "axios";
 import AllButtons from "../../components/AllButtons";
@@ -8,6 +9,8 @@ import AllButtons from "../../components/AllButtons";
 function RoutineExercise() {
   const params = useParams();
   const { idRoutine, idExerciseInArray } = params;
+
+  const bipAudio = new Audio(Bipsound);
 
   const navigate = useNavigate();
 
@@ -22,6 +25,9 @@ function RoutineExercise() {
   const [isStartExerciseRoad, setisStartExerciseRoad] = useState(
     window.location.href.includes("start") ? true : false
   );
+  const [isChronometerRunning, setisChronometerRunning] = useState(false);
+  const [countExerciseInroutine, setcountExerciseInroutine] = useState(0);
+  const [countSeriesDone, setcountSeriesDone] = useState(0);
 
   useEffect(() => {
     getDataExerciseInArrayRoutine();
@@ -33,10 +39,14 @@ function RoutineExercise() {
         const response = await axios.get(
           `http://localhost:5005/api/routine/${idRoutine}`
         );
-        setrepeticion(response.data.exercises[0].repeticion);
-        setSeries(response.data.exercises[0].series);
-        setChronometro(response.data.exercises[0].chronometro);
-        setexercisseData(response.data.exercises[0]);
+        setrepeticion(
+          response.data.exercises[countExerciseInroutine].repeticion
+        );
+        setSeries(response.data.exercises[countExerciseInroutine].series);
+        setChronometro(
+          response.data.exercises[countExerciseInroutine].chronometro
+        );
+        setexercisseData(response.data.exercises[countExerciseInroutine]);
         console.log(response.data);
         setisFetching(false);
       } else {
@@ -94,10 +104,39 @@ function RoutineExercise() {
     }
   };
 
-const handleChronometer=()=>{
-  
-}
-  
+  const handleStartChronometer = () => {
+    setisChronometerRunning(true);
+  };
+  const handleResetChronometer = () => {
+    setChronometro(exercisseData.chronometro);
+    setisChronometerRunning(false);
+  };
+
+  useEffect(() => {
+    if (isChronometerRunning && chronometro > 0) {
+      const intervalId = setInterval(() => {
+        setChronometro((currentState) => {
+          if (currentState === 4) {
+            bipAudio.play();
+          } else if (currentState === 1) {
+            setisChronometerRunning(false);
+          }
+          return currentState - 1;
+        });
+      }, 1000);
+
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [isChronometerRunning]);
+
+  const handleSerieIncrement = () => {
+    setcountSeriesDone(countSeriesDone +1);
+    
+
+  };
+
   return (
     <div className="mainContainer">
       <AllButtons />
@@ -113,21 +152,22 @@ const handleChronometer=()=>{
           <p>calories: {exercisseData.exercisesId.calories}</p>
 
           {isStartExerciseRoad ? (
-
             <div>
               <div className="chronometro">
                 <h2>chronometro: {chronometro}</h2>
-                <button onClick={handleChronometer}>Start</button>
-                <button>reset</button>
+                <button onClick={handleStartChronometer}>Start</button>
+                <button onClick={handleResetChronometer}>reset</button>
               </div>
 
               <div className="SeriesCounter">
-                <h2>series count: 0/ {series}</h2>
-                <button>1 serie DONE</button>
+                <h2>
+                  series count: {countSeriesDone}/ {series}
+                </h2>
+                <button onClick={handleSerieIncrement}>1 serie DONE</button>
               </div>
 
               <h2>
-                You have to do {exercisseData.series} series of{" "}
+                You have to do {exercisseData.series} series of
                 {exercisseData.repeticion} repeticion
               </h2>
             </div>
