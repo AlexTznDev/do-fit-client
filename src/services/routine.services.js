@@ -5,6 +5,10 @@ const routineService = () => {
 
 }
 
+const crearRoutineService =(newRoutine)=>{
+    return service.post("/routine", newRoutine)
+}
+
 // const exerciseCreateService = (newExercise) => {
 //     return service.post("/exercise", newExercise)
 // }
@@ -23,6 +27,6 @@ const routineService = () => {
 
 export {
 
-    routineService
+    routineService, crearRoutineService
    
 }

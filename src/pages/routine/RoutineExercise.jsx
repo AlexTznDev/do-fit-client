@@ -26,13 +26,18 @@ function RoutineExercise() {
     window.location.href.includes("start") ? true : false
   );
   const [isChronometerRunning, setisChronometerRunning] = useState(false);
+
   const [countExerciseInroutine, setcountExerciseInroutine] = useState(0);
   const [countSeriesDone, setcountSeriesDone] = useState(0);
-  const [isAddExerciseRoad, setisAddExerciseRoad] = useState(window.location.href.includes("add") ? true : false);
+  const [IsRoutineFinished, setIsRoutineFinished] = useState(false);
+
+  const [isAddExerciseRoad, setisAddExerciseRoad] = useState(
+    window.location.href.includes("add") ? true : false
+  );
 
   useEffect(() => {
     getDataExerciseInArrayRoutine();
-  }, []);
+  }, [countExerciseInroutine]);
 
   const getDataExerciseInArrayRoutine = async () => {
     try {
@@ -48,9 +53,8 @@ function RoutineExercise() {
           response.data.exercises[countExerciseInroutine].chronometro
         );
         setexercisseData(response.data.exercises[countExerciseInroutine]);
-        console.log(response.data);
         setisFetching(false);
-      } else if(!isStartExerciseRoad && !isAddExerciseRoad){
+      } else if (!isStartExerciseRoad && !isAddExerciseRoad) {
         const response = await axios.get(
           `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
         );
@@ -67,7 +71,7 @@ function RoutineExercise() {
   };
 
   const handleRemove = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       await axios.patch(
         `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
@@ -89,7 +93,7 @@ function RoutineExercise() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const updateExercise = {
       newRepeticion: repeticion,
       newSeries: series,
@@ -102,11 +106,9 @@ function RoutineExercise() {
         updateExercise
       );
       navigate(`/routine/${idRoutine}`);
-
     } catch (error) {
       console.log(error);
     }
- 
   };
 
   const handleStartChronometer = () => {
@@ -137,21 +139,32 @@ function RoutineExercise() {
   }, [isChronometerRunning]);
 
   const handleSerieIncrement = () => {
-    setcountSeriesDone(countSeriesDone +1);
-    
+    if (countSeriesDone + 1 <= series && !IsRoutineFinished) {
+      setcountSeriesDone(countSeriesDone + 1);
+    }
+    if (countSeriesDone + 1 === series) {
+      setIsRoutineFinished(true);
+      setcountSeriesDone(0);
+    }
+  };
 
+  const handleNextExercise = () => {
+    setcountExerciseInroutine((currentState) => {
+      return currentState + 1;
+    });
+    setIsRoutineFinished(false);
+    console.log(exercisseData)
   };
 
   return (
     <div className="mainContainer">
-      
       {!isEditRoad ? (
         <Exercise />
       ) : isFetching ? (
         <h2>...Buscando</h2>
       ) : (
         <div className="mainContainer">
-        <AllButtons />
+          <AllButtons />
           <h2>name: {exercisseData.exercisesId.name}</h2>
           <p>category: {exercisseData.exercisesId.category}</p>
           <p>description: {exercisseData.exercisesId.description}</p>
@@ -171,6 +184,13 @@ function RoutineExercise() {
                 </h2>
                 <button onClick={handleSerieIncrement}>1 serie DONE</button>
               </div>
+              <br />
+              <br />
+              {IsRoutineFinished ? (
+                <button className="nextExercise" onClick={handleNextExercise}>
+                  Next exercise
+                </button>
+              ) : null}
 
               <h2>
                 You have to do {exercisseData.series} series of

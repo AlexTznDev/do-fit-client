@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AllButtons from "../../components/AllButtons";
 import ProfilDescription from "../../components/ProfilDescription";
 
@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function RoutineDetail() {
+
+
+  const navigate = useNavigate()
   const params = useParams();
   const { id } = params;
 
@@ -31,6 +34,19 @@ function RoutineDetail() {
       console.log(error);
     }
   };
+
+
+  const handleDeleteRoutine = async () =>{
+
+    try {
+      await axios.delete(`http://localhost:5005/api/routine/${id}`)
+      navigate("/profile")
+    } catch (error) {
+      console.log(error)
+    }
+
+
+  }
 
   return (
     <div className="mainContainer">
@@ -62,6 +78,9 @@ function RoutineDetail() {
           <div className="ButtonStart">Start the routine!!</div>
         </Link>
       )}
+
+
+      <button onClick={handleDeleteRoutine} className="ButtonCreate">Delete the routine</button>
 
     </div>
   );
