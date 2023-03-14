@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 
 button{
@@ -11,7 +11,12 @@ a{
   text-decoration: none;
   color: black;
 }
-
+h3{
+  margin: 0;
+}
+p{
+  margin: 0;
+}
 
 .containerBtnHome{
   display: flex;
@@ -90,4 +95,14 @@ a{
   margin-right: auto;
   text-decoration: none;
   border-radius: 10px;
+}
+
+.containerInfoExercisse{
+
+  display: flex;
+  gap: 2rem;
+
+}
+.ColumnDisplay{
+  display: grid;
 }

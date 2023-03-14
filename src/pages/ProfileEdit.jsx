@@ -13,7 +13,6 @@ function ProfileEdit() {
   const { id } = params;
 
   const [username, setUsername] = useState("");
-  const [profileImage, setProfileImage] = useState("");
   const [userAge, setUserAge] = useState(0);
   const [userHeight, setUserHeight] = useState(0);
   const [userWeight, setUserWeight] = useState(0);
@@ -23,13 +22,8 @@ function ProfileEdit() {
   const [isUploading, setIsUploading] = useState(false);
   //!!!!!!!
 
-
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
-  };
-
-  const handleProfileImageChange = (event) => {
-    setProfileImage(event.target.value);
   };
 
   const handleUserAgeChange = (event) => {
@@ -55,7 +49,6 @@ function ProfileEdit() {
       const { name, imageProfile, age, weight, height } = response.data;
       console.log(imageProfile);
       setUsername(name);
-      setProfileImage(imageProfile);
       setUserAge(age);
       setUserWeight(weight);
       setUserHeight(height);
@@ -83,41 +76,36 @@ function ProfileEdit() {
     }
   };
 
-
-//! cloudinary
+  //! cloudinary
   const handleFileUpload = async (event) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
-  
+
     if (!event.target.files[0]) {
       // to prevent accidentally clicking the choose file button and not selecting a file
       return;
     }
-  
+
     setIsUploading(true); // to start the loading animation
-  
+
     const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
     uploadData.append("image", event.target.files[0]);
     //                   |
     //     this name needs to match the name used in the middleware => uploader.single("image")
-  
+
     try {
       const response = await uploadImageService(uploadData);
-      // or below line if not using services
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/upload`, uploadData)
-  
+
       setImageUrl(response.data.imageUrl);
-      console.log(response.data.imageUrl)
+      console.log(response.data.imageUrl);
       //                          |
       //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-  
+
       setIsUploading(false); // to stop the loading animation
-      
     } catch (error) {
       navigate("/error");
     }
   };
-//!!!!!!!!!!
-
+  //!!!!!!!!!!
 
   return (
     <div>
@@ -133,12 +121,7 @@ function ProfileEdit() {
         />
         <br />
         <label htmlFor="imageProfile">Profile picture: </label>
-        <input
-          type="file"
-          name="imageProfile"
-
-          onChange={handleFileUpload}
-        />
+        <input type="file" name="imageProfile" onChange={handleFileUpload} />
         <br />
         <label htmlFor="age">Age: </label>
         <input
@@ -164,7 +147,12 @@ function ProfileEdit() {
           onChange={handleUserHeightChange}
         />
         <br />
-        <button onClick={handleUpdateProfile}>Update</button>
+
+        {!isUploading ? (
+          <button onClick={handleUpdateProfile}>Update</button>
+        ) : (
+          <h2>...is uploading</h2>
+        )}
       </form>
     </div>
   );

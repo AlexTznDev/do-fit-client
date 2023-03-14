@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { exerciseCreateService } from "../../services/exercise.services";
 import AllButtons from "../../components/AllButtons";
 
+import { uploadImageService } from "../../services/upload.services";
+
 
 function ExerciseCreate() {
   const navigate = useNavigate();
@@ -14,7 +16,11 @@ function ExerciseCreate() {
   const [description, setDescription] = useState("");
   const [videoUrl, setvideoUrl] = useState("");
   const [tagline, settagline] = useState("");
-  const [image, setimage] = useState("");
+
+    //!cloudinary
+    const [imageUrl, setImageUrl] = useState(null);
+    const [isUploading, setIsUploading] = useState(false);
+    //!!!!!!!
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -34,9 +40,7 @@ function ExerciseCreate() {
   const handleTaglineChange = (e) => {
     settagline(e.target.value);
   };
-  const handleImageChange = (e) => {
-    setimage(e.target.value);
-  };
+
   const handleCaloriesChange = (e) => {
     setCalories(e.target.value);
   };
@@ -51,7 +55,7 @@ function ExerciseCreate() {
       description,
       videoUrl,
       tagline,
-      image,
+      image: imageUrl,
     };
 
     try {
@@ -62,6 +66,37 @@ function ExerciseCreate() {
     }
   };
 
+
+    //! cloudinary
+    const handleFileUpload = async (event) => {
+      // console.log("The file to be uploaded is: ", e.target.files[0]);
+  
+      if (!event.target.files[0]) {
+        // to prevent accidentally clicking the choose file button and not selecting a file
+        return;
+      }
+  
+      setIsUploading(true); // to start the loading animation
+  
+      const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+      uploadData.append("image", event.target.files[0]);
+      //                   |
+      //     this name needs to match the name used in the middleware => uploader.single("image")
+  
+      try {
+        const response = await uploadImageService(uploadData);
+  
+        setImageUrl(response.data.imageUrl);
+        console.log(response.data.imageUrl);
+        //                          |
+        //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+  
+        setIsUploading(false); // to stop the loading animation
+      } catch (error) {
+        navigate("/error");
+      }
+    };
+    //!!!!!!!!!!
   return (
     <div className="mainContainer">
       <h2>Add exercise</h2>
@@ -153,13 +188,9 @@ function ExerciseCreate() {
         <br />
         <br />
 
-        <label htmlFor="image">Image</label>
-        <input
-          type="text"
-          name="image"
-          value={image}
-          onChange={handleImageChange}
-        />
+        <label htmlFor="image">Exercisse picture: </label>
+        <input type="file" name="image" onChange={handleFileUpload} />
+        <br />
         <br />
         <br />
 
