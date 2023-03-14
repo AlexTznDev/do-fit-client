@@ -1,24 +1,29 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import videoBg from "../video/videoHome.mp4"
 
 function Home() {
   return (
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center", paddingTop:"2rem"}}>
+    <div>
+      <div class="video-container">
+        <video src={videoBg} autoPlay loop></video>
+      </div>
 
 
+<div className="filterHome">
 
-    <div className={"containerBtnHome"}>
-      <NavLink to="/signup" className={"ButtonHome"}>
-      Sign Up
-      </NavLink>
+<h2 style={{color:"#fff" , paddingLeft:"1rem", margin:"0"}}>Do Fit Training Club</h2>
+<div className={"containerBtnHome"}>
+        <NavLink to="/signup" className={"ButtonHome"}>
+          Sign Up
+        </NavLink>
 
-      <NavLink to="/login" className={"ButtonHome"}>
-       Log In
-      </NavLink>
+        <NavLink to="/login" className={"ButtonHome"}>
+          Log In
+        </NavLink>
+      </div>
+</div>
 
-     
-
-    </div>
 
     </div>
   );

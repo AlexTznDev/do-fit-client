@@ -8,6 +8,9 @@ import { AuthContext } from "../context/auth.context";
 
 import { routineService } from "../services/routine.services";
 
+
+import ButtonOut from "../components/ButtonOut";
+
 function Profile() {
   const navigate = useNavigate();
 
@@ -67,12 +70,15 @@ function Profile() {
   };
 
   return (
-    <div className="mainContainer">
-      <div>
-        <button onClick={handleLogout}>Logout</button>
+    <div >
+    
+      <ButtonOut handleLogout={handleLogout}/>
+
+      <div className="mainContainer">
+      <div className="containerImgProfil">
+        <img className="imgWrapper" src={userData.imageProfile} alt="img" width="100%" />
       </div>
-      <div style={{ borderStyle: "solid", width: "30vw", height: "600px"}}>
-        <img src={userData.imageProfile} alt="img" width="200px" />
+
         <div>
           <h3>{userData.name}</h3>
           <p>Age: {userData.age} yrs</p>
@@ -100,7 +106,7 @@ function Profile() {
 
       <br />
       <br />
-      <AllButtons />
+
 
       <br />
       <br />
@@ -123,6 +129,7 @@ function Profile() {
       <Link to={"/routine/create"}>
         <div className={"ButtonCreate"}>create a new routine</div>
       </Link>
+      <AllButtons />
     </div>
   );
 }
