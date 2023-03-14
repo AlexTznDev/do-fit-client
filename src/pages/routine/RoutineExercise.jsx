@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Exercise from "../exercisse/Exercise";
 import Bipsound from "../../sounfFile/bip.wav";
 
-
 import AllButtons from "../../components/AllButtons";
 
 //* all services import
@@ -11,9 +10,6 @@ import { routineDetailService } from "../../services/routine.services";
 import { ExerciseInRoutineDetail } from "../../services/routine.services";
 import { RemoveExerciseFromRoutine } from "../../services/routine.services";
 import { EditExerciseFromRoutine } from "../../services/routine.services";
-
-
-
 
 function RoutineExercise() {
   const params = useParams();
@@ -58,7 +54,7 @@ function RoutineExercise() {
   const getDataExerciseInArrayRoutine = async () => {
     try {
       if (isStartExerciseRoad && !isAddExerciseRoad) {
-        const response = await routineDetailService(idRoutine)
+        const response = await routineDetailService(idRoutine);
 
         setrepeticion(
           response.data.exercises[countExerciseInroutine].repeticion
@@ -70,7 +66,10 @@ function RoutineExercise() {
         setexercisseData(response.data.exercises[countExerciseInroutine]);
         setisFetching(false);
       } else if (!isStartExerciseRoad && !isAddExerciseRoad) {
-        const response = await ExerciseInRoutineDetail(idRoutine, idExerciseInArray)
+        const response = await ExerciseInRoutineDetail(
+          idRoutine,
+          idExerciseInArray
+        );
 
         setrepeticion(response.data.exercises[0].repeticion);
         setSeries(response.data.exercises[0].series);
@@ -86,7 +85,7 @@ function RoutineExercise() {
   const handleRemove = async (e) => {
     e.preventDefault();
     try {
-      await RemoveExerciseFromRoutine(idRoutine, idExerciseInArray)
+      await RemoveExerciseFromRoutine(idRoutine, idExerciseInArray);
 
       navigate(`/routine/${idRoutine}`);
     } catch (error) {
@@ -113,7 +112,11 @@ function RoutineExercise() {
     };
 
     try {
-      await EditExerciseFromRoutine(idRoutine, idExerciseInArray, updateExercise)
+      await EditExerciseFromRoutine(
+        idRoutine,
+        idExerciseInArray,
+        updateExercise
+      );
 
       navigate(`/routine/${idRoutine}`);
     } catch (error) {
@@ -171,12 +174,19 @@ function RoutineExercise() {
     });
 
     setIsRoutineFinished(false);
-;
   };
 
   const handleEndRoutine = () => {
-    navigate(`/routine/${idRoutine}`);
+    if(!isUserRoad){
+      navigate(`/routine/${idRoutine}`);
+    }else{
+      navigate(`/routine/${idRoutine}/user`);
+    }
+    
   };
+  // const handleEndRoutineUser = () => {
+  //   navigate(`/routine/${idRoutine}/user`);
+  // };
 
   return (
     <div className="mainContainer">
@@ -214,14 +224,15 @@ function RoutineExercise() {
                 </button>
               ) : null}
               {isEndRoutine ? (
-                <button className="endExercise" onClick={handleEndRoutine}>
-                  End routine
-                </button>
+                
+                  <button className="endExercise" onClick={handleEndRoutine}>
+                    End routine
+                  </button>
+                
               ) : null}
 
-              <h2>
-                You have to do {exercisseData.series} series of
-                {exercisseData.repeticion} repeticion
+              <h2 style={{color:"red"}}>
+                You have to do {exercisseData.series} series of {" "}{exercisseData.repeticion} repeticion
               </h2>
             </div>
           ) : !isUserRoad ? (

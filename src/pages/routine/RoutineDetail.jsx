@@ -5,18 +5,14 @@ import ProfilDescription from "../../components/ProfilDescription";
 
 import { Link } from "react-router-dom";
 
-
-
 //* all services import
 import { routineDetailService } from "../../services/routine.services";
 import { deleteRoutineService } from "../../services/routine.services";
-
 
 function RoutineDetail() {
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-
 
   const [routineData, setRoutineData] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -31,11 +27,10 @@ function RoutineDetail() {
 
   const getData = async () => {
     try {
-      const response = await routineDetailService(id)
-
+      const response = await routineDetailService(id);
 
       setRoutineData(response.data.exercises);
-  
+
       setIsFetching(false);
     } catch (error) {
       console.log(error);
@@ -44,8 +39,8 @@ function RoutineDetail() {
 
   const handleDeleteRoutine = async () => {
     try {
-      await deleteRoutineService(id)
-      
+      await deleteRoutineService(id);
+
       navigate("/profile");
     } catch (error) {
       console.log(error);
@@ -64,17 +59,11 @@ function RoutineDetail() {
           return (
             <div key={eachExercisse.exercisesId._id}>
               {!isUserRoad ? (
-                <Link
-                  to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
-                  
-                >
+                <Link to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}>
                   <h4>{eachExercisse.exercisesId.name}</h4>
                 </Link>
               ) : (
-                <Link
-                  to={`/routine/${id}/exercise/${eachExercisse._id}/user`}
-              
-                >
+                <Link to={`/routine/${id}/exercise/${eachExercisse._id}/user`}>
                   <h4>{eachExercisse.exercisesId.name}</h4>
                 </Link>
               )}
@@ -91,8 +80,16 @@ function RoutineDetail() {
 
       <br />
       <br />
-      {isFetching || routineData.length === 0 ? null : (
-        <Link  to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}`}>
+      {isFetching || routineData.length === 0 ? null : !isUserRoad ? (
+        <Link
+          to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}`}
+        >
+          <div className="ButtonStart">Start the routine!!</div>
+        </Link>
+      ) : (
+        <Link
+          to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}/user`}
+        >
           <div className="ButtonStart">Start the routine!!</div>
         </Link>
       )}
