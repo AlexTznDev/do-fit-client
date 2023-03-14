@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AllButtons from "../../components/AllButtons";
-import ProfilDescription from "../../components/ProfilDescription";
-
 import { Link } from "react-router-dom";
-
-
 
 //* all services import
 import { routineDetailService } from "../../services/routine.services";
@@ -54,7 +50,7 @@ function RoutineDetail() {
 
   return (
     <div className="mainContainer">
-      <ProfilDescription />
+      
       <AllButtons />
 
       {isFetching ? (

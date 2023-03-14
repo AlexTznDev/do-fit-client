@@ -1,6 +1,7 @@
-import axios from "axios"
+
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { searchUserService } from "../services/search.seervices"
 
 function SearchFriends() {
 
@@ -33,7 +34,7 @@ function SearchFriends() {
 
         try {
 
-            const response = await axios.get("http://localhost:5005/api/search")
+            const response = await searchUserService()
             console.log(response.data)
             setUsersArr(response.data)
             setIsFetching(false)

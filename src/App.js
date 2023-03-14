@@ -32,6 +32,7 @@ function App() {
 <Route path="/profile/:idFoundUser" element={<ProfileFoundUser/>}/>
 
 
+
 <Route path="/" element={ <Home/> }/>
 
 <Route path="/profile" element={<IsPrivate><Profile/></IsPrivate>}/>

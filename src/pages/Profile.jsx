@@ -19,6 +19,8 @@ function Profile() {
   const [isFetching, setisFetching] = useState(true);
 
   const [isFetchingRoutine, setisFetchingRoutine] = useState(true);
+  
+  const [ showingFriends, setShowingFriends ] = useState(false)
 
   useEffect(() => {
     getData();
@@ -48,6 +50,11 @@ function Profile() {
     }
   };
 
+  const showFriends = () => {
+    
+    setShowingFriends(!showingFriends)
+  }
+
   if (isFetching === true) {
     return;
     <h1>...Searching</h1>;
@@ -64,7 +71,7 @@ function Profile() {
       <div>
         <button onClick={handleLogout}>Logout</button>
       </div>
-      <div style={{ borderStyle: "solid", width: "30vw" }}>
+      <div style={{ borderStyle: "solid", width: "30vw", height: "600px"}}>
         <img src={userData.imageProfile} alt="img" width="200px" />
         <div>
           <h3>{userData.name}</h3>
@@ -74,9 +81,21 @@ function Profile() {
         </div>
 
         <div>
-          <h3>Friends: {userData.friends}</h3>
+          <h3>Following</h3>
+
+          <h4 onClick={showFriends}>{userData.friends.length}</h4>
+          {showingFriends ? (userData.friends.map((each) =>{
+            return(
+              // <p key={each._id}>{each.name}</p>
+              <Link to= {each._id === userData._id ? "/profile": `/profile/${each._id}`}><p>{each.name}</p></Link>
+            )
+          })): null} 
+          
+          
         </div>
-        <Link to={`/profile/${userData._id}/edit`}>Edit Profile</Link>
+          
+        <Link to={`/profile/${userData._id}/edit`} className={"ButtonCreate"}>Edit Profile</Link>
+      
       </div>
 
       <br />

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import AllButtons from "../../components/AllButtons";
-import ProfilDescription from "../../components/ProfilDescription";
-
 import { useNavigate } from "react-router-dom";
-
 //* all services import
 import { crearRoutineService } from "../../services/routine.services";
 
@@ -45,8 +42,7 @@ function RoutineCreate() {
 
   return (
     <div className="mainContainer">
-      <ProfilDescription />
-
+      
       <AllButtons />
 
       <form style={{ padding: "2rem" }}>

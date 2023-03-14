@@ -1,9 +1,8 @@
-import axios from "axios";
+
 import AllButtons from "../components/AllButtons";
-import ProfilDescription from "../components/ProfilDescription";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { profileSerivce } from "../services/profile.services";
+import {  followFoundUserService, profileSerivce, profileUserService } from "../services/profile.services";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useParams } from "react-router-dom";
@@ -11,7 +10,7 @@ import { routineUserService } from "../services/routine.services";
 
 
 function ProfileFoundUser() {
-    
+  
     const params = useParams()
     const navigate = useNavigate();
 
@@ -25,11 +24,18 @@ function ProfileFoundUser() {
 
     const [allRoutines, setallRoutines] = useState(null);
     const [isFetchingRoutine, setisFetchingRoutine] = useState(true);
+
+    const [ visitorData, setVisitorData ] = useState(null)
+    const [ areFriends, setAreFriends ] = useState(false)
+  
   
     useEffect(() => {
       getData();
       getDataAllRoutines();
+
     }, []);
+
+
   
     const getDataAllRoutines = async () => {
       try {
@@ -47,31 +53,45 @@ function ProfileFoundUser() {
       setisFetching(true);
   
       try {
-        const response = await axios.get(`http://localhost:5005/api/profile/${idFoundUser}`)
+        const response = await profileUserService(idFoundUser) 
         console.log(response.data);
+    
+        const response2 = await profileSerivce()
+        console.log(response2.data)
+
         setUserData(response.data);
+        setVisitorData(response2.data)
         setisFetching(false);
+
       } catch (error) {
         console.log(error);
       }
     };
+
+    const followFoundUser = async() => {
+
+      try {
+        const response = await followFoundUserService(idFoundUser)
+        console.log(response)
+        setAreFriends(true)
+        
+        
+        
+
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
   
     if (isFetching === true) {
       return;
       <h1>...Searching</h1>;
     }
   
-    // const handleLogout = () => {
-    //   localStorage.removeItem("authToken");
-    //   authenticateUser();
-    //   navigate("/");
-    // };
-
   return (
     <div className="mainContainer">
-      {/* <div>
-        <button onClick={handleLogout}>Logout</button>
-      </div> */}
+      
       <div style={{ borderStyle: "solid", width: "30vw" }}>
         <img src={userData.imageProfile} alt="img" width="200px" />
         <div>
@@ -84,12 +104,15 @@ function ProfileFoundUser() {
         <div>
           <h3>Friends: {userData.friends}</h3>
         </div>
-        {/* <Link to={`/profile/${userData._id}/edit`}>Edit Profile</Link> */}
       </div>
 
       <br />
       <br />
       <AllButtons/>
+      {visitorData.friends.includes(idFoundUser) ? null : (areFriends ? null : <button type="submit" onClick={followFoundUser}>Follow</button>)}
+      
+      
+      
 
       <br />
       <br />
@@ -108,9 +131,7 @@ function ProfileFoundUser() {
         })
       }
 
-      {/* <Link to={"/routine/create"}>
-        <div className={"ButtonCreate"}></div>
-      </Link> */}
+      
     </div>
   )
 }

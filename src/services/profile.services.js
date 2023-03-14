@@ -9,11 +9,18 @@ const profileEditService = (userId, editProfile) => {
     return service.patch(`/profile/${userId}`, editProfile)
 }
 
-// const exerciseDeleteService = (exerciseId) => {
-//     return service.delete(`/exercise/${exerciseId}`)
-// }
+const profileUserService = (idFoundUser) => {
+    return service.get(`/profile/${idFoundUser}`)
+}
+
+const followFoundUserService = (idFoundUser) => {
+    return service.patch(`/userInformation/${idFoundUser}/followUser`)
+}
+
 
 export {
    profileSerivce,
-   profileEditService
+   profileEditService,
+   profileUserService,
+   followFoundUserService
 }
