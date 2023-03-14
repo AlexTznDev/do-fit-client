@@ -3,9 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { exerciseDetailService } from "../../services/exercise.services";
 import { exerciseDeleteService } from "../../services/exercise.services";
-import axios from "axios";
+
 
 import AllButtons from "../../components/AllButtons";
+
+//* import of services
+import { AddExerciseToRoutineService } from "../../services/routine.services";
 
 function Exercisedetails() {
   const params = useParams();
@@ -76,10 +79,8 @@ function Exercisedetails() {
     };
 
     try {
-      await axios.patch(
-        `http://localhost:5005/api/routine/${idRoutine}`,
-        addExercisseToRoutine
-      );
+      await AddExerciseToRoutineService(idRoutine,addExercisseToRoutine )
+
       navigate(`/routine/${idRoutine}`);
     } catch (error) {}
   };

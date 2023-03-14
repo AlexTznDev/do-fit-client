@@ -4,8 +4,13 @@ import AllButtons from "../../components/AllButtons";
 import ProfilDescription from "../../components/ProfilDescription";
 
 import { Link } from "react-router-dom";
-import axios from "axios";
-import RoutineExercise from "./RoutineExercise";
+
+
+
+//* all services import
+import { routineDetailService } from "../../services/routine.services";
+import { deleteRoutineService } from "../../services/routine.services";
+
 
 function RoutineDetail() {
   const navigate = useNavigate();
@@ -26,9 +31,8 @@ function RoutineDetail() {
 
   const getData = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5005/api/routine/${id}`
-      );
+      const response = await routineDetailService(id)
+
 
       setRoutineData(response.data.exercises);
   
@@ -40,7 +44,8 @@ function RoutineDetail() {
 
   const handleDeleteRoutine = async () => {
     try {
-      await axios.delete(`http://localhost:5005/api/routine/${id}`);
+      await deleteRoutineService(id)
+      
       navigate("/profile");
     } catch (error) {
       console.log(error);

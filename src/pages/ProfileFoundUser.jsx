@@ -33,7 +33,8 @@ function ProfileFoundUser() {
   
     const getDataAllRoutines = async () => {
       try {
-        const response = await axios.get(`http://localhost:5005/api/userInformation/${idFoundUser}`)
+        const response = await routineUserService(idFoundUser)
+        
         setallRoutines(response.data);
         console.log(response)
         setisFetchingRoutine(false);

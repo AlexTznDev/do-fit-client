@@ -1,6 +1,5 @@
-import axios from "axios";
 import AllButtons from "../components/AllButtons";
-import ProfilDescription from "../components/ProfilDescription";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { profileSerivce } from "../services/profile.services";
@@ -28,7 +27,7 @@ function Profile() {
 
   const getDataAllRoutines = async () => {
     try {
-      const response = await routineService()
+      const response = await routineService();
       setallRoutines(response.data);
       setisFetchingRoutine(false);
     } catch (error) {

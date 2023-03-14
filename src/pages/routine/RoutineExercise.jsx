@@ -3,8 +3,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import Exercise from "../exercisse/Exercise";
 import Bipsound from "../../sounfFile/bip.wav";
 
-import axios from "axios";
+
 import AllButtons from "../../components/AllButtons";
+
+//* all services import
+import { routineDetailService } from "../../services/routine.services";
+import { ExerciseInRoutineDetail } from "../../services/routine.services";
+import { RemoveExerciseFromRoutine } from "../../services/routine.services";
+import { EditExerciseFromRoutine } from "../../services/routine.services";
+
+
+
 
 function RoutineExercise() {
   const params = useParams();
@@ -49,9 +58,8 @@ function RoutineExercise() {
   const getDataExerciseInArrayRoutine = async () => {
     try {
       if (isStartExerciseRoad && !isAddExerciseRoad) {
-        const response = await axios.get(
-          `http://localhost:5005/api/routine/${idRoutine}`
-        );
+        const response = await routineDetailService(idRoutine)
+
         setrepeticion(
           response.data.exercises[countExerciseInroutine].repeticion
         );
@@ -62,9 +70,7 @@ function RoutineExercise() {
         setexercisseData(response.data.exercises[countExerciseInroutine]);
         setisFetching(false);
       } else if (!isStartExerciseRoad && !isAddExerciseRoad) {
-        const response = await axios.get(
-          `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
-        );
+        const response = await ExerciseInRoutineDetail(idRoutine, idExerciseInArray)
 
         setrepeticion(response.data.exercises[0].repeticion);
         setSeries(response.data.exercises[0].series);
@@ -80,9 +86,8 @@ function RoutineExercise() {
   const handleRemove = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(
-        `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}`
-      );
+      await RemoveExerciseFromRoutine(idRoutine, idExerciseInArray)
+
       navigate(`/routine/${idRoutine}`);
     } catch (error) {
       console.log(error);
@@ -108,10 +113,8 @@ function RoutineExercise() {
     };
 
     try {
-      await axios.patch(
-        `http://localhost:5005/api/routine/${idRoutine}/${idExerciseInArray}/edit`,
-        updateExercise
-      );
+      await EditExerciseFromRoutine(idRoutine, idExerciseInArray, updateExercise)
+
       navigate(`/routine/${idRoutine}`);
     } catch (error) {
       console.log(error);
