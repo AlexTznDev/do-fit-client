@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { exerciseDetailService } from "../../services/exercise.services";
 import { exerciseDeleteService } from "../../services/exercise.services";
 
+import ReactPlayer from "react-player";
 
 import AllButtons from "../../components/AllButtons";
 
@@ -14,7 +15,6 @@ function Exercisedetails() {
   const params = useParams();
   const { id } = params;
   const { idRoutine, idExercise } = params;
-
 
   const navigate = useNavigate();
 
@@ -32,14 +32,11 @@ function Exercisedetails() {
   const getDetailDataExercise = async () => {
     try {
       if (isRoutineRoad) {
-
         const response = await exerciseDetailService(idExercise);
-
 
         setDetailsExercise(response.data);
         setisFetching(false);
       } else {
-
         const response = await exerciseDetailService(id);
         setDetailsExercise(response.data);
         setisFetching(false);
@@ -79,7 +76,7 @@ function Exercisedetails() {
     };
 
     try {
-      await AddExerciseToRoutineService(idRoutine,addExercisseToRoutine )
+      await AddExerciseToRoutineService(idRoutine, addExercisseToRoutine);
 
       navigate(`/routine/${idRoutine}`);
     } catch (error) {}
@@ -87,16 +84,25 @@ function Exercisedetails() {
 
   return (
     <div className="mainContainer">
-      <AllButtons />
+
 
       {isFetching ? null : (
-        <div>
+        <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center", width: "30rem" }}>
+        <ReactPlayer
+            config={{
+              youtube: {
+                playerVars: { modestbranding: 1 },
+              },
+            }}
+            url={detailsExercise.videoUrl}
+            width="400px"
+            height="200px"
+            controls={true}
+          />
           <h2>{detailsExercise.name}</h2>
-          <p>{detailsExercise.calories}</p>
-          <p>{detailsExercise.category}</p>
+          <p>Burn {detailsExercise.calories} calories</p>
           <p>{detailsExercise.description}</p>
-          <p>{detailsExercise.videoUrl}</p>
-          <p>{detailsExercise.image}</p>
+
 
           {!isRoutineRoad ? (
             <div>
@@ -136,6 +142,7 @@ function Exercisedetails() {
           )}
         </div>
       )}
+      <AllButtons />
     </div>
   );
 }

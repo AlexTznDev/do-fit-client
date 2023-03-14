@@ -5,6 +5,7 @@ import AllButtons from "../../components/AllButtons";
 import { exerciseSerivce } from "../../services/exercise.services";
 
 
+
 function Exercise() {
   const params = useParams();
   const { idRoutine } = params;
@@ -80,10 +81,13 @@ function Exercise() {
                 
               >
                 <div className="containerInfoExercisse">
-                  <h3>{eachExercisse.name}</h3>
+                <div className="ColumnDisplay">
+                <h3>{eachExercisse.name}</h3>
                   <h5>{eachExercisse.category}</h5>
                   <p>{eachExercisse.tagline}</p>
                   <p>{eachExercisse.calories}</p>
+                </div>
+                  <img src={eachExercisse.image} alt={eachExercisse.name} width="100px"/>
                 </div>
 
                 <br />
