@@ -11,6 +11,13 @@ import AllButtons from "../../components/AllButtons";
 //* import of services
 import { AddExerciseToRoutineService } from "../../services/routine.services";
 
+import { MdFastfood } from "react-icons/md";
+
+
+
+
+
+
 function Exercisedetails() {
   const params = useParams();
   const { id } = params;
@@ -84,64 +91,83 @@ function Exercisedetails() {
 
   return (
     <div className="mainContainer">
-
-
-      {isFetching ? null : (
-        <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center", width: "30rem" }}>
-        <ReactPlayer
-            config={{
-              youtube: {
-                playerVars: { modestbranding: 1 },
-              },
+      <div className="ContainerDetailExercise">
+        {isFetching ? null : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "30rem",
             }}
-            url={detailsExercise.videoUrl}
-            width="400px"
-            height="200px"
-            controls={true}
-          />
-          <h2>{detailsExercise.name}</h2>
-          <p>Burn {detailsExercise.calories} calories</p>
-          <p>{detailsExercise.description}</p>
+          >
+            <ReactPlayer
+              config={{
+                youtube: {
+                  playerVars: { modestbranding: 1 },
+                },
+              }}
+              url={detailsExercise.videoUrl}
+              width="100vw"
 
+            />
 
-          {!isRoutineRoad ? (
-            <div>
-              <button onClick={handleDeleteExercise}>Delete</button>
-              <Link to={`/exercise/${detailsExercise._id}/edit`}>Edit</Link>
+            <div className="ContainerdetailExerciseText">
+              <h2>{detailsExercise.name}</h2>
+
+              <div className="wrapperTextIconDetailExercise">
+              <MdFastfood/>
+              <p>Burn {detailsExercise.calories} calories</p>
+              </div>
+
+              <div className="wrapperTextIconDetailExercise">
+              <MdFastfood/>
+                <p>{detailsExercise.description}</p>
+              </div>
+
             </div>
-          ) : (
-            <div>
-              <form>
-                <label htmlFor="repeticion">repeticion</label>
-                <input
-                  type="number"
-                  name="repeticion"
-                  onChange={handleRepeticionChange}
-                />
 
-                <label htmlFor="series">series</label>
-                <input
-                  type="number"
-                  name="series"
-                  onChange={handleSeriesChange}
-                />
+            {!isRoutineRoad ? (
+              <div className="containerEditAndDelete">
+                <button onClick={handleDeleteExercise}>Delete</button>
+                <Link to={`/exercise/${detailsExercise._id}/edit`}>Edit</Link>
+              </div>
+            ) : (
+              <div>
+                <form>
+                  <label htmlFor="repeticion">repeticion</label>
+                  <input
+                    type="number"
+                    name="repeticion"
+                    onChange={handleRepeticionChange}
+                  />
 
-                <label htmlFor="chronometro">chronometro</label>
-                <input
-                  type="number"
-                  name="chronometro"
-                  onChange={handleChronometerChange}
-                />
-                <br />
-                <br />
-                <button className="ButtonCreate" onClick={handleSubmit}>
-                  Add to my routine
-                </button>
-              </form>
-            </div>
-          )}
-        </div>
-      )}
+                  <label htmlFor="series">series</label>
+                  <input
+                    type="number"
+                    name="series"
+                    onChange={handleSeriesChange}
+                  />
+
+                  <label htmlFor="chronometro">chronometro</label>
+                  <input
+                    type="number"
+                    name="chronometro"
+                    onChange={handleChronometerChange}
+                  />
+                  <br />
+                  <br />
+                  <button className="ButtonCreate" onClick={handleSubmit}>
+                    Add to my routine
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
       <AllButtons />
     </div>
   );

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 //* all services import
 import { routineDetailService } from "../../services/routine.services";
 import { deleteRoutineService } from "../../services/routine.services";
+import Profile from "../profile/Profile";
 
 function RoutineDetail() {
   const navigate = useNavigate();
@@ -46,9 +47,8 @@ function RoutineDetail() {
   };
 
   return (
-    <div className="mainContainer">
-      
-      <AllButtons />
+    <div >
+      <Profile />
 
       {isFetching ? (
         <h2>... buscando</h2>
@@ -97,6 +97,7 @@ function RoutineDetail() {
           Delete the routine
         </button>
       ) : null}
+      <AllButtons />
     </div>
   );
 }

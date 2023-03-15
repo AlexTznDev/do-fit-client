@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   profileEditService,
   profileSerivce,
-} from "../services/profile.services";
-import { uploadImageService } from "../services/upload.services";
+} from "../../services/profile.services";
+import { uploadImageService } from "../../services/upload.services";
 
 function ProfileEdit() {
   const navigate = useNavigate();
