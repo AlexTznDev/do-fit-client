@@ -5,7 +5,7 @@ import {Routes, Route} from 'react-router';
 import Home from './pages/Home';
 import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
-import Profile from './pages/Profile';
+import Profile from './pages/profile/Profile';
 
 import Exercise from "./pages/exercisse/Exercise"
 import ExerciseDetails from "./pages/exercisse/Exercisedetails.jsx"
@@ -16,16 +16,22 @@ import RoutineCreate from './pages/routine/RoutineCreate';
 import RoutineDetail from './pages/routine/RoutineDetail';
 import RoutineExercise from './pages/routine/RoutineExercise';
 
+import logo from "./logo/logo-final.png"
 
 import IsPrivate from './components/isPrivate';
-import ProfileEdit from './pages/ProfileEdit';
+import ProfileEdit from './pages/profile/ProfileEdit';
 import SearchFriends from './components/SearchFriends';
-import ProfileFoundUser from './pages/ProfileFoundUser';
+import ProfileFoundUser from './pages/profile/ProfileFoundUser';
 
 function App() {
   return (
     <div className="App">
 
+<div className='minWidthMedia'>
+  <div className='containerLogo'>
+    <img src={logo} alt="logo do fit" />
+  </div>
+</div>
 
 <Routes>
 <Route path="/search" element={<IsPrivate><SearchFriends/></IsPrivate>}/>

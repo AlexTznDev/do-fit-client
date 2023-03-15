@@ -1,173 +1,361 @@
-
-body{
+body {
   font-family: 'Roboto', sans-serif;
 }
 
-button{
-border: none;
-}
-
-a{
-  text-decoration: none;
-  color: black;
-}
-h3{
-  margin: 0;
-}
-p{
+* {
   margin: 0;
 }
 
-/* nav bar  */
-.containerBtnHome{
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-  position: fixed;
-  justify-content: space-around;
-  align-items: center;
-  border-top:.5px solid rgba(33, 33, 33, 0.153);
-  bottom: 0;
-  height: 4rem;
-  background-color: #fff;
-}
-.ButtonHome{
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: .2rem;
-}
-
-.textButton{
-  font-size: .8rem;
-  color:rgba(33, 33, 33, 0.853)
-}
-
-
-.video-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-color: black;
-  
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.filterHome{
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.21);
+/**colors*/
+.grey {
+  color: rgb(143, 143, 143);
 }
 
 
 
-/*Profil page*/
+@media (min-width: 551px) {
+  .minWidthMedia {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    position: fixed;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-.containerImgProfil{
-  width: 10rem;
-  height: 10rem;
-  border-radius: 50%;
-  overflow: hidden;
+  body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-}
+  .containerLogo {
+    width: 30rem;
+    height: 30rem;
+  }
 
+  .containerLogo img {
+    width: 100%;
+    height: 100%;
 
-.imgWrapper{
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-
-.buttonOut{
-  background-color: transparent;
-  padding-left: 1rem;
-  padding-top: 1rem;
-}
-
-
-
-
-
-.ButtonCreate{
-  padding:1rem 2rem;
-  background-color: rgb(91, 91, 91);
-  color: #fff;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  border-radius: 10px;
-
+  }
 
 }
 
-.mainContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@media (max-width: 470px) {
+  .wrapperNameRoutineProfile {
+    width: 6.5rem !important;
+    height: 6.5rem !important;
 
+  }
+
+  .wrapperNameRoutineProfile h2 {
+    font-size: 20px;
+
+  }
 }
 
-.ButtonStart{
-  background-color: rgb(65, 203, 65);
-  font-size: 25px;
-  font-weight: bold;
-  padding:1rem 2rem;
-  color: #fff;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  border-radius: 10px;
+@media (max-width: 550px) {
+  .minWidthMedia {
+    display: none;
+  }
+
+  button {
+    border: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  /* nav bar  */
+  .containerBtnHome {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    position: fixed;
+    justify-content: space-around;
+    align-items: center;
+    border-top: .5px solid rgba(33, 33, 33, 0.153);
+    bottom: 0;
+    height: 4rem;
+    background-color: #fff;
+  }
+
+  .ButtonHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .2rem;
+    cursor: pointer;
+  }
+
+  .textButton {
+    font-size: .8rem;
+    color: rgba(33, 33, 33, 0.853)
+  }
+
+
+  .video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: black;
+
+  }
+
+  .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .filterHome {
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.21);
+  }
+
+
+
+  /*Profil page*/
+
+  .containerImgProfil {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+  }
+
+
+  .imgWrapper {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .buttonOut {
+    background-color: transparent;
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+
+
+
+
+
+  .ButtonCreate {
+    padding: .3rem 3rem;
+    border: .5px solid rgb(91, 91, 91);
+    color: rgb(23, 23, 23);
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    border-radius: 3px;
+
+
+
+  }
+
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .ButtonStart {
+    background-color: rgb(65, 203, 65);
+    font-size: 25px;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    border-radius: 10px;
+  }
+
+  .chronometro {
+    padding: 2rem 4rem;
+    background-color: rgb(65, 179, 65);
+  }
+
+  .SeriesCounter {
+    padding: 2rem 4rem;
+    background-color: rgb(65, 107, 179);
+  }
+
+  .nextExercise {
+    background-color: rgb(203, 168, 65);
+    font-size: 25px;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    border-radius: 10px;
+  }
+
+
+  .endExercise {
+    background-color: rgb(203, 65, 65);
+    font-size: 25px;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    border-radius: 10px;
+  }
+
+
+  /*exercise list css*/
+  .containerInfoExercisse {
+    width: 90vw;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-around
+  }
+
+  .ColumnDisplay {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+  }
+
+  .containerImgExercise {
+    width: 6rem;
+    height: 6rem;
+    border-radius: .3rem;
+    overflow: hidden;
+  }
+
+  .imgExercise {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /*fin exercise list css*/
+
+  .ajustDiv {
+    height: 10rem;
+  }
+
+  /*component containerRoutineProfil*/
+  .containerRoutineProfil {
+
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 1.5rem;
+    padding: 1rem 1rem;
+    padding-bottom: 6rem;
+    border: .5px solid rgba(33, 33, 33, 0.153);
+    border-radius: 10px;
+    min-height: 20rem;
+    position: relative;
+
+  }
+
+
+
+  .wrapperNameRoutineProfile {
+    width: 8rem;
+    height: 8rem;
+    background-color: rgba(33, 33, 33, 0.053);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center
+  }
+
+
+  .wrapperRoutine {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+
+  }
+
+  /*fin component containerRoutineProfil*/
+
+  /*Detail Exercise*/
+  .ContainerDetailExercise {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(39, 39, 39);
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    color: #fff;
+
+
+  }
+
+  .ContainerdetailExerciseText {
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    
+    gap: 2rem;
+  }
+
+  .containerEditAndDelete {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .containerEditAndDelete button {
+    border: none;
+    padding: .5rem 2rem;
+    border-radius: 10rem;
+    font-size: 1rem;
+    background-color: #fff;
+    cursor: pointer;
+  }
+  .containerEditAndDelete a {
+    border: 1px solid #fff;
+    color: #fff;
+    padding: .5rem 2rem;
+    border-radius: 10rem;
+    font-size: 1rem;
+  }
+  .containerEditAndDelete button:hover {
+
+    background-color: #ffd5aa;
+
+  }
+  .containerEditAndDelete a:hover {
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: #ffffff0e;
+
+  }
+  .wrapperTextIconDetailExercise{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /*Fin Detail Exercise*/
+
 }
-
-.chronometro{
-  padding: 2rem 4rem;
-  background-color: rgb(65, 179, 65);
-}
-.SeriesCounter{
-  padding: 2rem 4rem;
-  background-color: rgb(65, 107, 179);
-}
-.nextExercise{
-  background-color: rgb(203, 168, 65);
-  font-size: 25px;
-  font-weight: bold;
-  padding:1rem 2rem;
-  color: #fff;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
-
-.endExercise{
-  background-color: rgb(203, 65, 65);
-  font-size: 25px;
-  font-weight: bold;
-  padding:1rem 2rem;
-  color: #fff;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  border-radius: 10px;
-}
-
-.containerInfoExercisse{
-
-  display: flex;
-  gap: 2rem;
-
-}
-.ColumnDisplay{
-  display: grid;
-}
-
-

@@ -1,14 +1,14 @@
-import AllButtons from "../components/AllButtons";
-import { Link } from "react-router-dom";
+import AllButtons from "../../components/AllButtons";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   followFoundUserService,
   profileSerivce,
 } from "../services/profile.services";
 import { useContext } from "react";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
 import { useParams } from "react-router-dom";
-import { routineUserService } from "../services/routine.services";
+import { routineUserService } from "../../services/routine.services";
 
 function ProfileFoundUser() {
   const params = useParams();

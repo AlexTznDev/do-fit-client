@@ -4,7 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import AllButtons from "../../components/AllButtons";
 import { exerciseSerivce } from "../../services/exercise.services";
 
-
+import { BsInfoSquare } from "react-icons/bs";
+import { MdAddCircle } from "react-icons/md";
 
 function Exercise() {
   const params = useParams();
@@ -33,15 +34,15 @@ function Exercise() {
   };
 
   return (
-    <div className="mainContainer">
+    <div className="mainContainer" style={{ paddingTop: "2rem" }}>
       <h2>Exercisse List</h2>
+      <br />
       <br />
       <br />
 
       <AllButtons />
-      <br />
 
-      {isFetching  ? (
+      {isFetching ? (
         <h1>...buscando</h1>
       ) : isRoutineRoad ? (
         allExercise.map((eachExercisse, index) => {
@@ -51,26 +52,44 @@ function Exercise() {
                 textDecoration: "none",
                 color: "black",
                 cursor: "pointer",
+                height: "7rem",
               }}
               to={`/routine/${idRoutine}/exercise/${eachExercisse._id}`}
               key={eachExercisse._id + index}
             >
               <div className="containerInfoExercisse">
-                <h3>{eachExercisse.name}</h3>
-                <h5>{eachExercisse.category}</h5>
-                <p>{eachExercisse.tagline}</p>
-                <p>{eachExercisse.calories}</p>
-              </div>
+                <div>
+                  <div className="containerImgExercise">
+                    <img
+                      src={eachExercisse.image}
+                      alt={eachExercisse.name}
+                      className="imgExercise"
+                    />
+                  </div>
+                </div>
 
-              <br />
-              <br />
+                <div className="ColumnDisplay">
+                  <h4>{eachExercisse.name}</h4>
+                  <p className="grey">{eachExercisse.category}</p>
+                  <p className="grey">{eachExercisse.tagline}</p>
+                  <p className="grey">{eachExercisse.calories} calories</p>
+                </div>
+
+                <BsInfoSquare size="2rem" color="#f4a261" />
+              </div>
             </Link>
           );
         })
       ) : (
         allExercise.map((eachExercisse, index) => {
           return (
-            <div key={eachExercisse._id + index}>
+            <div
+              key={eachExercisse._id + index}
+              style={{
+                height: "7rem",
+                display: "flex",
+              }}
+            >
               <Link
                 style={{
                   textDecoration: "none",
@@ -78,26 +97,40 @@ function Exercise() {
                   cursor: "pointer",
                 }}
                 to={`/exercise/${eachExercisse._id}/details`}
-                
               >
                 <div className="containerInfoExercisse">
-                <div className="ColumnDisplay">
-                <h3>{eachExercisse.name}</h3>
-                  <h5>{eachExercisse.category}</h5>
-                  <p>{eachExercisse.tagline}</p>
-                  <p>{eachExercisse.calories}</p>
-                </div>
-                  <img src={eachExercisse.image} alt={eachExercisse.name} width="100px"/>
-                </div>
+                  <div>
+                    <div className="containerImgExercise">
+                      <img
+                        src={eachExercisse.image}
+                        alt={eachExercisse.name}
+                        className="imgExercise"
+                      />
+                    </div>
+                  </div>
 
-                <br />
-                <br />
+                  <div className="ColumnDisplay">
+                    <h4>{eachExercisse.name}</h4>
+                    <p className="grey">{eachExercisse.category}</p>
+                    <p className="grey">{eachExercisse.tagline}</p>
+                    <p className="grey">{eachExercisse.calories} calories</p>
+                  </div>
+
+                  <BsInfoSquare size="2rem" color="#f4a261" />
+                </div>
               </Link>
             </div>
           );
         })
       )}
-      <Link to={"/exercise/create"}>Create Exercise</Link>
+      <Link
+        className={"ButtonHome"}
+        style={{ marginTop: "4rem" }}
+        to={"/exercise/create"}
+      >
+        <MdAddCircle size="2rem" />
+        <p className="textButton">Add one</p>
+      </Link>
     </div>
   );
 }
