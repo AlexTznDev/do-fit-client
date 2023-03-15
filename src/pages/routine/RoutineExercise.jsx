@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 import { MdFastfood } from "react-icons/md";
 import { BiRun } from "react-icons/bi";
 
+
 //* all services import
 import { routineDetailService } from "../../services/routine.services";
 import { ExerciseInRoutineDetail } from "../../services/routine.services";
@@ -243,14 +244,20 @@ function RoutineExercise() {
                   <h2>{chronometro}</h2>
                 </div>
                 <div className="containerBtnChronometer">
-                <button onClick={handleStartChronometer}>Start</button>
-                <button onClick={handleResetChronometer}>reset</button>
+                  <button onClick={handleStartChronometer}>Start</button>
+                  <button onClick={handleResetChronometer}>reset</button>
                 </div>
-
+                <div
+                  style={{
+                    height: ".2px",
+                    backgroundColor: "#ffffff60",
+                    width: "90vw",
+                  }}
+                ></div>
 
                 <div className="SeriesCounter">
                   <h2>
-                   {countSeriesDone}/ {series}
+                    {countSeriesDone}/ {series}
                   </h2>
                   <button onClick={handleSerieIncrement}>1 serie DONE</button>
                 </div>
@@ -266,12 +273,11 @@ function RoutineExercise() {
                     End routine
                   </button>
                 ) : null}
-
               </div>
             ) : !isUserRoad ? (
               <div className="ContainerForm">
                 <form>
-                  <label htmlFor="repeticion">repeticion</label>
+                  <label style={{color:"#fff"}} htmlFor="repeticion">repeticion</label>
                   <input
                     type="number"
                     name="repeticion"
@@ -279,7 +285,7 @@ function RoutineExercise() {
                     onChange={handleRepeticionChange}
                   />
 
-                  <label htmlFor="series">series</label>
+                  <label style={{color:"#fff"}} htmlFor="series">series</label>
                   <input
                     type="number"
                     name="series"
@@ -287,7 +293,7 @@ function RoutineExercise() {
                     onChange={handleSeriesChange}
                   />
 
-                  <label htmlFor="chronometro">chronometro</label>
+                  <label style={{color:"#fff"}} htmlFor="chronometro">chronometro</label>
                   <input
                     type="number"
                     name="chronometro"

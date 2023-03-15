@@ -118,9 +118,13 @@ function Profile() {
               borderBottom: "1px solid rgba(33, 33, 33, 0.190)",
             }}
           ></div>
-          {params.id !== undefined ? null : <ContainerRoutineProfil />}
+          {params.id !== undefined ? null : (
+            <div>
+              {" "}
+              <ContainerRoutineProfil /> <div className="ajustDiv"></div>
+            </div>
+          )}
 
-          <div className="ajustDiv"></div>
           <AllButtons />
         </div>
       )}
