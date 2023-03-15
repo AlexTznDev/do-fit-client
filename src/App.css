@@ -3,6 +3,9 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+*{
+  margin: 0;
+}
 button{
 border: none;
 }
@@ -11,12 +14,7 @@ a{
   text-decoration: none;
   color: black;
 }
-h3{
-  margin: 0;
-}
-p{
-  margin: 0;
-}
+
 
 /* nav bar  */
 .containerBtnHome{
@@ -36,6 +34,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 gap: .2rem;
+cursor: pointer;
 }
 
 .textButton{
@@ -97,13 +96,14 @@ gap: .2rem;
 
 
 .ButtonCreate{
-  padding:1rem 2rem;
-  background-color: rgb(91, 91, 91);
-  color: #fff;
+  padding:.3rem 3rem;
+  border: .5px solid rgb(91, 91, 91);
+  color: rgb(23, 23, 23);
   margin-left: auto;
   margin-right: auto;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 3px;
+ 
 
 
 }
@@ -171,3 +171,43 @@ gap: .2rem;
 }
 
 
+.ajustDiv{
+  height: 10rem;
+}
+
+
+.containerRoutineProfil{
+  
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 1.5rem;
+  padding: 1rem 1rem;
+  padding-bottom: 4rem;
+  border:.5px solid rgba(33, 33, 33, 0.153);
+  border-radius: 10px;
+  min-height: 20rem;
+  position: relative;
+ 
+}
+.wrapperNameRoutineProfile{
+  width: 8rem;
+  height: 8rem;
+  background-color: rgba(33, 33, 33, 0.053);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  text-align: center
+}
+
+
+.wrapperRoutine{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center
+}
