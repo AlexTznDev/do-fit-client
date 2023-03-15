@@ -183,14 +183,73 @@ body {
     border-radius: 10px;
   }
 
+
+  /* ! Chronometer*/
+  .containerBtnChronometer {
+
+    display: flex;
+    gap: 10rem;
+    transform: translateY(-60px);
+
+  }
+
+  .containerBtnChronometer button:first-child {
+
+    background-color:#c2ffaabb;
+    width: 3rem;
+    height: 3rem;
+    border: .5px solid rgb(155, 255, 155);
+    border-radius: 50%;
+    color: #fff;
+
+
+  }
+  .containerBtnChronometer button:nth-child(2) {
+
+    background-color:#aaaaaabb;
+    width: 3rem;
+    height: 3rem;
+    border: .5px solid rgb(242, 242, 242);
+    border-radius: 50%;
+    color: #fff;
+
+  }
+
+
+  .containerSeriesChronometerAndButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+  }
+
   .chronometro {
-    padding: 2rem 4rem;
-    background-color: rgb(65, 179, 65);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 5px solid #ffd5aa;
+  }
+
+  .chronometro h2 {
+
+    font-size: 3rem;
   }
 
   .SeriesCounter {
     padding: 2rem 4rem;
     background-color: rgb(65, 107, 179);
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
   }
 
   .nextExercise {
@@ -311,10 +370,14 @@ body {
   }
 
   .ContainerdetailExerciseText {
-    padding: 2rem 1rem;
+
+    padding-top: 4rem;
     display: flex;
     flex-direction: column;
-    
+    align-items: flex-start;
+    align-content: flex-start;
+    width: 90%;
+    min-height: 20rem;
     gap: 2rem;
   }
 
@@ -332,6 +395,7 @@ body {
     background-color: #fff;
     cursor: pointer;
   }
+
   .containerEditAndDelete a {
     border: 1px solid #fff;
     color: #fff;
@@ -339,23 +403,99 @@ body {
     border-radius: 10rem;
     font-size: 1rem;
   }
+
   .containerEditAndDelete button:hover {
 
     background-color: #ffd5aa;
 
   }
+
   .containerEditAndDelete a:hover {
     border: 1px solid #fff;
     color: #fff;
     background-color: #ffffff0e;
 
   }
-  .wrapperTextIconDetailExercise{
+
+  .wrapperTextIconDetailExercise {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    gap: 7px;
+    width: 100%;
   }
 
   /*Fin Detail Exercise*/
+
+
+  /*form */
+
+  .containerForm {
+    width: 70%;
+  }
+
+  .ContainerForm form {
+    padding: 1.5rem 1rem;
+    background-color: #ffffff12;
+    border-radius: 2rem;
+    color: rgb(33, 33, 33);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: #ffd5aa 1px solid;
+  }
+
+  .ContainerForm input {
+    padding: .5rem;
+    text-align: center;
+    border: none;
+    border: .5px solid rgb(255, 255, 255);
+    border-radius: .5rem;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    margin: 5px;
+    caret-color: rgb(33, 33, 33);
+  }
+
+  .ContainerForm form button {
+    border: none;
+    background: rgb(33, 33, 33);
+    color: #ffffff;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+  }
+
+  .ContainerForm form button:hover {
+    border: none;
+    background: rgb(255, 210, 181);
+    color: #ffffff;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+  }
+
+
+  .ContainerForm input::placeholder {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 800;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .ContainerForm input:hover {
+    background-color: #ffdebe74;
+
+  }
+
+
+  .ContainerForm input:focus {
+    outline-color: #ffd5aa;
+  }
+
+  /*!  form   */
 
 }

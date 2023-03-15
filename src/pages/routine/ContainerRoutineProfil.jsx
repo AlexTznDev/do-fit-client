@@ -52,7 +52,7 @@ function ContainerRoutineProfil() {
         to={"/routine/create"}
       >
         <MdAddCircle size="2rem" />
-        <p className="textButton">Add one</p>
+        <p className="textButton">Create routine</p>
       </Link>
     </div>
   );

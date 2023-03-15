@@ -1,10 +1,8 @@
 import AllButtons from "../../components/AllButtons";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  followFoundUserService,
-  profileSerivce,
-} from "../services/profile.services";
+import {profileSerivce} from "../../services/profile.services.js"
+import {followFoundUserService} from "../../services/profile.services.js"
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import { useParams } from "react-router-dom";
