@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { exerciseDetailService } from "../../services/exercise.services";
@@ -12,10 +12,15 @@ import AllButtons from "../../components/AllButtons";
 import { AddExerciseToRoutineService } from "../../services/routine.services";
 
 import { MdFastfood } from "react-icons/md";
+
+import { AuthContext } from "../../context/auth.context";
 import { MdDescription } from "react-icons/md";
 import { BiRun } from "react-icons/bi";
 
 function Exercisedetails() {
+
+  const { loggedUser } = useContext(AuthContext)
+
   const params = useParams();
   const { id } = params;
   const { idRoutine, idExercise } = params;
@@ -139,10 +144,12 @@ function Exercisedetails() {
             </div>
 
             {!isRoutineRoad ? (
+              // AQUI RESTRINGIR ESTOS DOS BOTONES
+              loggedUser.role === "admin" ?
               <div className="containerEditAndDelete">
                 <button onClick={handleDeleteExercise}>Delete</button>
                 <Link to={`/exercise/${detailsExercise._id}/edit`}>Edit</Link>
-              </div>
+              </div> : null
             ) : (
               <div className="ContainerForm">
                 <form>

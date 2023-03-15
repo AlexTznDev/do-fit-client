@@ -22,6 +22,7 @@ import IsPrivate from './components/isPrivate';
 import ProfileEdit from './pages/profile/ProfileEdit';
 import SearchFriends from './components/SearchFriends';
 import ProfileFoundUser from './pages/profile/ProfileFoundUser';
+import IsAdmin from './components/isAdmin';
 
 function App() {
   return (
@@ -52,8 +53,8 @@ function App() {
 
 <Route path="/exercise" element={<IsPrivate><Exercise/></IsPrivate> }/>
 <Route path="/exercise/:id/details" element={<IsPrivate><ExerciseDetails/></IsPrivate>}/>
-<Route path="/exercise/:id/edit" element={<IsPrivate><ExerciseEdit/></IsPrivate>}/>
-<Route path="/exercise/create" element={<IsPrivate><ExerciseCreate/></IsPrivate>}/>
+<Route path="/exercise/:id/edit" element={<IsAdmin><ExerciseEdit/></IsAdmin>}/>
+<Route path="/exercise/create" element={<IsAdmin><ExerciseCreate/></IsAdmin>}/>
 
 <Route path="/routine/:id" element={<IsPrivate><RoutineDetail/></IsPrivate>}/>
 <Route path="/routine/:id/user" element={<IsPrivate><RoutineDetail/></IsPrivate>}/>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import AllButtons from "../../components/AllButtons";
@@ -7,7 +7,12 @@ import { exerciseSerivce } from "../../services/exercise.services";
 import { BsInfoSquare } from "react-icons/bs";
 import { MdAddCircle } from "react-icons/md";
 
+import { AuthContext } from "../../context/auth.context";
+
 function Exercise() {
+
+  const { loggedUser } = useContext(AuthContext)
+   
   const params = useParams();
   const { idRoutine } = params;
 
@@ -123,14 +128,16 @@ function Exercise() {
           );
         })
       )}
-      <Link
+
+      {loggedUser.role ==="admin" ? <Link
         className={"ButtonHome"}
         style={{ marginTop: "4rem" }}
         to={"/exercise/create"}
       >
         <MdAddCircle size="2rem" />
         <p className="textButton">Add one</p>
-      </Link>
+      </Link> : null  }
+      
     </div>
   );
 }
