@@ -8,7 +8,6 @@ import { AuthContext } from "../context/auth.context";
 
 import { routineService } from "../services/routine.services";
 
-
 import ButtonOut from "../components/ButtonOut";
 
 function Profile() {
@@ -22,8 +21,8 @@ function Profile() {
   const [isFetching, setisFetching] = useState(true);
 
   const [isFetchingRoutine, setisFetchingRoutine] = useState(true);
-  
-  const [ showingFriends, setShowingFriends ] = useState(false)
+
+  const [showingFriends, setShowingFriends] = useState(false);
 
   useEffect(() => {
     getData();
@@ -54,13 +53,13 @@ function Profile() {
   };
 
   const showFriends = () => {
-    
-    setShowingFriends(!showingFriends)
-  }
+    setShowingFriends(!showingFriends);
+  };
 
   if (isFetching === true) {
-    return;
-    <h1>...Searching</h1>;
+    return(
+      <h1>...Searching</h1>
+    ) 
   }
 
   const handleLogout = () => {
@@ -70,14 +69,18 @@ function Profile() {
   };
 
   return (
-    <div >
-    
-      <ButtonOut handleLogout={handleLogout}/>
+    <div>
+      <ButtonOut handleLogout={handleLogout} />
 
       <div className="mainContainer">
-      <div className="containerImgProfil">
-        <img className="imgWrapper" src={userData.imageProfile} alt="img" width="100%" />
-      </div>
+        <div className="containerImgProfil">
+          <img
+            className="imgWrapper"
+            src={userData.imageProfile}
+            alt="img"
+            width="100%"
+          />
+        </div>
 
         <div>
           <h3>{userData.name}</h3>
@@ -90,23 +93,28 @@ function Profile() {
           <h3>Following</h3>
 
           <h4 onClick={showFriends}>{userData.friends.length}</h4>
-          {showingFriends ? (userData.friends.map((each) =>{
-            return(
-              // <p key={each._id}>{each.name}</p>
-              <Link to= {each._id === userData._id ? "/profile": `/profile/${each._id}`}><p>{each.name}</p></Link>
-            )
-          })): null} 
-          
-          
+          {showingFriends
+            ? userData.friends.map((each) => {
+                return (
+                  <Link
+                    key={each._id}
+                    to={
+                      each._id === userData._id
+                        ? "/profile"
+                        : `/profile/${each._id}`
+                    }
+                  >
+                    <p>{each.name}</p>
+                  </Link>
+                );
+              })
+            : null}
         </div>
-          
-        <Link to={`/profile/${userData._id}/edit`} className={"ButtonCreate"}>Edit Profile</Link>
-      
+
+        <Link to={`/profile/${userData._id}/edit`} className={"ButtonCreate"}>
+          Edit Profile
+        </Link>
       </div>
-
-      <br />
-      <br />
-
 
       <br />
       <br />
@@ -116,12 +124,11 @@ function Profile() {
       ) : (
         allRoutines.map((eachRoutine) => {
           return (
-            <Link key={eachRoutine._id} to={`/routine/${eachRoutine._id}`}>
-              <div>
-                {/* <img src="first image from exercisse" alt="" /> */}
+            <div key={eachRoutine._id}>
+              <Link to={`/routine/${eachRoutine._id}`}>
                 <h2>{eachRoutine.name}</h2>
-              </div>
-            </Link>
+              </Link>
+            </div>
           );
         })
       )}

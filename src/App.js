@@ -28,8 +28,9 @@ function App() {
 
 
 <Routes>
-<Route path="/search" element={<SearchFriends/>}></Route>
-<Route path="/profile/:idFoundUser" element={<ProfileFoundUser/>}/>
+<Route path="/search" element={<IsPrivate><SearchFriends/></IsPrivate>}/>
+<Route path="/profile/:idFoundUser" element={<IsPrivate><ProfileFoundUser/></IsPrivate>}/>
+<Route path="/profile/:idFoundUser/user" element={<isPrivate><ProfileFoundUser/></isPrivate>}/>
 
 
 
@@ -48,20 +49,20 @@ function App() {
 <Route path="/exercise/:id/edit" element={<IsPrivate><ExerciseEdit/></IsPrivate>}/>
 <Route path="/exercise/create" element={<IsPrivate><ExerciseCreate/></IsPrivate>}/>
 
-<Route path="/routine/:id" element={<RoutineDetail/>}></Route>
-<Route path="/routine/:id/user" element={<RoutineDetail/>}></Route>
+<Route path="/routine/:id" element={<IsPrivate><RoutineDetail/></IsPrivate>}/>
+<Route path="/routine/:id/user" element={<IsPrivate><RoutineDetail/></IsPrivate>}/>
 
-<Route path="/routine/create" element={<RoutineCreate/>}></Route>
-<Route path="/routine/:idRoutine/exercise" element={<RoutineExercise/>}></Route>
-<Route path="/routine/:idRoutine/exercise/add" element={<RoutineExercise/>}></Route>
-<Route path="/routine/:idRoutine/exercise/:idExercise" element={<ExerciseDetails/>}></Route>
-<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/edit" element={<RoutineExercise/>}></Route>
-<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/user" element={<RoutineExercise/>}></Route>
+<Route path="/routine/create" element={<IsPrivate><RoutineCreate/></IsPrivate>}/>
+<Route path="/routine/:idRoutine/exercise" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
+<Route path="/routine/:idRoutine/exercise/add" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
+<Route path="/routine/:idRoutine/exercise/:idExercise" element={<IsPrivate><ExerciseDetails/></IsPrivate>}/>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/edit" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/user" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
 
 
-<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData" element={<RoutineExercise/>}></Route>
-<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData/user" element={<RoutineExercise/>}></Route>
-<Route path="/routine/create" element={<RoutineCreate/>}></Route>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
+<Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData/user" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
+
 
 
 </Routes>

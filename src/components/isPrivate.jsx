@@ -7,12 +7,10 @@ function IsPrivate(props) {
 const { isLoggedIn } = useContext(AuthContext)
 
 
-if(isLoggedIn === true){
-    //solo renbderiza el compoenente envuelto si el usuario esta activo
+if(isLoggedIn){
     return props.children
  } else {
-    //EL sistema no me permitira hacer navigate con useNavigate en la base del componente
-    return <Navigate to="/login"/>
+    return <Navigate to="/"/>
 }
 
 }
