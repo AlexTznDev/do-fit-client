@@ -1,14 +1,14 @@
 import AllButtons from "../../components/AllButtons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  followFoundUserService,
-  profileSerivce,
-} from "../services/profile.services";
-import { useContext } from "react";
-import { AuthContext } from "../../context/auth.context";
+import { followFoundUserService } from "../../services/profile.services";
+import { profileSerivce } from "../../services/profile.services";
+
 import { useParams } from "react-router-dom";
 import { routineUserService } from "../../services/routine.services";
+
+import { FaUserFriends } from "react-icons/fa";
+
 
 function ProfileFoundUser() {
   const params = useParams();
@@ -24,6 +24,8 @@ function ProfileFoundUser() {
 
   const [visitorData, setVisitorData] = useState(null);
   const [areFriends, setAreFriends] = useState(false);
+
+  const [showingFriends, setShowingFriends] = useState(false);
 
   useEffect(() => {
     getDataAllRoutines();
@@ -48,6 +50,10 @@ function ProfileFoundUser() {
     }
   };
 
+  const showFriends = () => {
+    setShowingFriends(!showingFriends);
+  };
+
   const followFoundUser = async () => {
     try {
       const response = await followFoundUserService(idFoundUser);
@@ -65,22 +71,36 @@ function ProfileFoundUser() {
 
   return (
     <div className="mainContainer">
-      <div style={{ borderStyle: "solid", width: "30vw" }}>
+      <div className="containerImgProfil">
         <img
+          className="imgWrapper"
           src={userData.infoFoundUser.imageProfile}
           alt="img"
-          width="200px"
+          width="100%"
         />
-        <div>
-          <h3>{userData.infoFoundUser.name}</h3>
-          <p>Age: {userData.infoFoundUser.age} yrs</p>
-          <p>Weight: {userData.infoFoundUser.weight} kg</p>
-          <p>Height: {userData.infoFoundUser.height} cm</p>
-        </div>
+       </div>
 
         <div>
+          <h4 style={{ marginTop: "2rem" }}>{userData.infoFoundUser.name}</h4>
+        </div>
+          
+          <div>
+
+
+          
+          {/* <p>Age: {userData.infoFoundUser.age} yrs</p>
+          <p>Weight: {userData.infoFoundUser.weight} kg</p>
+          <p>Height: {userData.infoFoundUser.height} cm</p>
+        </div> */}
+
+            <div
+              onClick={showFriends}
+              className="ButtonHome"
+              style={{ marginTop: "1rem", marginBottom: "1rem" }}
+            >
+            <FaUserFriends size="1.3rem" color="f4a261" />
           <h3>Friends</h3>
-          {userData.infoFoundUser.friends.map((each) => {
+          {showingFriends? userData.infoFoundUser.friends.map((each) => {
             return (
               <div key={each._id}>
                 <Link
@@ -93,8 +113,8 @@ function ProfileFoundUser() {
                   {each.name}
                 </Link>
               </div>
-            );
-          })}
+            ) 
+          }) : null}
         </div>
       </div>
 

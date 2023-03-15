@@ -4,6 +4,7 @@ import { AuthContext } from "../context/auth.context";
 import videoBg from "../video/videoHome.mp4";
 
 function Home() {
+  
   const { isLoggedIn } = useContext(AuthContext);
 
   if (isLoggedIn === true) {

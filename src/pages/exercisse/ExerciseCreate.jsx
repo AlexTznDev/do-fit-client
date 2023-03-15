@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { exerciseCreateService } from "../../services/exercise.services";
 import AllButtons from "../../components/AllButtons";
 
 import { uploadImageService } from "../../services/upload.services";
 
+import { AuthContext } from "../../context/auth.context";
+
+
 
 function ExerciseCreate() {
+
+  const {loggedUser} = useContext(AuthContext)
+  console.log(loggedUser)
+
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -194,7 +201,7 @@ function ExerciseCreate() {
         <br />
         <br />
 
-        <button onClick={handleSubmitExercisse}>Create</button>
+        {loggedUser.role === "admin" ? <button onClick={handleSubmitExercisse}>Create</button> : null}
       </form>
     </div>
   );
