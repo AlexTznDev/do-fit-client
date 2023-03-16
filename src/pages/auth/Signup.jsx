@@ -6,15 +6,13 @@ import imgBG from "../../image/signUp.jpg";
 import logoWhite from "../../logo/logoDofitblanc.png";
 
 function Signup() {
-  //Navigate para ir a login despues de crear el usuario
+  
   const navigate = useNavigate();
 
-  //Creacion de estados para la aceptacion de email y password
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  //Funciones para cambiar el valor de los estados de email y password
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -27,20 +25,20 @@ function Signup() {
   const handleSignUp = async (event) => {
     event.preventDefault();
 
-    //creando nuevo usuario
     const newUser = {
       email: email,
       password: password,
     };
 
     try {
-      const response = await signupSerivce(newUser);
-      console.log(response);
+      await signupSerivce(newUser);
       navigate("/login");
     } catch (error) {
-      console.log(error.response.status);
-      console.log(error.response.data.errorMessage);
-      setErrorMessage(error.response.data.errorMessage);
+      if (error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      } else {
+        navigate("/error");
+      }
     }
   };
 

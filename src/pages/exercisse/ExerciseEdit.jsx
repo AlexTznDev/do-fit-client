@@ -5,8 +5,9 @@ import { exerciseDetailService } from "../../services/exercise.services";
 import { exerciseEditService } from "../../services/exercise.services";
 
 function ExerciseEdit() {
-  const params = useParams();
+
   const navigate = useNavigate()
+  const params = useParams();
   const { id } = params;
 
   const [name, setName] = useState("");
@@ -72,11 +73,7 @@ function ExerciseEdit() {
       settagline(tagline)
       setimage(image)
       
-
-
-
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -97,7 +94,7 @@ function ExerciseEdit() {
       await exerciseEditService(id, updateExercise)
       navigate(`/exercise/${id}/details`)
     } catch (error) {
-      console.log(error);
+      navigate("/error")
     }
   };
 

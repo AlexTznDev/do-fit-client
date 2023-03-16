@@ -8,6 +8,7 @@ import { routineUserService } from "../../services/routine.services";
 import { FaUserFriends } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
 import ButtonBack from "../../components/ButtonBack";
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 function ProfilePrueba(props) {
   const idFoundUser = props.isUser._id;
@@ -51,7 +52,7 @@ function ProfilePrueba(props) {
   };
 
   if (isFetching === true) {
-    return <h1>...Searching</h1>;
+    return <SearchingSpinner />
   }
 
   const found = visitorData.friends.find((user) => user._id === idFoundUser);

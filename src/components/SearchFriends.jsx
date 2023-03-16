@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { searchUserService } from "../services/search.seervices";
 import AllButtons from "./AllButtons";
 
 import logo from "../logo/logo-final.png";
+import SearchingSpinner from "./SearchingSpinner";
 
 function SearchFriends() {
-    
+
+  const navigate = useNavigate()  
+
   const [usersArr, setUsersArr] = useState(null);
   const [searchUser, setSearchUser] = useState("");
   const [userToDisplay, setUserToDisplay] = useState([]);
@@ -29,11 +32,10 @@ function SearchFriends() {
   const getUsers = async () => {
     try {
       const response = await searchUserService();
-      console.log(response.data);
       setUsersArr(response.data);
       setIsFetching(false);
     } catch (error) {
-      console.log(error);
+      navigate("/error")
     }
   };
 
@@ -50,11 +52,10 @@ function SearchFriends() {
     });
 
     setUserToDisplay(foundUser);
-    console.log(foundUser);
   };
 
   if (isFetching) {
-    return <h3>...Buscando</h3>;
+    return <SearchingSpinner/>
   }
 
   return (

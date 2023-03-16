@@ -8,8 +8,6 @@ import logoWhite from "../../logo/logoDofitblanc.png";
 import imgBG from "../../image/signUp.jpg";
 
 function Login() {
-  // añadiendo el authcontext
-
   const { authenticateUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -37,16 +35,16 @@ function Login() {
 
     try {
       const response = await loginService(userAccount);
-      console.log(response);
-
       authenticateUser();
-      console.log("usuario autentificado");
-      //6. Haciendo uso del LocalStorage para almacenar el token que viene del BE
+
       localStorage.setItem("authToken", response.data.authToken);
       navigate("/profile");
     } catch (error) {
-      console.log(error);
-      setErrorMessage(error.response.data.errorMessage);
+      if (error.response.status === 400) {
+        setErrorMessage(error.response.data.errorMessage);
+      } else {
+        navigate("/error");
+      }
     }
   };
 
@@ -86,7 +84,8 @@ function Login() {
         <div className="ContainerForm">
           <form onSubmit={handleLogin}>
             <h1 style={{ color: "#fff" }}>Log In</h1>
-            <br /><br />
+            <br />
+            <br />
             <label></label>
             <input
               type="email"
@@ -95,7 +94,7 @@ function Login() {
               onChange={handleEmailChange}
               placeholder="Email"
             />
-           
+
             <label></label>
             <input
               type="password"
@@ -127,9 +126,9 @@ function Login() {
               padding: ".5rem 2rem",
               backgroundColor: "#fff",
               borderRadius: "40px",
-              display:"flex",
-              justifyContent:"center",
-              alignItems:"center"
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
             to="/"
           >
@@ -140,9 +139,9 @@ function Login() {
               padding: ".5rem 2rem",
               backgroundColor: "#fff",
               borderRadius: "40px",
-              display:"flex",
-              justifyContent:"center",
-              alignItems:"center"
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
             to="/signup"
           >

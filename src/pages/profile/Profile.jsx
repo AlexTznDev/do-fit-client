@@ -10,19 +10,17 @@ import { FaUserFriends } from "react-icons/fa";
 
 import ButtonOut from "../../components/ButtonOut";
 import ContainerRoutineProfil from "../routine/ContainerRoutineProfil";
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 function Profile() {
+  
   const navigate = useNavigate();
-
-  const { isLoggedIn, authenticateUser } = useContext(AuthContext);
-
-  const [userData, setUserData] = useState(null);
-
-  const [isFetching, setisFetching] = useState(true);
-
-  const [showingFriends, setShowingFriends] = useState(false);
-
   const params = useParams();
+
+  const {authenticateUser} = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
+  const [isFetching, setisFetching] = useState(true);
+  const [showingFriends, setShowingFriends] = useState(false);
 
   useEffect(() => {
     getData();
@@ -37,7 +35,7 @@ function Profile() {
       setUserData(response.data);
       setisFetching(false);
     } catch (error) {
-      console.log(error);
+      navigate("/error")
     }
   };
 
@@ -54,7 +52,7 @@ function Profile() {
   return (
     <div>
       {isFetching ? (
-        <h1>...Searching</h1>
+        <SearchingSpinner/>
       ) : (
         <div>
           <ButtonOut handleLogout={handleLogout} />
@@ -71,9 +69,6 @@ function Profile() {
 
             <div>
               <h3 style={{ marginTop: "2rem" }}>{userData.name}</h3>
-              {/* <p>Age: {userData.age} yrs</p>
-          <p>Weight: {userData.weight} kg</p>
-          <p>Height: {userData.height} cm</p> */}
             </div>
 
             <Link
@@ -94,7 +89,6 @@ function Profile() {
               {showingFriends
                 ? userData.friends.map((each) => {
                     return (
-                      // <p key={each._id}>{each.name}</p>
                       <Link key={each._id}
                         to={
                           each._id === userData._id

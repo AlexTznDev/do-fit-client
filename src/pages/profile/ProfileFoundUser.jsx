@@ -11,6 +11,9 @@ import { routineUserService } from "../../services/routine.services";
 
 import { FaUserFriends } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
+import ButtonBack from "../../components/ButtonBack";
+import { MoonLoader } from "react-spinners";
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 function ProfileFoundUser() {
   const params = useParams();
@@ -71,16 +74,18 @@ function ProfileFoundUser() {
     }
   };
 
-  if (isFetching === true) {
-    return <h1>...Searching</h1>;
+  if (isFetching) {
+    return <SearchingSpinner/>
   }
 
   const found = visitorData.friends.find((user) => user._id === idFoundUser);
 
   return (
     <div>
+      <ButtonBack/>
       <div className="mainContainer">
         <div className="containerImgProfil">
+          
           <img
             className="imgWrapper"
             src={userData.infoFoundUser.imageProfile}
@@ -90,7 +95,7 @@ function ProfileFoundUser() {
         </div>
 
         <div>
-          <h3>{userData.infoFoundUser.name}</h3>
+          <h3 style={{ marginTop: "2rem" }}>{userData.infoFoundUser.name}</h3>
         </div>
 
         <div>
@@ -147,10 +152,10 @@ function ProfileFoundUser() {
           }}
         ></div>
 
-        {!isUserRoad ? <div className="containerRoutineProfil" style={{width: "80vw"}}>
+        {!isUserRoad ? <div className="containerRoutineProfil" style={{width: "90vw"}}>
           <div className="wrapperRoutine">
             {isFetchingRoutine ? (
-              <h2>...is fetching</h2>
+              <SearchingSpinner/>
             ) : (
               allRoutines.rutinasFoundUser.map((eachRoutine) => {
                 return (

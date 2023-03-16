@@ -14,6 +14,7 @@ import { AuthContext } from "../../context/auth.context";
 import ProfilePrueba from "../profile/ProfilePrueba";
 
 import logo from "../../logo/logo-final.png";
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 function RoutineDetail() {
   const { loggedUser } = useContext(AuthContext);
@@ -68,12 +69,12 @@ function RoutineDetail() {
     <div >
       
 
-      {isFetching ? (<h2>... buscando</h2>) : routineOwner._id === loggedUser._id ? <Profile /> : <ProfilePrueba isUser={routineOwner}/>}
+      {isFetching ? <SearchingSpinner/> : routineOwner._id === loggedUser._id ? <Profile /> : <ProfilePrueba isUser={routineOwner}/>}
       
       
 
       {isFetching ? (
-        <h2>... buscando</h2>
+        <SearchingSpinner />
       ) : (
         <div className="mainContainer" style={{ paddingTop: "2rem" }}>
           <h2>{routineName}</h2>
