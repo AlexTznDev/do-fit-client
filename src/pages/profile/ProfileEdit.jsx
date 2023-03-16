@@ -8,7 +8,7 @@ import {
 import { uploadImageService } from "../../services/upload.services";
 
 import logoWhite from "../../logo/logoDofitblanc.png";
-import imgBG from "../../image/createRoutine.jpg";
+import imgBG from "../../image/editProfil.jpg";
 
 function ProfileEdit() {
   const navigate = useNavigate();

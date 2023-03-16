@@ -13,6 +13,7 @@ function RoutineCreate() {
   const [name, setName] = useState("");
   const [frequency, setFrequency] = useState("");
   const [status, setStatus] = useState("private");
+  const [category, setcategory] = useState("Abbs");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -24,6 +25,9 @@ function RoutineCreate() {
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
+  const handleCategoryChange = (e) => {
+    setcategory(e.target.value);
+  };
 
   const handleSubmitRoutine = async (e) => {
     e.preventDefault();
@@ -31,6 +35,7 @@ function RoutineCreate() {
       name,
       frequency,
       status,
+      category
     };
 
     try {
@@ -45,7 +50,7 @@ function RoutineCreate() {
   return (
     <div className="mainContainer justify">
 
-    
+
       <div className="containerLogohome">
         <img src={logoWhite} alt="logo" />
       </div>
@@ -93,8 +98,7 @@ function RoutineCreate() {
               placeholder="Name"
             />
 
-            <br />
-
+          
             <label htmlFor="frequency"></label>
             <input
               type="text"
@@ -119,6 +123,23 @@ function RoutineCreate() {
               <option value="private">Private</option>
               <option value="public">Public</option>
             </select>
+            <br /><br />
+
+            <select
+              type="text"
+              name="status"
+              value={category}
+              onChange={handleCategoryChange}
+            >
+              <option value="Abbs">Abbs</option>
+              <option value="Upper body">Upper body</option>
+              <option value="Lower body">Lower body</option>
+              <option value="Stretching">Stretching</option>
+              <option value="Breathings">Breathings</option>
+              <option value="Cardio">Cardio</option>
+              <option value="body weight">Body weight</option>
+            </select>
+
             <br />
             <button onClick={handleSubmitRoutine}>Ok</button>
           </form>

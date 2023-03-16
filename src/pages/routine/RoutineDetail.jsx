@@ -12,16 +12,16 @@ import { BsInfoSquare } from "react-icons/bs";
 import { MdAddCircle } from "react-icons/md";
 import { AuthContext } from "../../context/auth.context";
 
+import logo from "../../logo/logo-final.png";
 
 function RoutineDetail() {
-
-  const { loggedUser } = useContext(AuthContext)
-  console.log("LALALALALA", loggedUser)
+  const { loggedUser } = useContext(AuthContext);
+  console.log("LALALALALA", loggedUser);
 
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-  console.log("LOLOLOLO", params)
+  console.log("LOLOLOLO", params);
 
   const [routineData, setRoutineData] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -31,7 +31,7 @@ function RoutineDetail() {
     window.location.href.includes("user") ? true : false
   );
 
-  const [ routineOwner, setRoutineOwner ] = useState(null)
+  const [routineOwner, setRoutineOwner] = useState(null);
 
   useEffect(() => {
     getData();
@@ -42,10 +42,10 @@ function RoutineDetail() {
       const response = await routineDetailService(id);
 
       setroutineName(response.data.name);
-      console.log(response.data.exercises);
-      console.log("AQUI LO QUE QUIERES", response.data.owner)
+
+      console.log("AQUI LO QUE QUIERES", response.data.owner);
       setRoutineData(response.data.exercises);
-      setRoutineOwner(response.data.owner)
+      setRoutineOwner(response.data.owner);
 
       setIsFetching(false);
     } catch (error) {
@@ -64,11 +64,14 @@ function RoutineDetail() {
   };
 
   return (
-    <div >
-
-      {isFetching ? (<h2>... buscando</h2>) : routineOwner._id === loggedUser._id ? <Profile /> : <p>FUNCIONA</p>}
-      
-      
+    <div>
+      {isFetching ? (
+        <h2>... buscando</h2>
+      ) : routineOwner._id === loggedUser._id ? (
+        <Profile />
+      ) : (
+        <p>FUNCIONA</p>
+      )}
 
       {isFetching ? (
         <h2>... buscando</h2>
@@ -78,89 +81,98 @@ function RoutineDetail() {
 
           <br />
           <br />
-          {routineData.map((eachExercisse) => {
-            return (
-              <div key={eachExercisse.exercisesId._id}>
-                {!isUserRoad ? (
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      cursor: "pointer",
-                      height: "7rem",
-                    }}
-                    to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
-                  >
-                    <div className="containerInfoExercisse">
-                      <div>
-                        <div className="containerImgExercise">
-                          <img
-                            src={eachExercisse.exercisesId.image}
-                            alt={eachExercisse.exercisesId.name}
-                            className="imgExercise"
-                          />
+
+          {routineData.length > 0 ? (
+            routineData.map((eachExercisse) => {
+              return (
+                <div key={eachExercisse.exercisesId._id}>
+                  {!isUserRoad ? (
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        cursor: "pointer",
+                        height: "7rem",
+                      }}
+                      to={`/routine/${id}/exercise/${eachExercisse._id}/edit`}
+                    >
+                      <div className="containerInfoExercisse">
+                        <div>
+                          <div className="containerImgExercise">
+                            <img
+                              src={eachExercisse.exercisesId.image}
+                              alt={eachExercisse.exercisesId.name}
+                              className="imgExercise"
+                            />
+                          </div>
                         </div>
-                      </div>
 
-                      <div className="ColumnDisplay">
-                        <h4>{eachExercisse.exercisesId.name}</h4>
-                        <p className="grey">
-                          {eachExercisse.exercisesId.category}
-                        </p>
-                        <p className="grey">
-                          {eachExercisse.exercisesId.tagline}
-                        </p>
-                        <p className="grey">
-                          {eachExercisse.exercisesId.calories} calories
-                        </p>
-                      </div>
-
-                      <BsInfoSquare size="2rem" color="#f4a261" />
-                    </div>
-                    <br />
-                  </Link>
-                ) : (
-                  <Link
-                    style={{
-                      textDecoration: "none",
-                      color: "black",
-                      cursor: "pointer",
-                      height: "7rem",
-                    }}
-                    to={`/routine/${id}/exercise/${eachExercisse._id}/user`}
-                  >
-                    <div className="containerInfoExercisse">
-                      <div>
-                        <div className="containerImgExercise">
-                          <img
-                            src={eachExercisse.exercisesId.image}
-                            alt={eachExercisse.exercisesId.name}
-                            className="imgExercise"
-                          />
+                        <div className="ColumnDisplay">
+                          <h4>{eachExercisse.exercisesId.name}</h4>
+                          <p className="grey">
+                            {eachExercisse.exercisesId.category}
+                          </p>
+                          <p className="grey">
+                            {eachExercisse.exercisesId.tagline}
+                          </p>
+                          <p className="grey">
+                            {eachExercisse.exercisesId.calories} calories
+                          </p>
                         </div>
-                      </div>
 
-                      <div className="ColumnDisplay">
-                        <h4>{eachExercisse.exercisesId.name}</h4>
-                        <p className="grey">
-                          {eachExercisse.exercisesId.category}
-                        </p>
-                        <p className="grey">
-                          {eachExercisse.exercisesId.tagline}
-                        </p>
-                        <p className="grey">
-                          {eachExercisse.exercisesId.calories} calories
-                        </p>
+                        <BsInfoSquare size="2rem" color="#f4a261" />
                       </div>
+                      <br />
+                    </Link>
+                  ) : (
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "black",
+                        cursor: "pointer",
+                        height: "7rem",
+                      }}
+                      to={`/routine/${id}/exercise/${eachExercisse._id}/user`}
+                    >
+                      <div className="containerInfoExercisse">
+                        <div>
+                          <div className="containerImgExercise">
+                            <img
+                              src={eachExercisse.exercisesId.image}
+                              alt={eachExercisse.exercisesId.name}
+                              className="imgExercise"
+                            />
+                          </div>
+                        </div>
 
-                      <BsInfoSquare size="2rem" color="#f4a261" />
-                    </div>
-                    <br />
-                  </Link>
-                )}
+                        <div className="ColumnDisplay">
+                          <h4>{eachExercisse.exercisesId.name}</h4>
+                          <p className="grey">
+                            {eachExercisse.exercisesId.category}
+                          </p>
+                          <p className="grey">
+                            {eachExercisse.exercisesId.tagline}
+                          </p>
+                          <p className="grey">
+                            {eachExercisse.exercisesId.calories} calories
+                          </p>
+                        </div>
+
+                        <BsInfoSquare size="2rem" color="#f4a261" />
+                      </div>
+                      <br />
+                    </Link>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <div className="wrapperLogo">
+              <div className="containerLogoFound">
+                <img src={logo} alt="logo" className="imgWrapper" />
               </div>
-            );
-          })}
+            </div>
+          )}
         </div>
       )}
 
@@ -179,26 +191,25 @@ function RoutineDetail() {
       <br />
 
       <div className="containerBtnStartAndDelete">
+        {isFetching || routineData.length === 0 ? null : !isUserRoad ? (
+          <Link
+            to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}`}
+          >
+            <div className="ButtonStart">Start the routine!!</div>
+          </Link>
+        ) : (
+          <Link
+            to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}/user`}
+          >
+            <div className="ButtonStart">Start the routine!!</div>
+          </Link>
+        )}
 
-      {isFetching || routineData.length === 0 ? null : !isUserRoad ? (
-        <Link
-          to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}`}
-        >
-          <div className="ButtonStart">Start the routine!!</div>
-        </Link>
-      ) : (
-        <Link
-          to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}/user`}
-        >
-          <div className="ButtonStart">Start the routine!!</div>
-        </Link>
-      )}
-
-      {!isUserRoad ? (
-        <button onClick={handleDeleteRoutine} className="deleteBtn">
-          Delete the routine
-        </button>
-      ) : null}
+        {!isUserRoad ? (
+          <button onClick={handleDeleteRoutine} className="deleteRoutine">
+            Delete the routine
+          </button>
+        ) : null}
       </div>
 
       <div className="ajustDiv"></div>

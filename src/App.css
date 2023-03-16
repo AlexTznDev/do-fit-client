@@ -185,6 +185,19 @@ body {
     overflow: hidden;
 
   }
+  .containerImgProfilFound {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+
+  }
+  .containerImgAndName{
+    display: flex;
+
+    align-items: center;
+    gap: 1.5rem;
+  }
 
 
   .imgWrapper {
@@ -213,8 +226,11 @@ body {
     text-decoration: none;
     border-radius: 3px;
 
-
-
+  }
+  .ButtonCreate:hover {
+  
+    border: .5px solid rgb(83, 83, 83);
+ 
   }
 
   .mainContainer {
@@ -417,7 +433,9 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    text-align: center
+    text-align: center;
+    position: relative;
+    overflow: hidden;
   }
 
 
@@ -589,7 +607,19 @@ body {
 
 
   }
+.deleteRoutine{
+  padding: .5rem 2rem;
+  background-color: #f7ca9d;
+  color: #1d1d1d;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.deleteRoutine:hover{
 
+  background-color: #f6bd84;
+
+
+}
 
   .ButtonStart {
     background-color: rgba(65, 203, 65, 0.563);
@@ -621,5 +651,78 @@ body {
   .containerBtnStartAndDelete button:nth-child(2):hover {
     background-color: #fddec060;
   }
+
+
+
+  /* search component*/
+
+
+.searchContainer{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+.inputSearchContainer{
+  width: 90vw;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+  
+
+}
+.inputSearchContainer input{
+  width: 70%;
+  background-color: #efefef;
+  border: none;
+  border-radius: 10px;
+  padding-left: 2rem;
+  background-image: url("../src/icon/search.png");
+  background-size: 15px auto;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+ 
+}
+
+.inputSearchContainer input::placeholder{
+font-size: 15px;
+}
+.inputSearchContainer input:focus{
+  outline-color: #ffd5aa;
+}
+
+
+.inputSearchContainer button{
+  padding: .5rem 1rem;
+  background-color: transparent;
+  font-size: 17px;
+ 
+}
+
+.containerLogoFound{
+  width: 12rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.wrapperLogo{
+  position: relative;
+  width: 90%;
+  height: 15rem;
+}
+
+
+.imgBgRoutine{
+  
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  opacity: .4;
+}
 
 }
