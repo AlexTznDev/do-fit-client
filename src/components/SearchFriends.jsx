@@ -3,16 +3,10 @@ import { Link } from "react-router-dom";
 import { searchUserService } from "../services/search.seervices";
 import AllButtons from "./AllButtons";
 
-
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import { searchUserService } from "../services/search.seervices"
-import AllButtons from "./AllButtons"
-
 import logo from "../logo/logo-final.png";
 
-
 function SearchFriends() {
+    
   const [usersArr, setUsersArr] = useState(null);
   const [searchUser, setSearchUser] = useState("");
   const [userToDisplay, setUserToDisplay] = useState([]);

@@ -104,7 +104,7 @@ function Exercisedetails() {
               // width: "30rem",
             }}
           >
-            <ReactPlayer
+           <ReactPlayer
               config={{
                 youtube: {
                   playerVars: { modestbranding: 1 },
