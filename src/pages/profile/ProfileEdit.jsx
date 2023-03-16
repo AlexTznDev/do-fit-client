@@ -20,8 +20,6 @@ function ProfileEdit() {
 
   const [username, setUsername] = useState("");
   const [userAge, setUserAge] = useState(0);
-  const [userHeight, setUserHeight] = useState(0);
-  const [userWeight, setUserWeight] = useState(0);
   const [userImageProfile, setUserImageProfile] = useState("")
 
   const [isFetching, setisFetching] = useState(true);
@@ -46,12 +44,10 @@ function ProfileEdit() {
   const getData = async () => {
     try {
       const response = await profileSerivce();
-      const { name, imageProfile, age, weight, height } = response.data;
+      const { name, imageProfile, age} = response.data;
       setUsername(name);
       setUserAge(age);
-      setUserWeight(weight);
-      setUserHeight(height);
-     // setUserImageProfile(imageProfile)
+      // setUserImageProfile(imageProfile)
       console.log(imageProfile)
       setisFetching(false)
     } catch (error) {
@@ -163,7 +159,6 @@ function ProfileEdit() {
             <input
               type="file"
               name="imageProfile"
-              // value={userImageProfile}
               onChange={handleFileUpload}
               placeholder="Profile picture"
               style={{ width: "15rem" }}

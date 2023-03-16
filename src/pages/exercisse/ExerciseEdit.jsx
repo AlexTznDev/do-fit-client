@@ -72,6 +72,7 @@ function ExerciseEdit() {
       settagline(tagline);
       setimage(image);
     } catch (error) {
+      navigate("/error")
     }
   };
 
