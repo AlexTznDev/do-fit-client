@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import AllButtons from "../../components/AllButtons";
 import {
   profileEditService,
   profileSerivce,
 } from "../../services/profile.services";
 import { uploadImageService } from "../../services/upload.services";
+
+import logoWhite from "../../logo/logoDofitblanc.png";
+import imgBG from "../../image/createRoutine.jpg";
 
 function ProfileEdit() {
   const navigate = useNavigate();
@@ -108,52 +112,96 @@ function ProfileEdit() {
   //!!!!!!!!!!
 
   return (
-    <div>
-      <h3>Edit Profile</h3>
+    <div className="mainContainer justify">
+      <div className="containerLogohome">
+        <img src={logoWhite} alt="logo" />
+      </div>
 
-      <form>
-        <label htmlFor="name">Username: </label>
-        <input
-          type="text"
-          name="name"
-          value={username}
-          onChange={handleUsernameChange}
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          zIndex: "-1",
+        }}
+      >
+        <img
+          src={imgBG}
+          alt="bachGDimgForm"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
         />
-        <br />
-        <label htmlFor="imageProfile">Profile picture: </label>
-        <input type="file" name="imageProfile" onChange={handleFileUpload} />
-        <br />
-        <label htmlFor="age">Age: </label>
-        <input
-          type="number"
-          name="age"
-          value={userAge}
-          onChange={handleUserAgeChange}
-        />
-        <br />
-        <label htmlFor="weight">Weight: </label>
-        <input
-          type="number"
-          name="weight"
-          value={userWeight}
-          onChange={handleUserWeightChange}
-        />
-        <br />
-        <label htmlFor="height">Height: </label>
-        <input
-          type="number"
-          name="height"
-          value={userHeight}
-          onChange={handleUserHeightChange}
-        />
-        <br />
+      </div>
 
-        {!isUploading ? (
-          <button onClick={handleUpdateProfile}>Update</button>
-        ) : (
-          <h2>...is uploading</h2>
-        )}
-      </form>
+      <div
+        style={{
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div className="ContainerForm">
+          <form>
+            <h1 style={{ color: "#fff" }}>Edit profile</h1>
+            <br /><br />
+            <label htmlFor="name"></label>
+            <input
+              type="text"
+              name="name"
+              value={username}
+              onChange={handleUsernameChange}
+              placeholder="Username"
+            />
+
+            <label htmlFor="imageProfile"></label>
+            <input
+              type="file"
+              name="imageProfile"
+              onChange={handleFileUpload}
+              placeholder="Profile picture"
+            />
+            
+            <label style={{color:"#fff"}} htmlFor="age">Age :</label>
+            <input
+              type="number"
+              name="age"
+              value={userAge}
+              onChange={handleUserAgeChange}
+              placeholder="Age"
+            />
+            
+            {/* <label htmlFor="weight"></label>
+            <input
+              type="number"
+              name="weight"
+              value={userWeight}
+              onChange={handleUserWeightChange}
+              placeholder="Weight"
+            />
+            
+            <label htmlFor="height">Height: </label>
+            <input
+              type="number"
+              name="height"
+              value={userHeight}
+              onChange={handleUserHeightChange}
+            /> */}
+            <br />
+
+            {!isUploading ? (
+              <button onClick={handleUpdateProfile}>Update</button>
+            ) : (
+              <h2>...is uploading</h2>
+            )}
+          </form>
+        </div>
+      </div>
+
+      <AllButtons />
     </div>
   );
 }

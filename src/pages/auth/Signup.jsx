@@ -1,6 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { signupSerivce } from "../../services/auth.services";
+
+import imgBG from "../../image/signUp.jpg";
+import logoWhite from "../../logo/logoDofitblanc.png";
+
 function Signup() {
   //Navigate para ir a login despues de crear el usuario
   const navigate = useNavigate();
@@ -8,7 +12,7 @@ function Signup() {
   //Creacion de estados para la aceptacion de email y password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [ errorMessage, setErrorMessage ] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   //Funciones para cambiar el valor de los estados de email y password
 
@@ -30,41 +34,107 @@ function Signup() {
     };
 
     try {
-      const response = await signupSerivce(newUser)
+      const response = await signupSerivce(newUser);
       console.log(response);
       navigate("/login");
     } catch (error) {
       console.log(error.response.status);
       console.log(error.response.data.errorMessage);
-      setErrorMessage(error.response.data.errorMessage)
+      setErrorMessage(error.response.data.errorMessage);
     }
   };
 
   return (
-    <div>
-      <Link to="/">Home</Link>
-      <h1>Sing Up</h1>
+    <div className="mainContainer justify">
+      <div className="containerLogohome">
+        <img src={logoWhite} alt="logo" />
+      </div>
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          zIndex: "-1",
+        }}
+      >
+        <img
 
-      <form onSubmit={handleSignUp}>
-        <label>Email: </label>
-        <input
-          onChange={handleEmailChange}
-          type="email"
-          name="email"
-          value={email}
+          src={imgBG}
+          alt="bachGDimgForm"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          
+          }}
         />
-        <br />
-        <label>Password: </label>
-        <input
-          onChange={handlePasswordChange}
-          type="text"
-          name="password"
-          value={password}
-        />
-        <br />
-        <button type="submit">SignUp</button>
-        {errorMessage !== "" ? <p>{errorMessage}</p> : null}
-      </form>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div className="ContainerForm">
+          <form onSubmit={handleSignUp}>
+            <h1 style={{ color: "#fff" }}>Sing Up</h1>
+            <br />
+            <br />
+            <div></div>
+
+            <label style={{ color: "#fff" }}></label>
+            <input
+              onChange={handleEmailChange}
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Email"
+            />
+            <br />
+            <label style={{ color: "#fff" }}></label>
+            <input
+              onChange={handlePasswordChange}
+              type="text"
+              name="password"
+              value={password}
+              placeholder="Password"
+            />
+            <br />
+            <button type="submit">SignUp</button>
+            {errorMessage !== "" ? <p>{errorMessage}</p> : null}
+          </form>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent:"center",
+            gap: "2rem",
+            position:"fixed",
+            bottom:"5rem",
+            left:"50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <Link 
+          style={{
+            padding:".5rem 2rem",
+            backgroundColor:"#fff",
+            borderRadius:"40px"
+          }}
+          to="/">Home</Link>
+          <Link 
+           style={{
+            padding:".5rem 2rem",
+            backgroundColor:"#fff",
+            borderRadius:"40px"
+          }}
+          to="/login">Login</Link>
+        </div>
+      </div>
     </div>
   );
 }

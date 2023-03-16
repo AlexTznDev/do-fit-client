@@ -4,18 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import { loginService } from "../../services/auth.services";
 
+import logoWhite from "../../logo/logoDofitblanc.png";
+import imgBG from "../../image/signUp.jpg";
+
 function Login() {
-// añadiendo el authcontext
+  // añadiendo el authcontext
 
-  const {authenticateUser} = useContext(AuthContext)
+  const { authenticateUser } = useContext(AuthContext);
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [ errorMessage, setErrorMessage ] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -34,48 +36,120 @@ function Login() {
     };
 
     try {
-     const response =  await loginService(userAccount)
-     console.log(response)
-    
-      authenticateUser()
-      console.log("usuario autentificado")
-     //6. Haciendo uso del LocalStorage para almacenar el token que viene del BE
-     localStorage.setItem("authToken", response.data.authToken) 
-      navigate("/profile")
+      const response = await loginService(userAccount);
+      console.log(response);
 
+      authenticateUser();
+      console.log("usuario autentificado");
+      //6. Haciendo uso del LocalStorage para almacenar el token que viene del BE
+      localStorage.setItem("authToken", response.data.authToken);
+      navigate("/profile");
     } catch (error) {
       console.log(error);
-      setErrorMessage(error.response.data.errorMessage)
+      setErrorMessage(error.response.data.errorMessage);
     }
   };
 
   return (
-    <div>
-      <Link to="/">Home</Link>
+    <div className="mainContainer justify">
+      <div className="containerLogohome">
+        <img src={logoWhite} alt="logo" />
+      </div>
 
-      <h1>Log In</h1>
-
-      <form onSubmit={handleLogin}>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          zIndex: "-1",
+        }}
+      >
+        <img
+          src={imgBG}
+          alt="bachGDimgForm"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
         />
-        <br />
-        <label>Password:</label>
-        <input
-          type="text"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <br />
+      </div>
 
-        <button type="submit">Login</button>
-        {errorMessage !== "" ? <p>{errorMessage}</p> : null}
-      </form>
+      <div
+        style={{
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div className="ContainerForm">
+          <form onSubmit={handleLogin}>
+            <h1 style={{ color: "#fff" }}>Log In</h1>
+            <br /><br />
+            <label></label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder="Email"
+            />
+           
+            <label></label>
+            <input
+              type="text"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              placeholder="Password"
+            />
+            <br />
+
+            <button type="submit">Login</button>
+            {errorMessage !== "" ? <p>{errorMessage}</p> : null}
+          </form>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "2rem",
+            position: "fixed",
+            bottom: "5rem",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <Link
+            style={{
+              padding: ".5rem 2rem",
+              backgroundColor: "#fff",
+              borderRadius: "40px",
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center"
+            }}
+            to="/"
+          >
+            Home
+          </Link>
+          <Link
+            style={{
+              padding: ".5rem 2rem",
+              backgroundColor: "#fff",
+              borderRadius: "40px",
+              display:"flex",
+              justifyContent:"center",
+              alignItems:"center"
+            }}
+            to="/signup"
+          >
+            Signup
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

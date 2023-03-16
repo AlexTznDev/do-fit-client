@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { followFoundUserService } from "../../services/profile.services";
 import { profileSerivce } from "../../services/profile.services";
 
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth.context";
 import { useParams } from "react-router-dom";
 import { routineUserService } from "../../services/routine.services";
 

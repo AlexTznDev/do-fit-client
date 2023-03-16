@@ -14,6 +14,8 @@ import { AddExerciseToRoutineService } from "../../services/routine.services";
 import { MdFastfood } from "react-icons/md";
 
 import { AuthContext } from "../../context/auth.context";
+import { MdDescription } from "react-icons/md";
+import { BiRun } from "react-icons/bi";
 
 function Exercisedetails() {
 
@@ -99,7 +101,7 @@ function Exercisedetails() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              width: "30rem",
+              // width: "30rem",
             }}
           >
             <ReactPlayer
@@ -110,22 +112,35 @@ function Exercisedetails() {
               }}
               url={detailsExercise.videoUrl}
               width="100vw"
-
             />
 
             <div className="ContainerdetailExerciseText">
               <h2>{detailsExercise.name}</h2>
 
               <div className="wrapperTextIconDetailExercise">
-              <MdFastfood/>
-              <p>Burn {detailsExercise.calories} calories</p>
+                <div
+                  style={{
+                    minWidth: "1.5rem",
+                  }}
+                >
+                  <MdFastfood size="1rem" />
+                </div>
+                <p>Burn {detailsExercise.calories} calories</p>
               </div>
 
               <div className="wrapperTextIconDetailExercise">
-              <MdFastfood/>
-                <p>{detailsExercise.description}</p>
+                <div
+                  style={{
+                    minWidth: "1.5rem",
+                  }}
+                >
+                  <BiRun size="1.3rem" />
+                </div>
+                <p>{detailsExercise.tagline}</p>
               </div>
-
+              <p className="grey" style={{lineHeight:"27px"}}>{detailsExercise.description}</p>
+              <br />
+              <br />
             </div>
 
             {!isRoutineRoad ? (
@@ -136,27 +151,30 @@ function Exercisedetails() {
                 <Link to={`/exercise/${detailsExercise._id}/edit`}>Edit</Link>
               </div> : null
             ) : (
-              <div>
+              <div className="ContainerForm">
                 <form>
-                  <label htmlFor="repeticion">repeticion</label>
+                  <label htmlFor="repeticion"></label>
                   <input
                     type="number"
                     name="repeticion"
                     onChange={handleRepeticionChange}
+                    placeholder="repeticion"
                   />
 
-                  <label htmlFor="series">series</label>
+                  <label htmlFor="series"></label>
                   <input
                     type="number"
                     name="series"
                     onChange={handleSeriesChange}
+                    placeholder="series"
                   />
 
-                  <label htmlFor="chronometro">chronometro</label>
+                  <label htmlFor="chronometro"></label>
                   <input
                     type="number"
                     name="chronometro"
                     onChange={handleChronometerChange}
+                    placeholder="chronometro"
                   />
                   <br />
                   <br />
@@ -166,6 +184,7 @@ function Exercisedetails() {
                 </form>
               </div>
             )}
+            <div className="ajustDiv"></div>
           </div>
         )}
       </div>

@@ -4,6 +4,11 @@ import Exercise from "../exercisse/Exercise";
 import Bipsound from "../../sounfFile/bip.wav";
 
 import AllButtons from "../../components/AllButtons";
+import ReactPlayer from "react-player";
+
+import { MdFastfood } from "react-icons/md";
+import { BiRun } from "react-icons/bi";
+
 
 //* all services import
 import { routineDetailService } from "../../services/routine.services";
@@ -22,8 +27,6 @@ function RoutineExercise() {
   const [isUserRoad, setIsUserRoad] = useState(
     window.location.href.includes("user") ? true : false
   );
-
-  ////////////////////ALEX//////////////////
 
   const [isEditRoad, setisEditRoad] = useState(
     idExerciseInArray ? true : false
@@ -177,112 +180,150 @@ function RoutineExercise() {
   };
 
   const handleEndRoutine = () => {
-    if(!isUserRoad){
+    if (!isUserRoad) {
       navigate(`/routine/${idRoutine}`);
-    }else{
+    } else {
       navigate(`/routine/${idRoutine}/user`);
     }
-    
   };
-  // const handleEndRoutineUser = () => {
-  //   navigate(`/routine/${idRoutine}/user`);
-  // };
 
   return (
     <div className="mainContainer">
-      {!isEditRoad ? (
-        <Exercise />
-      ) : isFetching ? (
-        <h2>...Buscando</h2>
-      ) : (
-        <div className="mainContainer">
-          <AllButtons />
-          <h2>name: {exercisseData.exercisesId.name}</h2>
-          <p>category: {exercisseData.exercisesId.category}</p>
-          <p>description: {exercisseData.exercisesId.description}</p>
-          <p>calories: {exercisseData.exercisesId.calories}</p>
+      <div className="ContainerDetailExercise">
+        {!isEditRoad ? (
+          <Exercise />
+        ) : isFetching ? (
+          <h2>...Buscando</h2>
+        ) : (
+          <div className="mainContainer">
+            <ReactPlayer
+              config={{
+                youtube: {
+                  playerVars: { modestbranding: 1 },
+                },
+              }}
+              url={exercisseData.exercisesId.videoUrl}
+              width="100vw"
+            />
+            <div className="ContainerdetailExerciseText">
+              <h2>{exercisseData.exercisesId.name}</h2>
 
-          {isStartExerciseRoad ? (
-            <div>
-              <div className="chronometro">
-                <h2>chronometro: {chronometro}</h2>
-                <button onClick={handleStartChronometer}>Start</button>
-                <button onClick={handleResetChronometer}>reset</button>
+              <div className="wrapperTextIconDetailExercise">
+                <div
+                  style={{
+                    minWidth: "1.5rem",
+                  }}
+                >
+                  <MdFastfood size="1rem" />
+                </div>
+                <p>Burn {exercisseData.exercisesId.calories} calories</p>
               </div>
 
-              <div className="SeriesCounter">
-                <h2>
-                  series count: {countSeriesDone}/ {series}
-                </h2>
-                <button onClick={handleSerieIncrement}>1 serie DONE</button>
+              <div className="wrapperTextIconDetailExercise">
+                <div
+                  style={{
+                    minWidth: "1.5rem",
+                  }}
+                >
+                  <BiRun size="1.3rem" />
+                </div>
+                <p>{exercisseData.exercisesId.tagline}</p>
               </div>
-              <br />
-              <br />
-              {IsRoutineFinished ? (
-                <button className="nextExercise" onClick={handleNextExercise}>
-                  Next exercise
-                </button>
-              ) : null}
-              {isEndRoutine ? (
-                
+
+              <p className="grey" style={{ lineHeight: "27px" }}>
+                {exercisseData.exercisesId.description}
+              </p>
+            </div>
+
+            <br />
+            <br />
+
+            {isStartExerciseRoad ? (
+              <div className="containerSeriesChronometerAndButton">
+                <div className="chronometro">
+                  <h2>{chronometro}</h2>
+                </div>
+                <div className="containerBtnChronometer">
+                  <button onClick={handleStartChronometer}>Start</button>
+                  <button onClick={handleResetChronometer}>reset</button>
+                </div>
+                <div
+                  style={{
+                    height: ".2px",
+                    backgroundColor: "#ffffff60",
+                    width: "90vw",
+                  }}
+                ></div>
+
+                <div className="SeriesCounter">
+                  <h2>
+                    {countSeriesDone}/ {series}
+                  </h2>
+                  <button onClick={handleSerieIncrement}>1 serie DONE</button>
+                </div>
+                <br />
+                <br />
+                {IsRoutineFinished ? (
+                  <button className="nextExercise" onClick={handleNextExercise}>
+                    Next exercise
+                  </button>
+                ) : null}
+                {isEndRoutine ? (
                   <button className="endExercise" onClick={handleEndRoutine}>
                     End routine
                   </button>
-                
-              ) : null}
+                ) : null}
+              </div>
+            ) : !isUserRoad ? (
+              <div className="ContainerForm">
+                <form>
+                  <label style={{color:"#fff"}} htmlFor="repeticion">repeticion</label>
+                  <input
+                    type="number"
+                    name="repeticion"
+                    value={repeticion}
+                    onChange={handleRepeticionChange}
+                  />
 
-              <h2 style={{color:"red"}}>
-                You have to do {exercisseData.series} series of {" "}{exercisseData.repeticion} repeticion
-              </h2>
-            </div>
-          ) : !isUserRoad ? (
-            <div>
-              <form>
-                <label htmlFor="repeticion">repeticion</label>
-                <input
-                  type="number"
-                  name="repeticion"
-                  value={repeticion}
-                  onChange={handleRepeticionChange}
-                />
+                  <label style={{color:"#fff"}} htmlFor="series">series</label>
+                  <input
+                    type="number"
+                    name="series"
+                    value={series}
+                    onChange={handleSeriesChange}
+                  />
 
-                <label htmlFor="series">series</label>
-                <input
-                  type="number"
-                  name="series"
-                  value={series}
-                  onChange={handleSeriesChange}
-                />
+                  <label style={{color:"#fff"}} htmlFor="chronometro">chronometro</label>
+                  <input
+                    type="number"
+                    name="chronometro"
+                    value={chronometro}
+                    onChange={handleChronometerChange}
+                  />
+                  <br />
+                  <br />
+                  <button onClick={handleSubmit} className="ButtonCreate">
+                    Edit exercise to my routine
+                  </button>
+                  <br />
 
-                <label htmlFor="chronometro">chronometro</label>
-                <input
-                  type="number"
-                  name="chronometro"
-                  value={chronometro}
-                  onChange={handleChronometerChange}
-                />
-                <br />
-                <br />
-                <button onClick={handleSubmit} className="ButtonCreate">
-                  Edit exercise to my routine
-                </button>
-                <br />
-                <br />
-              </form>
-
-              <button className="ButtonCreate" onClick={handleRemove}>
-                Remove from the routine
-              </button>
-            </div>
-          ) : (
-            <div>
-              <p>Series: {exercisseData.series}</p>
-              <p>Repetitions: {exercisseData.repeticion}</p>
-              <p>TimeOut: {exercisseData.chronometro}</p>
-            </div>
-          )}
-        </div>
-      )}
+                  <button className="ButtonCreate" onClick={handleRemove}>
+                    Remove from the routine
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div>
+                <p>Series: {exercisseData.series}</p>
+                <p>Repetitions: {exercisseData.repeticion}</p>
+                <p>TimeOut: {exercisseData.chronometro}</p>
+              </div>
+            )}
+            <div className="ajustDiv"></div>
+            <AllButtons />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
