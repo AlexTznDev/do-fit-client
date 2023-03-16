@@ -8,6 +8,7 @@ import { BsInfoSquare } from "react-icons/bs";
 import { MdAddCircle } from "react-icons/md";
 
 import { AuthContext } from "../../context/auth.context";
+import ButtonBack from "../../components/ButtonBack";
 
 function Exercise() {
 
@@ -39,7 +40,9 @@ function Exercise() {
   };
 
   return (
+    <div><ButtonBack/>
     <div className="mainContainer" style={{ paddingTop: "2rem" }}>
+      
       <h2>Exercisse List</h2>
       <br />
       <br />
@@ -139,6 +142,7 @@ function Exercise() {
       </Link> : null  }
       
     </div>
+    </div> 
   );
 }
 

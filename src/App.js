@@ -33,7 +33,7 @@ function App() {
     <img src={logo} alt="logo do fit" />
   </div>
 </div>
-
+ 
 <Routes>
 <Route path="/search" element={<IsPrivate><SearchFriends/></IsPrivate>}/>
 <Route path="/profile/:idFoundUser" element={<IsPrivate><ProfileFoundUser/></IsPrivate>}/>

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { searchUserService } from "../services/search.seervices"
+import AllButtons from "./AllButtons"
 
 function SearchFriends() {
 
@@ -89,6 +90,7 @@ function SearchFriends() {
                     )
                 })}
             </div>
+        <AllButtons/>
         
     </div>
   )

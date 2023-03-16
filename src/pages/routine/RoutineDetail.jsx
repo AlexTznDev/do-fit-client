@@ -11,6 +11,7 @@ import Profile from "../profile/Profile";
 import { BsInfoSquare } from "react-icons/bs";
 import { MdAddCircle } from "react-icons/md";
 import { AuthContext } from "../../context/auth.context";
+import ProfilePrueba from "../profile/ProfilePrueba";
 
 
 function RoutineDetail() {
@@ -65,8 +66,9 @@ function RoutineDetail() {
 
   return (
     <div >
+      
 
-      {isFetching ? (<h2>... buscando</h2>) : routineOwner._id === loggedUser._id ? <Profile /> : <p>FUNCIONA</p>}
+      {isFetching ? (<h2>... buscando</h2>) : routineOwner._id === loggedUser._id ? <Profile /> : <ProfilePrueba isUser={routineOwner}/>}
       
       
 

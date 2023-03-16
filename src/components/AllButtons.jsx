@@ -15,11 +15,11 @@ function AllButtons() {
         <CgProfile size="1.7rem" color="rgba(33, 33, 33, 0.853)"/>
         <p className="textButton">Profil</p>
       </Link>
-
-      <Link to="/search" className={"ButtonHome"}>
+     {!window.location.href.includes("search") ? <Link to="/search" className={"ButtonHome"}>
         <MdSearch size="2.1rem" color="rgba(33, 33, 33, 0.853)"/>
         <p className="textButton">Search</p>
-      </Link>
+      </Link> : null}  
+      
     </div>
   );
 }

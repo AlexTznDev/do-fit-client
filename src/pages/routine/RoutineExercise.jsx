@@ -8,6 +8,9 @@ import ReactPlayer from "react-player";
 
 import { MdFastfood } from "react-icons/md";
 import { BiRun } from "react-icons/bi";
+import { GiWeightLiftingUp } from "react-icons/gi";
+import { TfiTimer } from "react-icons/tfi";
+import { BsArrowRepeat } from "react-icons/bs";
 
 
 //* all services import
@@ -15,6 +18,7 @@ import { routineDetailService } from "../../services/routine.services";
 import { ExerciseInRoutineDetail } from "../../services/routine.services";
 import { RemoveExerciseFromRoutine } from "../../services/routine.services";
 import { EditExerciseFromRoutine } from "../../services/routine.services";
+import ButtonBack from "../../components/ButtonBack";
 
 function RoutineExercise() {
   const params = useParams();
@@ -188,8 +192,13 @@ function RoutineExercise() {
   };
 
   return (
+
     <div className="mainContainer">
+      {/* <div style={{position: "absolute", left:"0"}}>
+      <ButtonBack/>
+      </div> */}
       <div className="ContainerDetailExercise">
+      
         {!isEditRoad ? (
           <Exercise />
         ) : isFetching ? (
@@ -207,7 +216,9 @@ function RoutineExercise() {
             />
             <div className="ContainerdetailExerciseText">
               <h2>{exercisseData.exercisesId.name}</h2>
-
+              <p className="grey" style={{ lineHeight: "27px" }}>
+                {exercisseData.exercisesId.description}
+              </p>
               <div className="wrapperTextIconDetailExercise">
                 <div
                   style={{
@@ -230,9 +241,7 @@ function RoutineExercise() {
                 <p>{exercisseData.exercisesId.tagline}</p>
               </div>
 
-              <p className="grey" style={{ lineHeight: "27px" }}>
-                {exercisseData.exercisesId.description}
-              </p>
+              
             </div>
 
             <br />
@@ -312,13 +321,27 @@ function RoutineExercise() {
                   </button>
                 </form>
               </div>
-            ) : (
-              <div>
-                <p>Series: {exercisseData.series}</p>
-                <p>Repetitions: {exercisseData.repeticion}</p>
-                <p>TimeOut: {exercisseData.chronometro}</p>
-              </div>
-            )}
+            ) : null
+            // (
+            //   <div className="containerFoundUser">
+            //     <div>
+            //     <BsArrowRepeat size="1.3rem" style={{marginRight: "1rem"}}/>
+            //     <p>Series: {exercisseData.series}</p>
+            //     </div>
+
+            //     <div>
+            //     <GiWeightLiftingUp size="1.3rem" style={{marginRight: "1rem"}}/>
+            //     <p>Repetitions: {exercisseData.repeticion}</p>
+            //     </div>
+
+            //     <div>
+            //     <TfiTimer size="1.3rem" style={{marginRight: "1rem"}}/>
+            //     <p>TimeOut: {exercisseData.chronometro}</p>
+            //     </div>
+
+            //   </div>
+            // )
+            }
             <div className="ajustDiv"></div>
             <AllButtons />
           </div>

@@ -29,6 +29,12 @@ function ProfileFoundUser() {
 
   const [showingFriends, setShowingFriends] = useState(false);
 
+  const [isUserRoad, setUserRoad] = useState(
+    window.location.href.includes("routine") ? true : false
+  );
+
+
+
   useEffect(() => {
     getDataAllRoutines();
   }, [idFoundUser]);
@@ -119,7 +125,7 @@ function ProfileFoundUser() {
                 })
               : null}
               </div>
-               {areFriends || found ? null : (
+               {areFriends || found || (visitorData._id === idFoundUser) ? null : (
             <div className="ButtonFollow" onClick={followFoundUser} style={{margin:"2rem"}}>
               <TiUserAdd size="1.3rem" color="f4a261"/><h5>Follow</h5>
               
@@ -141,7 +147,7 @@ function ProfileFoundUser() {
           }}
         ></div>
 
-        <div className="containerRoutineProfil">
+        {!isUserRoad ? <div className="containerRoutineProfil" style={{width: "80vw"}}>
           <div className="wrapperRoutine">
             {isFetchingRoutine ? (
               <h2>...is fetching</h2>
@@ -161,7 +167,8 @@ function ProfileFoundUser() {
               })
             )}
           </div>
-        </div>
+        </div> : null}
+        
         <div className="ajustDiv"></div>
         <AllButtons />
       </div>
