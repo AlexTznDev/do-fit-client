@@ -7,34 +7,32 @@ import { uploadImageService } from "../../services/upload.services";
 
 import { AuthContext } from "../../context/auth.context";
 
-
+import logoWhite from "../../logo/logoDofitblanc.png";
+import imgBG from "../../image/createRoutine.jpg";
 
 function ExerciseCreate() {
-
-  const {loggedUser} = useContext(AuthContext)
-  console.log(loggedUser)
+  const { loggedUser } = useContext(AuthContext);
+  console.log(loggedUser);
 
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
-  const [creador, setCreador] = useState("");
+
   const [category, setCategory] = useState("Abbs");
   const [calories, setCalories] = useState(0);
   const [description, setDescription] = useState("");
   const [videoUrl, setvideoUrl] = useState("");
   const [tagline, settagline] = useState("");
 
-    //!cloudinary
-    const [imageUrl, setImageUrl] = useState(null);
-    const [isUploading, setIsUploading] = useState(false);
-    //!!!!!!!
+  //!cloudinary
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+  //!!!!!!!
 
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-  const handleCreadorChange = (e) => {
-    setCreador(e.target.value);
-  };
+
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
@@ -56,7 +54,6 @@ function ExerciseCreate() {
     e.preventDefault();
     const newExercise = {
       name,
-      creador,
       category,
       calories,
       description,
@@ -66,143 +63,160 @@ function ExerciseCreate() {
     };
 
     try {
-        await exerciseCreateService(newExercise)
-        navigate("/exercise")
+      await exerciseCreateService(newExercise);
+      navigate("/exercise");
     } catch (error) {
       console.log(error);
     }
   };
 
+  //! cloudinary
+  const handleFileUpload = async (event) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
 
-    //! cloudinary
-    const handleFileUpload = async (event) => {
-      // console.log("The file to be uploaded is: ", e.target.files[0]);
-  
-      if (!event.target.files[0]) {
-        // to prevent accidentally clicking the choose file button and not selecting a file
-        return;
-      }
-  
-      setIsUploading(true); // to start the loading animation
-  
-      const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
-      uploadData.append("image", event.target.files[0]);
-      //                   |
-      //     this name needs to match the name used in the middleware => uploader.single("image")
-  
-      try {
-        const response = await uploadImageService(uploadData);
-  
-        setImageUrl(response.data.imageUrl);
-        console.log(response.data.imageUrl);
-        //                          |
-        //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
-  
-        setIsUploading(false); // to stop the loading animation
-      } catch (error) {
-        navigate("/error");
-      }
-    };
-    //!!!!!!!!!!
+    if (!event.target.files[0]) {
+      // to prevent accidentally clicking the choose file button and not selecting a file
+      return;
+    }
+
+    setIsUploading(true); // to start the loading animation
+
+    const uploadData = new FormData(); // images and other files need to be sent to the backend in a FormData
+    uploadData.append("image", event.target.files[0]);
+    //                   |
+    //     this name needs to match the name used in the middleware => uploader.single("image")
+
+    try {
+      const response = await uploadImageService(uploadData);
+
+      setImageUrl(response.data.imageUrl);
+      console.log(response.data.imageUrl);
+      //                          |
+      //     this is how the backend sends the image to the frontend => res.json({ imageUrl: req.file.path });
+
+      setIsUploading(false); // to stop the loading animation
+    } catch (error) {
+      navigate("/error");
+    }
+  };
+  //!!!!!!!!!!
   return (
-    <div className="mainContainer">
-      <h2>Add exercise</h2>
+    <div className="mainContainer justify">
+      <div className="containerLogohome">
+        <img src={logoWhite} alt="logo" />
+      </div>
 
-      <br />
-
-      <AllButtons/>
-      <br />
-      <br /> 
-
-      <form>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          position: "fixed",
+          zIndex: "-1",
+        }}
+      >
+        <img
+          src={imgBG}
+          alt="bachGDimgForm"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
         />
-        <br />
-        <br />
+      </div>
 
-        <label htmlFor="creador">Creador</label>
-        <input
-          type="text"
-          name="creador"
-          value={creador}
-          onChange={handleCreadorChange}
-        />
-        <br />
-        <br />
+      <div
+        style={{
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div className="ContainerForm">
+          <form>
+            <label htmlFor="name"></label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+              placeholder="Name"
+            />
 
-        <label htmlFor="category">Category</label>
-        <select
-          type="text"
-          name="category"
-          value={category}
-          onChange={handleCategoryChange}
-        >
-          <option value="Abbs">Abbs</option>
-          <option value="Upper body">Upper body</option>
-          <option value="Lower body">Lower body</option>
-          <option value="Stretching">Stretching</option>
-          <option value="Breathing">Breathing</option>
-          <option value="Cardio">Cardio</option>
-          <option value="body weight">body weight</option>
+            <br />
 
-        </select>
+            <label style={{ color: "#fff" }} htmlFor="category">
+              Category
+            </label>
+            <select
+              type="text"
+              name="category"
+              value={category}
+              onChange={handleCategoryChange}
+            >
+              <option value="Abbs">Abbs</option>
+              <option value="Upper body">Upper body</option>
+              <option value="Lower body">Lower body</option>
+              <option value="Stretching">Stretching</option>
+              <option value="Breathing">Breathing</option>
+              <option value="Cardio">Cardio</option>
+              <option value="body weight">body weight</option>
+            </select>
+            <br />
 
-        <br />
-        <br />
+            <label htmlFor="calories"></label>
+            <input
+              type="number"
+              name="calories"
+              value={calories}
+              onChange={handleCaloriesChange}
+              placeholder="Calories"
+            />
 
-        <label htmlFor="calories">Calories</label>
-        <input
-          type="number"
-          name="calories"
-          value={calories}
-          onChange={handleCaloriesChange}
-        />
-        <br />
-        <br />
+            <label htmlFor="description"></label>
+            <input
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+              placeholder="Description"
+            />
 
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-        <br />
-        <br />
+            <label htmlFor="videoUrl"></label>
+            <input
+              type="text"
+              name="videoUrl"
+              value={videoUrl}
+              onChange={handleVideoUrlChange}
+              placeholder="Video Url"
+            />
 
-        <label htmlFor="videoUrl">Video Url</label>
-        <input
-          type="text"
-          name="videoUrl"
-          value={videoUrl}
-          onChange={handleVideoUrlChange}
-        />
-        <br />
-        <br />
+            <label htmlFor="tagline"></label>
+            <input
+              type="text"
+              name="tagline"
+              value={tagline}
+              onChange={handleTaglineChange}
+              placeholder="Tagline"
+            />
 
-        <label htmlFor="tagline">Tagline</label>
-        <input
-          type="text"
-          name="tagline"
-          value={tagline}
-          onChange={handleTaglineChange}
-        />
-        <br />
-        <br />
+            <br />
+            <label style={{ color: "#fff" }} htmlFor="image">
+              Exercisse picture:{" "}
+            </label>
+            <input type="file" name="image" onChange={handleFileUpload} />
 
-        <label htmlFor="image">Exercisse picture: </label>
-        <input type="file" name="image" onChange={handleFileUpload} />
-        <br />
-        <br />
-        <br />
+            <br />
+            <br />
+            {loggedUser.role === "admin" && !isUploading ? (
+              <button onClick={handleSubmitExercisse}>Create</button>
+            ) : null}
+          </form>
+        </div>
+      </div>
 
-        {loggedUser.role === "admin" ? <button onClick={handleSubmitExercisse}>Create</button> : null}
-      </form>
+      <AllButtons />
     </div>
   );
 }
