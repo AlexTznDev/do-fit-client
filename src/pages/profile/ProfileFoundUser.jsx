@@ -12,6 +12,14 @@ import { routineUserService } from "../../services/routine.services";
 import { FaUserFriends } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
 
+import abbs from "../../image/Abbs.jpg"
+import bodyWeight from "../../image/bodyWeight.jpg"
+import breathing from "../../image/breathing.jpg"
+import cardio from "../../image/cardio.jpg"
+import lowerBody from "../../image/lowerBody.jpg"
+import stretching from "../../image/stretching.jpg"
+import upperBody from "../../image/upperBody.jpg"
+
 function ProfileFoundUser() {
   const params = useParams();
   const { idFoundUser } = params;
@@ -90,7 +98,7 @@ function ProfileFoundUser() {
         </div>
 
         <div>
-          <h3>{userData.infoFoundUser.name}</h3>
+          <h3 style={{ marginTop: "2rem" }}>{userData.infoFoundUser.name}</h3>
         </div>
 
         <div>
@@ -147,7 +155,7 @@ function ProfileFoundUser() {
           }}
         ></div>
 
-        {!isUserRoad ? <div className="containerRoutineProfil" style={{width: "80vw"}}>
+        {!isUserRoad ? <div className="containerRoutineProfil" style={{width: "90%"}}>
           <div className="wrapperRoutine">
             {isFetchingRoutine ? (
               <h2>...is fetching</h2>
@@ -159,9 +167,36 @@ function ProfileFoundUser() {
                     key={eachRoutine._id}
                     to={`/routine/${eachRoutine._id}/user`}
                   >
-                    <div>
-                      <h2>{eachRoutine.name}</h2>
+                    <div className="imgBgRoutine">
+
+
+                    {
+                  eachRoutine.category === 'Abbs'? (<img src={eachRoutine.category === 'Abbs'? (abbs):(null)} alt="" className="imgExercise"/>):(null)
+                }
+                {
+                  eachRoutine.category === 'Upper body'? (<img src={eachRoutine.category === 'Upper body'? (upperBody):(null)} alt="" className="imgExercise"/>):(null)
+                }
+                {
+                  eachRoutine.category === 'Lower body'? (<img src={eachRoutine.category === 'Lower body'? (lowerBody):(null)} alt="" className="imgExercise"/>):(null)
+                }
+                {
+                  eachRoutine.category === 'Stretching'? (<img src={eachRoutine.category === 'Stretching'? (stretching):(null)} alt="" className="imgExercise"/>):(null)
+                }
+                {
+                  eachRoutine.category === 'Breathings'? (<img src={eachRoutine.category === 'Breathings'? (breathing):(null)} alt="" className="imgExercise"/>):(null)
+                }
+                {
+                  eachRoutine.category === 'Cardio'? (<img src={eachRoutine.category === 'Cardio'? (cardio):(null)} alt="" className="imgExercise"/>):(null)
+                }
+                {
+                  eachRoutine.category === 'body weight'? (<img src={eachRoutine.category === 'body weight'? (bodyWeight):(null)} alt="" className="imgExercise"/>):(null)
+                }
+
+
+
                     </div>
+                      <h2>{eachRoutine.name}</h2>
+
                   </Link>
                 );
               })

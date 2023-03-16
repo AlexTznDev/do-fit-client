@@ -54,6 +54,9 @@ function RoutineExercise() {
     window.location.href.includes("add") ? true : false
   );
 
+
+
+
   useEffect(() => {
     getDataExerciseInArrayRoutine();
   }, [countExerciseInroutine]);
@@ -197,8 +200,10 @@ function RoutineExercise() {
       {/* <div style={{position: "absolute", left:"0"}}>
       <ButtonBack/>
       </div> */}
-      <div className="ContainerDetailExercise">
+      <div className="ContainerDetailExercise"  style={{backgroundColor: isAddExerciseRoad ? '#fff' : 'rgb(39, 39, 39)'}}>
       
+
+
         {!isEditRoad ? (
           <Exercise />
         ) : isFetching ? (
@@ -212,7 +217,7 @@ function RoutineExercise() {
                 },
               }}
               url={exercisseData.exercisesId.videoUrl}
-              width="100vw"
+              width="100%"
             />
             <div className="ContainerdetailExerciseText">
               <h2>{exercisseData.exercisesId.name}</h2>
@@ -260,7 +265,7 @@ function RoutineExercise() {
                   style={{
                     height: ".2px",
                     backgroundColor: "#ffffff60",
-                    width: "90vw",
+                    width: "90%",
                   }}
                 ></div>
 
@@ -321,26 +326,26 @@ function RoutineExercise() {
                   </button>
                 </form>
               </div>
-            ) : null
-            // (
-            //   <div className="containerFoundUser">
-            //     <div>
-            //     <BsArrowRepeat size="1.3rem" style={{marginRight: "1rem"}}/>
-            //     <p>Series: {exercisseData.series}</p>
-            //     </div>
+            ) : 
+           (
+               <div className="containerFoundUser">
+                 <div>
+                 <BsArrowRepeat size="1.3rem" style={{marginRight: "1rem"}}/>
+                 <p>Series: {exercisseData.series}</p>
+                 </div>
 
-            //     <div>
-            //     <GiWeightLiftingUp size="1.3rem" style={{marginRight: "1rem"}}/>
-            //     <p>Repetitions: {exercisseData.repeticion}</p>
-            //     </div>
+                 <div>
+                 <GiWeightLiftingUp size="1.3rem" style={{marginRight: "1rem"}}/>
+                 <p>Repetitions: {exercisseData.repeticion}</p>
+                 </div>
 
-            //     <div>
-            //     <TfiTimer size="1.3rem" style={{marginRight: "1rem"}}/>
-            //     <p>TimeOut: {exercisseData.chronometro}</p>
-            //     </div>
+                 <div>
+                 <TfiTimer size="1.3rem" style={{marginRight: "1rem"}}/>
+                 <p>TimeOut: {exercisseData.chronometro}</p>
+                 </div>
 
-            //   </div>
-            // )
+               </div>
+           )
             }
             <div className="ajustDiv"></div>
             <AllButtons />

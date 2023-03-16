@@ -58,7 +58,7 @@ function Login() {
 
       <div
         style={{
-          width: "100vw",
+          width: "100%",
           height: "100vh",
           position: "fixed",
           zIndex: "-1",
@@ -94,6 +94,7 @@ function Login() {
               value={email}
               onChange={handleEmailChange}
               placeholder="Email"
+              style={{ width: "15rem" }}
             />
            
             <label></label>
@@ -103,6 +104,7 @@ function Login() {
               value={password}
               onChange={handlePasswordChange}
               placeholder="Password"
+              style={{ width: "15rem" }}
             />
             <br />
 

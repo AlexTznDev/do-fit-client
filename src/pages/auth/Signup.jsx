@@ -51,7 +51,7 @@ function Signup() {
       </div>
       <div
         style={{
-          width: "100vw",
+          width: "100%",
           height: "100vh",
           position: "fixed",
           zIndex: "-1",
@@ -92,8 +92,9 @@ function Signup() {
               name="email"
               value={email}
               placeholder="Email"
+              style={{ width: "15rem" }}
             />
-            <br />
+            
             <label style={{ color: "#fff" }}></label>
             <input
               onChange={handlePasswordChange}
@@ -101,6 +102,7 @@ function Signup() {
               name="password"
               value={password}
               placeholder="Password"
+              style={{ width: "15rem" }}
             />
             <br />
             <button type="submit">SignUp</button>

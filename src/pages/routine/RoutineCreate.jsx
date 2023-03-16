@@ -57,7 +57,7 @@ function RoutineCreate() {
 
       <div
         style={{
-          width: "100vw",
+          width: "100%",
           height: "100vh",
           position: "fixed",
           zIndex: "-1",
@@ -109,7 +109,7 @@ function RoutineCreate() {
             />
 
             <br />
-            <br />
+            
 
             <label style={{ color: "#fff" }} htmlFor="status">
               Status
@@ -123,11 +123,15 @@ function RoutineCreate() {
               <option value="private">Private</option>
               <option value="public">Public</option>
             </select>
-            <br /><br />
+            <br />
 
+
+            <label style={{ color: "#fff" }} htmlFor="status">
+            category
+            </label>
             <select
               type="text"
-              name="status"
+              name="category"
               value={category}
               onChange={handleCategoryChange}
             >
