@@ -70,7 +70,7 @@ function Profile() {
             </div>
 
             <div>
-              <h4 style={{ marginTop: "2rem" }}>{userData.name}</h4>
+              <h3 style={{ marginTop: "2rem" }}>{userData.name}</h3>
               {/* <p>Age: {userData.age} yrs</p>
           <p>Weight: {userData.weight} kg</p>
           <p>Height: {userData.height} cm</p> */}
@@ -95,7 +95,7 @@ function Profile() {
                 ? userData.friends.map((each) => {
                     return (
                       // <p key={each._id}>{each.name}</p>
-                      <Link
+                      <Link key={each._id}
                         to={
                           each._id === userData._id
                             ? "/profile"
