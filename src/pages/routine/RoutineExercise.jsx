@@ -23,7 +23,7 @@ function RoutineExercise() {
     window.location.href.includes("user") ? true : false
   );
 
-  ////////////////////ALEX/////////////////
+  ////////////////////ALEX//////////////////
 
   const [isEditRoad, setisEditRoad] = useState(
     idExerciseInArray ? true : false

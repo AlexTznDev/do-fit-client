@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import AllButtons from "../../components/AllButtons";
 import { Link } from "react-router-dom";
@@ -7,11 +7,18 @@ import { Link } from "react-router-dom";
 import { routineDetailService } from "../../services/routine.services";
 import { deleteRoutineService } from "../../services/routine.services";
 import Profile from "../profile/Profile";
+import { AuthContext } from "../../context/auth.context";
+
 
 function RoutineDetail() {
+
+  const { loggedUser } = useContext(AuthContext)
+  console.log("LALALALALA", loggedUser)
+
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
+  console.log("LOLOLOLO", params)
 
   const [routineData, setRoutineData] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
@@ -20,6 +27,8 @@ function RoutineDetail() {
     window.location.href.includes("user") ? true : false
   );
 
+  const [ routineOwner, setRoutineOwner ] = useState(null)
+
   useEffect(() => {
     getData();
   }, []);
@@ -27,8 +36,9 @@ function RoutineDetail() {
   const getData = async () => {
     try {
       const response = await routineDetailService(id);
-
+      console.log("AQUI LO QUE QUIERES", response.data.owner)
       setRoutineData(response.data.exercises);
+      setRoutineOwner(response.data.owner)
 
       setIsFetching(false);
     } catch (error) {
@@ -48,7 +58,10 @@ function RoutineDetail() {
 
   return (
     <div >
-      <Profile />
+
+      {isFetching ? (<h2>... buscando</h2>) : routineOwner._id === loggedUser._id ? <Profile /> : <p>FUNCIONA</p>}
+      
+      
 
       {isFetching ? (
         <h2>... buscando</h2>
