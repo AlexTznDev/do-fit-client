@@ -19,6 +19,7 @@ import { ExerciseInRoutineDetail } from "../../services/routine.services";
 import { RemoveExerciseFromRoutine } from "../../services/routine.services";
 import { EditExerciseFromRoutine } from "../../services/routine.services";
 import ButtonBack from "../../components/ButtonBack";
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 function RoutineExercise() {
   const params = useParams();
@@ -207,7 +208,7 @@ function RoutineExercise() {
         {!isEditRoad ? (
           <Exercise />
         ) : isFetching ? (
-          <h2>...Buscando</h2>
+          <SearchingSpinner/>
         ) : (
           <div className="mainContainer">
             <ReactPlayer

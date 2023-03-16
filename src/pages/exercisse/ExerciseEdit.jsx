@@ -10,8 +10,9 @@ import logoWhite from "../../logo/logoDofitblanc.png";
 import imgBG from "../../image/imgCreateExo.jpg";
 
 function ExerciseEdit() {
+
+  const navigate = useNavigate()
   const params = useParams();
-  const navigate = useNavigate();
   const { id } = params;
 
   const [name, setName] = useState("");
@@ -71,7 +72,7 @@ function ExerciseEdit() {
       settagline(tagline);
       setimage(image);
     } catch (error) {
-      console.log(error);
+      navigate("/error")
     }
   };
 
@@ -91,7 +92,7 @@ function ExerciseEdit() {
       await exerciseEditService(id, updateExercise);
       navigate(`/exercise/${id}/details`);
     } catch (error) {
-      console.log(error);
+      navigate("/error")
     }
   };
 

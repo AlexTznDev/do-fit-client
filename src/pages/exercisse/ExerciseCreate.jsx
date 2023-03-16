@@ -66,7 +66,7 @@ function ExerciseCreate() {
       await exerciseCreateService(newExercise);
       navigate("/exercise");
     } catch (error) {
-      console.log(error);
+      navigate("/error")
     }
   };
 
@@ -99,7 +99,6 @@ function ExerciseCreate() {
       navigate("/error");
     }
   };
-  //!!!!!!!!!!
   return (
     <div className="mainContainer justify">
       <div className="containerLogohome">

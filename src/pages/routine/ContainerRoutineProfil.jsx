@@ -14,6 +14,7 @@ import stretching from "../../image/stretching.jpg"
 import upperBody from "../../image/upperBody.jpg"
 
 import logo from "../../logo/logo-final.png"
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 
 function ContainerRoutineProfil() {
@@ -42,7 +43,7 @@ function ContainerRoutineProfil() {
     <div className="containerRoutineProfil">
       <div className="wrapperRoutine">
         {isFetchingRoutine ? (
-          <h2>...is fetching</h2>
+          <SearchingSpinner />
         ) : allRoutines.length !== 0 ? (
           allRoutines.map((eachRoutine) => {
             return (

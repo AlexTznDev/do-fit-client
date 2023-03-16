@@ -9,15 +9,20 @@ import { uploadImageService } from "../../services/upload.services";
 
 import logoWhite from "../../logo/logoDofitblanc.png";
 import imgBG from "../../image/editProfil.jpg";
+import SearchingSpinner from "../../components/SearchingSpinner";
 
 function ProfileEdit() {
+  
   const navigate = useNavigate();
-
   const params = useParams();
+  
   const { id } = params;
 
   const [username, setUsername] = useState("");
   const [userAge, setUserAge] = useState(0);
+  const [userImageProfile, setUserImageProfile] = useState("")
+
+  const [isFetching, setisFetching] = useState(true);
 
   //!cloudinary
   const [imageUrl, setImageUrl] = useState(null);
@@ -39,11 +44,12 @@ function ProfileEdit() {
   const getData = async () => {
     try {
       const response = await profileSerivce();
-      console.log(response.data);
-      const { name, imageProfile, age, weight, height } = response.data;
-      console.log(imageProfile);
+      const { name, imageProfile, age} = response.data;
       setUsername(name);
       setUserAge(age);
+      // setUserImageProfile(imageProfile)
+      console.log(imageProfile)
+      setisFetching(false)
     } catch (error) {
       console.log(error);
     }
@@ -62,7 +68,7 @@ function ProfileEdit() {
       await profileEditService(id, updatedProfileInformation);
       navigate("/profile");
     } catch (error) {
-      console.log(error);
+      navigate("/error");
     }
   };
 
@@ -95,8 +101,10 @@ function ProfileEdit() {
       navigate("/error");
     }
   };
-  //!!!!!!!!!!
-
+  
+  if (isFetching) {
+    return <SearchingSpinner/>
+  }
   return (
     <div className="mainContainer justify">
       <div className="containerLogohome">
@@ -173,7 +181,7 @@ function ProfileEdit() {
             {!isUploading ? (
               <button onClick={handleUpdateProfile}>Update</button>
             ) : (
-              <h2>...is uploading</h2>
+              <SearchingSpinner/>
             )}
           </form>
         </div>

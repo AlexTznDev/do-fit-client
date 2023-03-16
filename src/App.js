@@ -2,6 +2,9 @@
 import './App.css';
 import {Routes, Route} from 'react-router';
 
+import Error from './pages/Error';
+import NotFound from './pages/NotFound';
+
 import Home from './pages/Home';
 import Signup from './pages/auth/Signup';
 import Login from './pages/auth/Login';
@@ -70,6 +73,9 @@ function App() {
 <Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
 <Route path="/routine/:idRoutine/exercise/:idExerciseInArray/start/:lengthData/user" element={<IsPrivate><RoutineExercise/></IsPrivate>}/>
 
+
+<Route path="/error" element={<Error />}/>
+<Route path="*" element={<NotFound />}/>
 
 
 </Routes>
