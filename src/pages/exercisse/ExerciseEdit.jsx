@@ -4,6 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { exerciseDetailService } from "../../services/exercise.services";
 import { exerciseEditService } from "../../services/exercise.services";
 
+import AllButtons from "../../components/AllButtons";
+
+import logoWhite from "../../logo/logoDofitblanc.png";
+import imgBG from "../../image/imgCreateExo.jpg";
+
 function ExerciseEdit() {
 
   const navigate = useNavigate()
@@ -11,7 +16,6 @@ function ExerciseEdit() {
   const { id } = params;
 
   const [name, setName] = useState("");
-  const [creador, setCreador] = useState("");
   const [category, setCategory] = useState("");
   const [calories, setCalories] = useState(0);
   const [description, setDescription] = useState("");
@@ -22,9 +26,7 @@ function ExerciseEdit() {
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-  const handleCreadorChange = (e) => {
-    setCreador(e.target.value);
-  };
+
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
@@ -50,29 +52,25 @@ function ExerciseEdit() {
 
   const getDataExercise = async () => {
     try {
-      const response = await exerciseDetailService(id)
+      const response = await exerciseDetailService(id);
 
       const {
         name,
         calories,
         category,
-        creador,
         description,
         image,
         tagline,
         videoUrl,
       } = response.data;
 
-
-      setName(name)
-      setCreador(creador)
-      setCategory(category)
-      setCalories(calories)
-      setDescription(description)
-      setvideoUrl(videoUrl)
-      settagline(tagline)
-      setimage(image)
-      
+      setName(name);
+      setCategory(category);
+      setCalories(calories);
+      setDescription(description);
+      setvideoUrl(videoUrl);
+      settagline(tagline);
+      setimage(image);
     } catch (error) {
     }
   };
@@ -81,7 +79,6 @@ function ExerciseEdit() {
     e.preventDefault();
     const updateExercise = {
       name,
-      creador,
       category,
       calories,
       description,
@@ -91,112 +88,145 @@ function ExerciseEdit() {
     };
 
     try {
-      await exerciseEditService(id, updateExercise)
-      navigate(`/exercise/${id}/details`)
+      await exerciseEditService(id, updateExercise);
+      navigate(`/exercise/${id}/details`);
     } catch (error) {
       navigate("/error")
     }
   };
 
   return (
-    <div>
-      <form>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
+    <div className="mainContainer justify">
+      <div className="containerLogohome">
+        <img src={logoWhite} alt="logo" />
+      </div>
+
+      <div
+        style={{
+          width: "100%",
+          height: "100vh",
+          position: "fixed",
+          zIndex: "-1",
+        }}
+      >
+        <img
+          src={imgBG}
+          alt="bachGDimgForm"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
         />
-        <br />
-        <br />
+      </div>
 
-        <label htmlFor="creador">Creador</label>
-        <input
-          type="text"
-          name="creador"
-          value={creador}
-          onChange={handleCreadorChange}
-        />
-        <br />
-        <br />
+      <div
+        style={{
+          display: "flex",
+          minHeight: "100vh",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div className="ContainerForm">
+          <form>
+            <label style={{ color: "#fff" }} htmlFor="category">
+              Category
+            </label>
 
-        <label htmlFor="category">Category</label>
+            <select
+              type="text"
+              name="category"
+              value={category}
+              onChange={handleCategoryChange}
+            >
+              <option value="Abbs">Abbs</option>
+              <option value="Upper body">Upper body</option>
+              <option value="Lower body">Lower body</option>
+              <option value="Stretching">Stretching</option>
+              <option value="Breathing">Breathing</option>
+              <option value="Cardio">Cardio</option>
+              <option value="body weight">body weight</option>
+            </select>
 
+<br />
+            <label style={{ color: "#fff" }} htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={handleNameChange}
+              style={{ width: "15rem" }}
+            />
 
-        <select
-          type="text"
-          name="category"
-          value={category}
-          onChange={handleCategoryChange}
-        >
-          <option value="Abbs">Abbs</option>
-          <option value="Upper body">Upper body</option>
-          <option value="Lower body">Lower body</option>
-          <option value="Stretching">Stretching</option>
-          <option value="Breathing">Breathing</option>
-          <option value="Cardio">Cardio</option>
-          <option value="body weight">body weight</option>
+            <label style={{ color: "#fff" }} htmlFor="calories">
+              Calories
+            </label>
+            <input
+              type="number"
+              name="calories"
+              value={calories}
+              onChange={handleCaloriesChange}
+              style={{ width: "15rem" }}
+            />
 
-        </select>
+            <label style={{ color: "#fff" }} htmlFor="description">
+              Description
+            </label>
+            <input
+              type="text"
+              name="description"
+              value={description}
+              onChange={handleDescriptionChange}
+              style={{ width: "15rem" }}
+            />
 
+            <label style={{ color: "#fff" }} htmlFor="videoUrl">
+              Video Url
+            </label>
+            <input
+              type="text"
+              name="videoUrl"
+              value={videoUrl}
+              onChange={handleVideoUrlChange}
+              style={{ width: "15rem" }}
+            />
 
+            <label style={{ color: "#fff" }} htmlFor="tagline">
+              Tagline
+            </label>
+            <input
+              type="text"
+              name="tagline"
+              value={tagline}
+              onChange={handleTaglineChange}
+              style={{ width: "15rem" }}
+            />
 
-        <br />
-        <br />
+            <label
+              style={{ color: "#fff", paddingTop: "15px" }}
+              htmlFor="image"
+            >
+              Image
+            </label>
+            <input
+              type="text"
+              name="image"
+              value={image}
+              onChange={handleImageChange}
+              style={{ width: "15rem" }}
+            />
 
-        <label htmlFor="calories">Calories</label>
-        <input
-          type="number"
-          name="calories"
-          value={calories}
-          onChange={handleCaloriesChange}
-        />
-        <br />
-        <br />
+            <br />
+            <br />
 
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          name="description"
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-        <br />
-        <br />
-
-        <label htmlFor="videoUrl">Video Url</label>
-        <input
-          type="text"
-          name="videoUrl"
-          value={videoUrl}
-          onChange={handleVideoUrlChange}
-        />
-        <br />
-        <br />
-
-        <label htmlFor="tagline">Tagline</label>
-        <input
-          type="text"
-          name="tagline"
-          value={tagline}
-          onChange={handleTaglineChange}
-        />
-        <br />
-        <br />
-
-        <label htmlFor="image">Image</label>
-        <input
-          type="text"
-          name="image"
-          value={image}
-          onChange={handleImageChange}
-        />
-        <br />
-        <br />
-
-        <button onClick={handleSubmitExercisse}>Edit exercise</button>
-      </form>
+            <button onClick={handleSubmitExercisse}>Edit exercise</button>
+          </form>
+        </div>
+      </div>
+      <AllButtons />
     </div>
   );
 }

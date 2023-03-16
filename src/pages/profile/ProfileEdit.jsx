@@ -39,14 +39,6 @@ function ProfileEdit() {
     setUserAge(event.target.value);
   };
 
-  const handleUserHeightChange = (event) => {
-    setUserHeight(event.target.value);
-  };
-
-  const handleUserWeightChange = (event) => {
-    setUserWeight(event.target.value);
-  };
-
   useEffect(() => {
     getData();
   }, []);
@@ -74,8 +66,6 @@ function ProfileEdit() {
       name: username,
       imageProfile: imageUrl,
       age: userAge,
-      weight: userWeight,
-      height: userHeight,
     };
 
     try {
@@ -127,7 +117,7 @@ function ProfileEdit() {
 
       <div
         style={{
-          width: "100vw",
+          width: "100%",
           height: "100vh",
           position: "fixed",
           zIndex: "-1",
@@ -155,7 +145,8 @@ function ProfileEdit() {
         <div className="ContainerForm">
           <form>
             <h1 style={{ color: "#fff" }}>Edit profile</h1>
-            <br /><br />
+            <br />
+            <br />
             <label htmlFor="name"></label>
             <input
               type="text"
@@ -163,42 +154,33 @@ function ProfileEdit() {
               value={username}
               onChange={handleUsernameChange}
               placeholder="Username"
+              style={{ width: "15rem" }}
             />
-
-            <label htmlFor="imageProfile"></label>
+            <br />
+            <label style={{ color: "#fff" }} htmlFor="imageProfile">
+              Profile picture:
+            </label>
             <input
               type="file"
               name="imageProfile"
               // value={userImageProfile}
               onChange={handleFileUpload}
               placeholder="Profile picture"
+              style={{ width: "15rem" }}
             />
-            
-            <label style={{color:"#fff"}} htmlFor="age">Age :</label>
+            <br />
+            <label style={{ color: "#fff" }} htmlFor="age">
+              Age :
+            </label>
             <input
               type="number"
               name="age"
               value={userAge}
               onChange={handleUserAgeChange}
               placeholder="Age"
+              style={{ width: "15rem" }}
             />
-            
-            {/* <label htmlFor="weight"></label>
-            <input
-              type="number"
-              name="weight"
-              value={userWeight}
-              onChange={handleUserWeightChange}
-              placeholder="Weight"
-            />
-            
-            <label htmlFor="height">Height: </label>
-            <input
-              type="number"
-              name="height"
-              value={userHeight}
-              onChange={handleUserHeightChange}
-            /> */}
+
             <br />
 
             {!isUploading ? (
