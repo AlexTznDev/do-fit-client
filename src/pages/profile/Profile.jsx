@@ -31,7 +31,6 @@ function Profile() {
 
     try {
       const response = await profileSerivce();
-      console.log(response.data);
       setUserData(response.data);
       setisFetching(false);
     } catch (error) {

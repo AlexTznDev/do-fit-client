@@ -19,14 +19,10 @@ function AuthWrapper (props) {
         try {
             
            const response = await verifyService()
-           console.log(response)
-           console.log("Token es Valido")
            setIsLoggedIn(true)
            setLoggedUser(response.data)       
            setIsFetching(false)
         } catch (error) {
-           console.log("Token invalido o no existe")
-           console.log(error)
            setIsLoggedIn(false)
            setLoggedUser(null)
            setIsFetching(false)
