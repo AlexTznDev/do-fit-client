@@ -68,6 +68,7 @@ function SearchFriends() {
           value={searchUser}
           onChange={handleSearchChange}
           placeholder="Find user"
+          
         />
         <button style={{cursor:"pointer"}} onClick={handleSearchChange}>Search</button>
       </div>

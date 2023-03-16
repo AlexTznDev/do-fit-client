@@ -107,7 +107,7 @@ function Exercisedetails() {
                 },
               }}
               url={detailsExercise.videoUrl}
-              width="100%"
+              width="100vw"
             />
 
             <div className="ContainerdetailExerciseText">
