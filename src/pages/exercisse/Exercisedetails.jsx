@@ -7,21 +7,25 @@ import { exerciseDeleteService } from "../../services/exercise.services";
 import ReactPlayer from "react-player";
 
 import AllButtons from "../../components/AllButtons";
-import { AuthContext } from "../../context/auth.context";
 
+//* import of services
 import { AddExerciseToRoutineService } from "../../services/routine.services";
 
 import { MdFastfood } from "react-icons/md";
+
+import { AuthContext } from "../../context/auth.context";
+import { MdDescription } from "react-icons/md";
 import { BiRun } from "react-icons/bi";
 
 function Exercisedetails() {
 
   const { loggedUser } = useContext(AuthContext)
-  const navigate = useNavigate();
-  const params = useParams();
 
+  const params = useParams();
   const { id } = params;
   const { idRoutine, idExercise } = params;
+
+  const navigate = useNavigate();
 
   const [detailsExercise, setDetailsExercise] = useState(null);
   const [isFetching, setisFetching] = useState(true);
@@ -47,7 +51,7 @@ function Exercisedetails() {
         setisFetching(false);
       }
     } catch (error) {
-      navigate("/error")
+      console.log(error);
     }
   };
 
@@ -56,7 +60,7 @@ function Exercisedetails() {
       await exerciseDeleteService(id);
       navigate("/exercise");
     } catch (error) {
-      navigate("/error")
+      console.log(error);
     }
   };
 
@@ -82,10 +86,9 @@ function Exercisedetails() {
 
     try {
       await AddExerciseToRoutineService(idRoutine, addExercisseToRoutine);
+
       navigate(`/routine/${idRoutine}`);
-    } catch (error) {
-      navigate("/error")
-    }
+    } catch (error) {}
   };
 
   return (
@@ -98,6 +101,7 @@ function Exercisedetails() {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              // width: "30rem",
             }}
           >
            <ReactPlayer

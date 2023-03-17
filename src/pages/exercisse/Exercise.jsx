@@ -131,6 +131,7 @@ function Exercise() {
             );
           })
         )}
+    
 
         {loggedUser.role === "admin" ? (
           <Link
@@ -142,6 +143,7 @@ function Exercise() {
             <p className="textButton">Add one</p>
           </Link>
         ) : null}
+        <div className="ajustDiv"></div>
       </div>
     </div>
   );
