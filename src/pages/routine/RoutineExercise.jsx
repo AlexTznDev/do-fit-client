@@ -218,7 +218,7 @@ function RoutineExercise() {
                 },
               }}
               url={exercisseData.exercisesId.videoUrl}
-              width="100%"
+              width="100vw"
             />
             <div className="ContainerdetailExerciseText">
               <h2>{exercisseData.exercisesId.name}</h2>

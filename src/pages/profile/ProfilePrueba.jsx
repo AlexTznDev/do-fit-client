@@ -93,11 +93,9 @@ function ProfilePrueba(props) {
             }}
           >
             <FaUserFriends size="1.3rem" color="f4a261" />
-            <h5 style={{
-              backgroundColor:"red"
-            }}>Following</h5>
+            <h5>Following</h5>
 
-            <div className="containerFriend">
+            
 
             {showingFriends
               ? userData.infoFoundUser.friends.map((each) => {
@@ -117,7 +115,7 @@ function ProfilePrueba(props) {
                 })
               : null}
 
-            </div>
+            
 
           </div>
           {areFriends || found ? null : (
