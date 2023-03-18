@@ -60,7 +60,7 @@ function Exercise() {
                   textDecoration: "none",
                   color: "black",
                   cursor: "pointer",
-                  height: "7rem",
+                  paddingBottom:".5rem",
                 }}
                 to={`/routine/${idRoutine}/exercise/${eachExercisse._id}`}
                 key={eachExercisse._id + index}
@@ -94,7 +94,7 @@ function Exercise() {
               <div
                 key={eachExercisse._id + index}
                 style={{
-                  height: "7rem",
+                  paddingBottom:".5rem",
                   display: "flex",
                 }}
               >

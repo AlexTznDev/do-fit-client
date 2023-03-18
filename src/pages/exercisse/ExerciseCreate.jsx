@@ -141,6 +141,7 @@ function ExerciseCreate() {
               value={name}
               onChange={handleNameChange}
               placeholder="Name"
+              style={{width: "13rem"}}
             />
 
             <br />
@@ -171,6 +172,7 @@ function ExerciseCreate() {
               value={calories}
               onChange={handleCaloriesChange}
               placeholder="Calories"
+              style={{width: "13rem"}}
             />
 
             <label htmlFor="description"></label>
@@ -180,6 +182,7 @@ function ExerciseCreate() {
               value={description}
               onChange={handleDescriptionChange}
               placeholder="Description"
+              style={{width: "13rem"}}
             />
 
             <label htmlFor="videoUrl"></label>
@@ -189,6 +192,7 @@ function ExerciseCreate() {
               value={videoUrl}
               onChange={handleVideoUrlChange}
               placeholder="Video Url"
+              style={{width: "13rem"}}
             />
 
             <label htmlFor="tagline"></label>
@@ -198,13 +202,14 @@ function ExerciseCreate() {
               value={tagline}
               onChange={handleTaglineChange}
               placeholder="Tagline"
+              style={{width: "13rem"}}
             />
 
             <br />
             <label style={{ color: "#fff" }} htmlFor="image">
               Exercisse picture:{" "}
             </label>
-            <input type="file" name="image" onChange={handleFileUpload} />
+            <input type="file" name="image" onChange={handleFileUpload}  style={{width: "13rem"}}/>
 
             <br />
             <br />
