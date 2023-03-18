@@ -80,7 +80,7 @@ function Exercise() {
                     <h4>{eachExercisse.name}</h4>
                     <p className="grey">{eachExercisse.category}</p>
                     <p className="grey">{eachExercisse.tagline}</p>
-                    <p className="grey">{eachExercisse.calories} calories</p>
+                    <p className="grey displayNONEcalorieMobil">{eachExercisse.calories} calories</p>
                   </div>
 
                   <BsInfoSquare size="2rem" color="#f4a261" />
@@ -121,7 +121,7 @@ function Exercise() {
                       <h4>{eachExercisse.name}</h4>
                       <p className="grey">{eachExercisse.category}</p>
                       <p className="grey">{eachExercisse.tagline}</p>
-                      <p className="grey">{eachExercisse.calories} calories</p>
+                      <p className="grey displayNONEcalorieMobil">{eachExercisse.calories} calories</p>
                     </div>
 
                     <BsInfoSquare size="2rem" color="#f4a261" />

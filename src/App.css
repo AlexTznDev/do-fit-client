@@ -64,6 +64,9 @@ body {
     height: 5.2rem !important;
 
   }
+.displayNONEcalorieMobil{
+  display: none;
+}
 
   .wrapperNameRoutineProfile h2 {
     font-size: 15px;
