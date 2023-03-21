@@ -126,6 +126,7 @@ body {
     gap: 1rem;
     width: 100%;
     position: fixed;
+    padding-bottom: 7px;
     justify-content: space-around;
     align-items: center;
     border-top: .5px solid rgba(33, 33, 33, 0.153);
@@ -781,7 +782,24 @@ font-size: 15px;
   opacity: .4;
 }
 
-
+.cloneBtn{
+  background-color: rgba(203, 145, 65, 0.563);
+  font-size: 15px;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  color: #373737;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
 
 
 

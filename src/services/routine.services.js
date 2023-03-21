@@ -36,6 +36,10 @@ const AddExerciseToRoutineService = (idRoutine, addExercisseToRoutine)=>{
     return service.patch(`/routine/${idRoutine}`, addExercisseToRoutine)
 }
 
+
+const cloneRoutine = (routineCloned) =>{
+  return service.post("/routine/clone", routineCloned)
+}
 // const exerciseCreateService = (newExercise) => {
 //     return service.post("/exercise", newExercise)
 // }
@@ -61,5 +65,6 @@ export {
   RemoveExerciseFromRoutine,
   EditExerciseFromRoutine,
   deleteRoutineService,
-  AddExerciseToRoutineService
+  AddExerciseToRoutineService,
+  cloneRoutine
 };

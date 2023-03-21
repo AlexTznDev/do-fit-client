@@ -3,13 +3,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import AllButtons from "../../components/AllButtons";
 import { Link } from "react-router-dom";
 
+
+
 //* all services import
 import { routineDetailService } from "../../services/routine.services";
 import { deleteRoutineService } from "../../services/routine.services";
+import { cloneRoutine } from "../../services/routine.services";
 import Profile from "../profile/Profile";
 
 import { BsInfoSquare } from "react-icons/bs";
 import { MdAddCircle } from "react-icons/md";
+import { FaClone } from "react-icons/fa";
 import { AuthContext } from "../../context/auth.context";
 import ProfilePrueba from "../profile/ProfilePrueba";
 
@@ -18,14 +22,13 @@ import SearchingSpinner from "../../components/SearchingSpinner";
 
 function RoutineDetail() {
   const { loggedUser } = useContext(AuthContext);
-  console.log("LALALALALA", loggedUser);
 
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
-  console.log("LOLOLOLO", params);
 
   const [routineData, setRoutineData] = useState(null);
+  const [routineClone, setroutineClone] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
   const [routineName, setroutineName] = useState(null);
 
@@ -44,8 +47,7 @@ function RoutineDetail() {
       const response = await routineDetailService(id);
 
       setroutineName(response.data.name);
-
-      console.log("AQUI LO QUE QUIERES", response.data.owner);
+      setroutineClone(response.data);
       setRoutineData(response.data.exercises);
       setRoutineOwner(response.data.owner);
 
@@ -65,13 +67,34 @@ function RoutineDetail() {
     }
   };
 
-  return (
-    <div >
-      
+  const handleCloneRoutine = async () => {
+    const routineCloned ={
+      name : routineClone.name,
+      frequency:routineClone.frequency,
+      status:routineClone.status,
+      category:routineClone.category,
+      ownerCloned:routineClone.owner,
+      exercise: [...routineData]
 
-      {isFetching ? <SearchingSpinner/> : routineOwner._id === loggedUser._id ? <Profile /> : <ProfilePrueba isUser={routineOwner}/>}
-      
-      
+    }
+
+    try {
+      await cloneRoutine(routineCloned)
+      navigate("/profile")
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  return (
+    <div>
+      {isFetching ? (
+        <SearchingSpinner />
+      ) : routineOwner._id === loggedUser._id ? (
+        <Profile />
+      ) : (
+        <ProfilePrueba isUser={routineOwner} />
+      )}
 
       {isFetching ? (
         <SearchingSpinner />
@@ -193,20 +216,29 @@ function RoutineDetail() {
       <div className="containerBtnStartAndDelete">
         {isFetching || routineData.length === 0 ? null : !isUserRoad ? (
           <Link
+          style={{marginLeft:"8px"}}
             to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}`}
           >
             <div className="ButtonStart">Start the routine!!</div>
           </Link>
         ) : (
-          <Link
-            to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}/user`}
-          >
-            <div className="ButtonStart">Start the routine!!</div>
-          </Link>
+          <div>
+            <Link
+              to={`/routine/${id}/exercise/${routineData[0]._id}/start/${routineData.length}/user`}
+            >
+              <div className="ButtonStart">Start the routine!!</div>
+            </Link>
+            <button className="cloneBtn" onClick={handleCloneRoutine}>
+            Add to your routine
+            <FaClone/>
+            </button>
+          </div>
         )}
 
         {!isUserRoad ? (
-          <button onClick={handleDeleteRoutine} className="deleteRoutine">
+          <button 
+          style={{marginRight:"8px"}}
+          onClick={handleDeleteRoutine} className="deleteRoutine">
             Delete the routine
           </button>
         ) : null}
