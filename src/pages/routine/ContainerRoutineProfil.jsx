@@ -116,7 +116,7 @@ function ContainerRoutineProfil() {
                   ) : null}
                 </div>
                 <div 
-                style={{display:"flex", gap:"5px", justifyContent:"center", alignItems:"center"}}
+                style={{display:"flex", gap:"5px", justifyContent:"center", alignItems:"center", flexDirection:"column"}}
                 >
                   <h2 style={{ color: "black" }}>{eachRoutine.name}</h2>
                   {eachRoutine.ownerCloned ? <FaClone /> : null}
