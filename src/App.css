@@ -570,7 +570,7 @@ body {
     padding: .5rem;
     text-align: center;
     border: none;
-    border: .5px solid rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.621);
     border-radius: .5rem;
     background-color: transparent;
     color: rgb(255, 255, 255);
