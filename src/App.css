@@ -10,6 +10,7 @@ body {
 .grey {
   color: rgb(143, 143, 143);
 }
+
 .greyTransparent {
   color: rgb(164, 164, 164);
 }
@@ -17,7 +18,7 @@ body {
 
 /*font*/
 
-.fontLarge{
+.fontLarge {
   font-size: 22px;
   line-height: 40px;
 }
@@ -34,6 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
   body {
@@ -43,12 +45,17 @@ body {
   }
 
   .containerLogo {
-    width: 30rem;
-    height: 30rem;
+    width: 50rem;
+    height: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+
   .containerLogo img {
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
 
   }
 
@@ -64,9 +71,10 @@ body {
     height: 5.2rem !important;
 
   }
-.displayNONEcalorieMobil{
-  display: none;
-}
+
+  .displayNONEcalorieMobil {
+    display: none;
+  }
 
   .wrapperNameRoutineProfile h2 {
     font-size: 15px;
@@ -100,7 +108,8 @@ body {
     top: 1rem;
 
   }
-  .containerLogohome img{
+
+  .containerLogohome img {
     width: 100%;
     height: 100%;
   }
@@ -112,7 +121,7 @@ body {
     height: 100%;
     justify-content: flex-end;
     transform: translateY(-150px);
-    
+
   }
 
 
@@ -142,6 +151,7 @@ body {
     gap: .2rem;
     cursor: pointer;
   }
+
   .ButtonFollow {
     display: flex;
     flex-direction: column;
@@ -189,6 +199,7 @@ body {
     overflow: hidden;
 
   }
+
   .containerImgProfilFound {
     width: 3rem;
     height: 3rem;
@@ -196,7 +207,8 @@ body {
     overflow: hidden;
 
   }
-  .containerImgAndName{
+
+  .containerImgAndName {
     display: flex;
 
     align-items: center;
@@ -231,6 +243,7 @@ body {
     border-radius: 3px;
 
   }
+
   .ButtonCreate:hover {
 
     border: .5px solid rgb(83, 83, 83);
@@ -243,7 +256,8 @@ body {
     align-items: center;
 
   }
-  .justify{
+
+  .justify {
     justify-content: center;
   }
 
@@ -542,11 +556,11 @@ body {
     align-items: center;
     border: #ffd5aa 1px solid;
   }
-  
+
   /* Contenedor de repeticiones en perfil de FoundUser */
 
-  .containerFoundUser{
-  
+  .containerFoundUser {
+
     padding: 1.5rem 1rem;
     background-color: rgb(61, 60, 60);
     border-radius: 2rem;
@@ -558,11 +572,11 @@ body {
     border: #ffd5aa 1px solid;
   }
 
-  .containerFoundUser div{
+  .containerFoundUser div {
 
     display: flex;
     flex-direction: row;
-    padding: 1rem    
+    padding: 1rem
   }
 
 
@@ -629,7 +643,7 @@ body {
     outline: none;
     transition: box-shadow 0.2s ease-in-out;
   }
-  
+
   input[type="file"] {
     font-size: 16px;
     padding: 10px;
@@ -641,11 +655,12 @@ body {
     outline: none;
     transition: background-color 0.2s ease-in-out;
   }
-  
+
   input[type="file"]:hover,
   input[type="file"]:focus {
     background-color: #555;
   }
+
   /*!  form   */
 
 
@@ -662,19 +677,21 @@ body {
 
 
   }
-.deleteRoutine{
-  padding: .5rem 2rem;
-  background-color: #f7ca9d;
-  color: #1d1d1d;
-  border-radius: 30px;
-  cursor: pointer;
-}
-.deleteRoutine:hover{
 
-  background-color: #f6bd84;
+  .deleteRoutine {
+    padding: .5rem 2rem;
+    background-color: #f7ca9d;
+    color: #1d1d1d;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .deleteRoutine:hover {
+
+    background-color: #f6bd84;
 
 
-}
+  }
 
   .ButtonStart {
     background-color: rgba(65, 203, 65, 0.563);
@@ -713,93 +730,96 @@ body {
   /* search component*/
 
 
-.searchContainer{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  
-}
-.inputSearchContainer{
-  width: 90%;
-  margin-right: auto;
-  margin-left: auto;
-  display: flex;
-  gap: 1rem;
-  padding-top: 1rem;
-  
+  .searchContainer {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
-}
-.inputSearchContainer input{
-  width: 70%;
-  background-color: #efefef;
-  border: none;
-  border-radius: 10px;
-  padding-left: 2rem;
-  background-image: url("../src/icon/search.png");
-  background-size: 15px auto;
-  background-repeat: no-repeat;
-  background-position: 10px center;
- 
-}
+  }
 
-.inputSearchContainer input::placeholder{
-font-size: 15px;
-}
-.inputSearchContainer input:focus{
-  outline-color: #ffd5aa;
-}
+  .inputSearchContainer {
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
 
 
-.inputSearchContainer button{
-  padding: .5rem 1rem;
-  background-color: transparent;
-  font-size: 17px;
- 
-}
+  }
 
-.containerLogoFound{
-  width: 12rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  .inputSearchContainer input {
+    width: 70%;
+    background-color: #efefef;
+    border: none;
+    border-radius: 10px;
+    padding-left: 2rem;
+    background-image: url("../src/icon/search.png");
+    background-size: 15px auto;
+    background-repeat: no-repeat;
+    background-position: 10px center;
 
-}
+  }
 
-.wrapperLogo{
-  position: relative;
-  width: 90%;
-  height: 15rem;
-}
+  .inputSearchContainer input::placeholder {
+    font-size: 15px;
+  }
+
+  .inputSearchContainer input:focus {
+    outline-color: #ffd5aa;
+  }
 
 
-.imgBgRoutine{
-  
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
-  opacity: .4;
-}
+  .inputSearchContainer button {
+    padding: .5rem 1rem;
+    background-color: transparent;
+    font-size: 17px;
 
-.cloneBtn{
-  background-color: rgba(203, 145, 65, 0.563);
-  font-size: 15px;
-  font-weight: bold;
-  padding: 1rem 2rem;
-  color: #373737;
-  margin-left: auto;
-  margin-right: auto;
-  text-decoration: none;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: center;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-}
+  }
+
+  .containerLogoFound {
+    width: 12rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+
+  .wrapperLogo {
+    position: relative;
+    width: 90%;
+    height: 15rem;
+  }
+
+
+  .imgBgRoutine {
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    opacity: .4;
+  }
+
+  .cloneBtn {
+    background-color: rgba(203, 145, 65, 0.563);
+    font-size: 15px;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    color: #373737;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
 
 
 

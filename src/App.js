@@ -33,6 +33,7 @@ function App() {
 
 <div className='minWidthMedia'>
   <div className='containerLogo'>
+  <h1>Sorry, this Website is only for tablets and mobile screens.</h1>
     <img src={logo} alt="logo do fit" />
   </div>
 </div>
